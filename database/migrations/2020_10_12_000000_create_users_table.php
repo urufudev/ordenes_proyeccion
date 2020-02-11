@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('ap_paterno');
             $table->string('ap_materno');
             $table->string('gender');
-            $table->string('f_birth');
+            $table->date('f_birth');
             
             $table->string('position');
             $table->enum('regime',['DECRETO LEGISLATIVO N° 276','DECRETO LEGISLATIVO N° 1057',

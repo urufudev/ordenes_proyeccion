@@ -23,6 +23,7 @@ class CreateProvidedsTable extends Migration
             $table->integer('workday_id')->unsigned();
             $table->integer('institution_id')->unsigned();
             $table->integer('level_id')->unsigned();
+            $table->integer('year_id')->unsigned();
 
             $table->string('nombre');
             $table->string('ap_paterno');
@@ -61,6 +62,8 @@ class CreateProvidedsTable extends Migration
             $table->foreign('institution_id')->references('id')->on('institutions')
                 ->onUpdate('cascade');
             $table->foreign('level_id')->references('id')->on('levels')
+                ->onUpdate('cascade');
+            $table->foreign('year_id')->references('id')->on('years')
                 ->onUpdate('cascade');
         });
     }

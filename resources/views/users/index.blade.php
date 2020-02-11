@@ -1,7 +1,13 @@
 @extends('layouts.app')
+@section('styles')
+<link rel="stylesheet" href="{{assets('js/vendor/datepicker/bootstrap-datepicker3.min.css')}}">
+@endsection
+
 @section('title')
 Lista de Usuarios | Sistema de Administración de Personal
 @endsection
+
+
 
 @section('content')
 <div class="col-12">
@@ -37,8 +43,8 @@ Lista de Usuarios | Sistema de Administración de Personal
             <tbody>
                 @foreach($users as $user)
                 <tr>
-                    <td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
+                    <td><b>{{$user->id}}</b></td>
+                    <td>{{$user->full_name}}</td>
                     
                     <td>{{$user->name}}</td>
                     <td>{{$user->name}}</td>
@@ -100,13 +106,15 @@ Lista de Usuarios | Sistema de Administración de Personal
  {{--  <script src="{{asset('js/vendor/datatables/buttons.html5.min.js')}}"></script> --}}
   <script src="{{asset('js/vendor/datatables/buttons.colVis.min.js')}}"></script>
 {{--   <script src="{{asset('js/vendor/datatables/buttons.print.min.js')}}"></script> --}}
-
+<script src="{{assets('js/vendor/datepicker/bootstrap-datepicker.js')}}""></script>
 
 
   <script>
      $(document).ready(function(){
          $('[data-toggle="tooltip"]').tooltip();
          $('#modal-delete').tooltip();
+         $('.datepicker').datepicker({startdate: "11/05/2011", enddate: "11/05/2100"});
+
          $('#dgwTabla').DataTable({
  
          language: {

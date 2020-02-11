@@ -11,6 +11,6 @@ class OfficesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Office::class,20)->create();
     }
 }

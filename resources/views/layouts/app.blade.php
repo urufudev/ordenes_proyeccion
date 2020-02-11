@@ -18,7 +18,7 @@
     <!-- Madmin CSS -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
    <link href="{{asset('js/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
-
+   @yield('styles')
  
   </head>
 

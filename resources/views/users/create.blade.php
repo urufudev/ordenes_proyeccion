@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+<link rel="stylesheet" href="{{asset('js/vendor/datepicker/bootstrap-datepicker3.min.css')}}">
+@endsection
 @section('title')
 Crear Año | Sistema de Administración de Personal
 @endsection
@@ -12,7 +15,7 @@ Crear Año | Sistema de Administración de Personal
                 <h4>CREAR AÑO</h4>
             </div>
             <div class="col-md-6">
-                <a href="{{route('years.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
+                <a href="{{route('users.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>VOLVER</b> 
             </a>        
             </div> 
@@ -21,8 +24,8 @@ Crear Año | Sistema de Administración de Personal
       </div>
       <div class="card-body ">
 
-        {!! Form::open(['route'=>'years.store']) !!}
-            @include('years.partials.form')
+        {!! Form::open(['route'=>'users.store']) !!}
+            @include('users.partials.form')
         {!! Form::close() !!}
            
 
@@ -34,10 +37,18 @@ Crear Año | Sistema de Administración de Personal
 @endsection
 @section('scripts')
 
+<script src="{{asset('js/vendor/datepicker/bootstrap-datepicker.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
        
         $('.bestupper').caseEnforcer('uppercase');
+        $('.datepicker').datepicker({
+          language: "es",
+          startdate: "11/05/2011", enddate: "11/05/2100",
+          orientation: "bottom auto",
+          autoclose: true,
+
+          });
 
     });
 </script>

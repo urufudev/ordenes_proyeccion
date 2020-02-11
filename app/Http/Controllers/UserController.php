@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
+use App\Office;
+
 use Illuminate\Http\Request;
 use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
-
-
-
+use DB;
 class UserController extends Controller
 {
     /**
@@ -17,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('id', 'DESC')
-            /* ->where('status', '=', 'ACTIVO') */
+            ->where('status', '=', 'ACTIVO')
             ->get();
         
         return view('users.index', compact('users'));
@@ -30,7 +31,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('years.create');
+        $offices=Office::orderBy('name','ASC')
+        ->where('status','=','ACTIVO')   
+        ->pluck('name','id');
+
+        return view('users.create',compact('offices'));
     }
 
     /**
@@ -44,53 +49,54 @@ class UserController extends Controller
         $user = User::create($request->all());
 
         return redirect()->route('users.index')
-            ->with('info', 'USUARIO CREADO CON ÉXITO');
+            ->with('info', 'AÑO CREADO CON ÉXITO');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return view('users.show', compact('users'));
+        
+       /*  dd($user); */
+        return view('users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return view('years.edit',compact('year'));
+        return view('users.edit',compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::find($id);
 
         $user->fill($request->all())
             ->save();
 
         return redirect()->route('users.index')
-            ->with('info', 'USUARIO ACTUALIZADO CON EXITO');
+            ->with('info', 'AÑO ACTUALIZADO CON EXITO');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -98,6 +104,6 @@ class UserController extends Controller
         $user->update(['status' => 'INACTIVO']);
 
 
-        return back()->with('danger', 'USUARIO ELIMINADO CORRECTAMENTE ');
+        return back()->with('danger', 'AÑO ELIMINADO CORRECTAMENTE ');
     }
 }

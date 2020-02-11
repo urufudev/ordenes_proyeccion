@@ -17,9 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','email','ap_paterno','ap_materno','dni', 'password','gender',
+        'f_birth','office_id','position','regime','phone','status'
     ];
-
+    protected $appends =['full_name'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,4 +38,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->ap_paterno} {$this->ap_materno}, {$this->name}";
+    }
 }
