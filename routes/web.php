@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('can:roles.destroy');
 
     Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
-        ->middleware('can::roles.edit');
+        ->middleware('can:roles.edit');
 
     
         //Users
@@ -54,19 +54,19 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('can:users.create');
 
     Route::get('users', 'UserController@index')->name('users.index')
-        ->middleware('permission:users.index');
+        ->middleware('can:users.index');
 
     Route::put('users/{user}', 'UserController@update')->name('users.update')
-        ->middleware('permission:users.edit');
+        ->middleware('can:users.edit');
 
     Route::get('users/{user}', 'UserController@show')->name('users.show')
-        ->middleware('permission:users.show');
+        ->middleware('can:users.show');
 
     Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')
-        ->middleware('permission:users.destroy');
+        ->middleware('can:users.destroy');
 
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
-        ->middleware('permission:users.edit');
+        ->middleware('can:users.edit');
 
 
     //Años
@@ -89,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('can:years.destroy');
 
     Route::get('years/{year}/edit', 'YearController@edit')->name('years.edit')
-        ->middleware('can::years.edit');
+        ->middleware('can:years.edit');
 
 
 

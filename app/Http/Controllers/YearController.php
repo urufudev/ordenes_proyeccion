@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Year;
 use Illuminate\Http\Request;
-
+use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
+use DB;
 class YearController extends Controller
 {
     /**
@@ -28,7 +29,7 @@ class YearController extends Controller
      */
     public function create()
     {
-        //
+        return view('years.create');
     }
 
     /**
@@ -39,7 +40,10 @@ class YearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $year = Year::create($request->all());
+
+        return redirect()->route('years.index')
+            ->with('info', 'AÑO CREADO CON ÉXITO');
     }
 
     /**
@@ -50,7 +54,9 @@ class YearController extends Controller
      */
     public function show(Year $year)
     {
-        //
+        
+
+        return view('years.show', compact('year'));
     }
 
     /**
@@ -61,7 +67,7 @@ class YearController extends Controller
      */
     public function edit(Year $year)
     {
-        //
+        return view('years.edit',compact('year'));
     }
 
     /**
@@ -73,7 +79,12 @@ class YearController extends Controller
      */
     public function update(Request $request, Year $year)
     {
-        //
+
+        $year->fill($request->all())
+            ->save();
+
+        return redirect()->route('years.index')
+            ->with('info', 'AÑO ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -84,6 +95,9 @@ class YearController extends Controller
      */
     public function destroy(Year $year)
     {
-        //
+        $year->update(['status' => 'INACTIVO']);
+
+
+        return back()->with('danger', 'AÑO ELIMINADO CORRECTAMENTE ');
     }
 }

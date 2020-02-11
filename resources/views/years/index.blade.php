@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+Lista de Años | Sistema de Administración de Personal
+@endsection
 
 @section('content')
 <div class="col-12">
@@ -25,6 +28,9 @@
                     <th>ID</th>
                     <th>NOMBRE</th>
                     <th>DESCRIPCIÓN</th>
+                    <th>NOMBRE</th>
+                    <th>NOMBRE</th>
+                    <th>DESCRIPCIÓN</th>
                     <th class="text-center">OPCIONES</th>
                 </tr>
             </thead>
@@ -34,27 +40,40 @@
                     <td>{{$year->id}}</td>
                     <td>{{$year->name}}</td>
                     <td>{{$year->description}}</td>
+                    <td>{{$year->name}}</td>
+                    <td>{{$year->name}}</td>
+                    <td>{{$year->description}}</td>
                     <td class="text-center">
+                       {{--  <div class="btn-group m-2">
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
+                            </button>
+                            <div class="dropdown-menu">
+                              <a href="{{route('years.show',$year->id)}}" class="dropdown-item" >Ver</a>
+                              <a href="{{route('years.edit',$year->id)}}" class="dropdown-item" >Editar</a>
+                              <a data-target="#modal-delete-{{$year->id}}" class="dropdown-item" >Eliminar</a>
+
+                            </div>
+                          </div> --}}
+
 
                         <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                            
-                            <a href="{{route('years.show',$year->id)}}" class="btn btn-sm btn-info"  data-toggle="tooltip" data-placement="top" title="VER">
-                                <i class="material-icons md-28" >search</i>
-                            </a>
-                            
-                            <a href="{{route('years.edit',$year->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="EDITAR">
-                                <i class="material-icons md-18">border_color</i>
-                            </a>
 
-                            <a href="" data-target="#modal-delete-{{$year->id}}" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ELIMINAR">
-                                <i class="material-icons">delete</i>
-                            </a>
-                        
+                            <a href="{{route('years.show',$year->id)}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10"  data-toggle="tooltip" data-placement="top" title="VER">
+                                <i class="fas fa-search"></i>
+                              </a>
+                              <a  href="{{route('years.edit',$year->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
+                                <i class="far fa-edit"></i>
+                              </a>
+                              <a href="" data-target="#modal-delete-{{$year->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ELIMINAR">
+                                <i class="far fa-trash-alt"></i>
+                              </a>
+
                             
                         </div>
                         
                     </td>
-                    
+                    @include('years.modal')
                 </tr>
                 
                 @endforeach
@@ -70,17 +89,20 @@
   
 
   @section('scripts')
-  <script src="{{asset('js/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('js/vendor/datatables/jquery.dataTables.js')}}"></script>
   <script src="{{asset('js/vendor/datatables/dataTables.responsive.min.js')}}"></script>
   <script src="{{asset('js/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
   <script src="{{asset('js/vendor/datatables/dataTables.buttons.min.js')}}"></script>
   <script src="{{asset('js/vendor/datatables/buttons.bootstrap4.min.js')}}"></script>
-  <script src="{{asset('js/vendor/datatables/jszip.min.js')}}"></script>
+{{--   <script src="{{asset('js/vendor/datatables/jszip.min.js')}}"></script>
   <script src="{{asset('js/vendor/datatables/pdfmake.min.js')}}"></script>
-  <script src="{{asset('js/vendor/datatables/vfs_fonts.js')}}"></script>
-  <script src="{{asset('js/vendor/datatables/buttons.html5.min.js')}}"></script>
+  <script src="{{asset('js/vendor/datatables/vfs_fonts.js')}}"></script> --}}
+ {{--  <script src="{{asset('js/vendor/datatables/buttons.html5.min.js')}}"></script> --}}
   <script src="{{asset('js/vendor/datatables/buttons.colVis.min.js')}}"></script>
-  <script src="{{asset('js/vendor/datatables/buttons.print.min.js')}}"></script>
+{{--   <script src="{{asset('js/vendor/datatables/buttons.print.min.js')}}"></script> --}}
+
+
+
   <script>
      $(document).ready(function(){
          $('[data-toggle="tooltip"]').tooltip();
@@ -96,7 +118,7 @@
                      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
                      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
                      "sInfoPostFix":    "",
-                     "sSearch":         "BUSCAR:",
+                     "sSearch":         "Buscar:",
                      "sUrl":            "",
                      "sInfoThousands":  ",",
                      "sLoadingRecords": "Cargando...",
@@ -112,15 +134,19 @@
                      },
                      "buttons": {
                         
-                            "colvis": "Filtro"
+                            
+                            "copy":"Copiar",
+                            "colvis":"Filtro"
                 }
                  },
          dom: 'Bfrtip',
+         lengthChange: false,
          autoWidth: false,
          responsive: true,
          buttons: [
-              'excel', 'pdf', 'print','colvis',
+              'copy','excel', 'pdf','colvis'
          ]
+
      });
      });
  </script>

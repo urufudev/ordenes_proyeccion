@@ -14,7 +14,18 @@ class CreateInstitutionsTable extends Migration
     public function up()
     {
         Schema::create('institutions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('codigo');
+            $table->string('modular')->nullable();
+            $table->string('nombre');
+            $table->string('nivel');
+            $table->string('ugel')->nullable();
+            $table->string('provincia')->nullable();
+            $table->string('distrito')->nullable();
+            $table->string('lugar')->nullable();
+            $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
+
+
             $table->timestamps();
         });
     }

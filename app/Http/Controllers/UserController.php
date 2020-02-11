@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use Illuminate\Http\Request;
+use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
+
+
 
 class UserController extends Controller
 {
@@ -13,7 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::orderBy('id', 'DESC')
+            /* ->where('status', '=', 'ACTIVO') */
+            ->get();
+        
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -23,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('years.create');
     }
 
     /**
@@ -34,7 +41,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create($request->all());
+
+        return redirect()->route('users.index')
+            ->with('info', 'USUARIO CREADO CON ÉXITO');
     }
 
     /**
@@ -45,7 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('users.show', compact('users'));
     }
 
     /**
@@ -56,7 +66,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('years.edit',compact('year'));
     }
 
     /**
@@ -68,7 +78,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->fill($request->all())
+            ->save();
+
+        return redirect()->route('users.index')
+            ->with('info', 'USUARIO ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -77,8 +93,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->update(['status' => 'INACTIVO']);
+
+
+        return back()->with('danger', 'USUARIO ELIMINADO CORRECTAMENTE ');
     }
 }

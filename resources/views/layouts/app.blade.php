@@ -8,16 +8,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="icon" href="{{asset('images/madmin-favicon.png')}}">
+    <link rel="icon" href="{{asset('favicon.ico')}}" type="image/x-icon">
 
-    <title>Extra Pages | Blank Page</title>
+    <title>@yield('title')</title>
 
     <!-- Vendor CSS -->
     
 
     <!-- Madmin CSS -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
+   <link href="{{asset('js/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 
+ 
   </head>
 
   <body class="vertical dark-mode">
@@ -336,6 +338,32 @@
                   </div>
                 </div>
               </div> --}}
+              @if(session('info'))
+                
+                        <div class="col-lg-12">
+                            <div class="alert alert-success txt-bold solid bdr-0 text-white">
+                                {{session('info')}}
+                            </div>
+                        </div>
+                 @elseif(session('danger'))
+                
+                        <div class="col-lg-12">
+                            <div class="alert alert-danger txt-bold solid bdr-0 text-white">
+                                {{session('danger')}}
+                            </div>
+                        </div>
+                @elseif(session('warning'))
+                
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning txt-bold solid bdr-0 text-white">
+                                {{session('warning')}}
+                            </div>
+                        </div>
+                
+                
+                @endif
+
+              
 
               @yield('content')
             {{-- </div> --}}
@@ -360,7 +388,9 @@
     <!-- #app end -->
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{asset('js/vendor/jquery/jquery.min.js')}}"></script>
+    {{-- <script src="{{asset('js/vendor/jquery/jquery.min.js')}}"></script> --}}
+    <script src="{{asset('js/vendor/jquery/jquery_34.min.js')}}"></script>
+    <script src="{{asset('js/vendor/jquery/input-case-enforcer.js')}}"></script>
     <script src="{{asset('js/vendor/bootstrap/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('js/components/aside.js')}}"></script>

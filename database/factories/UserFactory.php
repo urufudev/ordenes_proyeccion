@@ -20,8 +20,19 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'dni'=>$faker->numberBetween($min = 10000000, $max = 99999999),
+        'ap_paterno'=>$faker->lastName,
+        'ap_materno'=>$faker->lastName,
+        'gender'=>$faker->randomElement(['MASCULINO','FEMENINO']),
+        'f_birth'=>$faker->dateTime($max = 'now', $timezone = null),
+        'office_id'=>rand(1,20),
+        'position'=>$faker->text(10),
+        'regime'=>$faker->randomElement(['DECRETO LEGISLATIVO N° 276','DECRETO LEGISLATIVO N° 1057',
+        'LEY N° 29944','LEY N° 30512','LEY N° 30328','LEY N° 30493']),
+        'phone'=>$faker->phoneNumber,
+        'status'=>$faker->randomElement(['ACTIVO','INACTIVO']),
+
         'remember_token' => Str::random(10),
     ];
 });

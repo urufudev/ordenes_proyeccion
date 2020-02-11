@@ -129,7 +129,7 @@
 /* ------------------------------------------------------ */
 @import url(../icons/simple-line-icons/css/simple-line-icons.css);
 @import url(../icons/themify-icons/themify-icons.css);
-@import url(../icons/flag-icon-css/flag-icon.min.css);
+
 @import url(../icons/cryptocoins/cryptocoins.css);
 @import url(../icons/cryptocoins/cryptocoins-colors.css);
 @import url(../icons/fontawesome/css/all.min.css);
@@ -2224,6 +2224,7 @@ pre code {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.form-control.form-control-uppercase{text-transform:uppercase}
 
 @media screen and (prefers-reduced-motion: reduce) {
   /* line 7, Madmin Full Product/Madmin non-gulp version/madmin-vertical/assets/css/scss/bootstrap-root/_forms.scss */
