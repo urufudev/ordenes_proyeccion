@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Office;
+use App\Regime;
 
 use Illuminate\Http\Request;
 use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
@@ -34,8 +35,14 @@ class UserController extends Controller
         $offices=Office::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
+        $regimes=Regime::orderBy('name','ASC')
+        ->where('status','=','ACTIVO')   
+        ->pluck('name','id');
 
-        return view('users.create',compact('offices'));
+
+        
+
+        return view('users.create',compact('offices','regimes'));
     }
 
     /**
@@ -46,10 +53,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::create($request->all());
+
+        $user=new User;
+
+        $user->name = $request['name'];
+        $user->ap_paterno = $request['ap_paterno'];
+        $user->ap_materno = $request['ap_materno'];
+        $user->dni  =  $request['dni'];
+        $user->gender  =  $request['gender'];
+        $user->f_birth  =  $request['f_birth'];
+        $user->office_id  =  $request['office_id'];
+        $user->regime_id  =  $request['regime_id'];
+        $user->position  =  $request['position'];
+        $user->phone  =  $request['phone'];
+        $user->email  =  $request['email'];
+        $user->password  =  bcrypt($request['password']);
+        
+        $user->save();
+
+        
+
+
+        //actualize los roles
+/*         $user->roles()->sync($request->get('roles'));
+ */
 
         return redirect()->route('users.index')
-            ->with('info', 'AÑO CREADO CON ÉXITO');
+            ->with('info','USUARIO ACTUALIZADO CON EXITO');
+
+       
     }
 
     /**
@@ -73,7 +105,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit',compact('user'));
+        $offices=Office::orderBy('name','ASC')
+        ->where('status','=','ACTIVO')   
+        ->pluck('name','id');
+        $regimes=Regime::orderBy('name','ASC')
+        ->where('status','=','ACTIVO')   
+        ->pluck('name','id');
+
+
+        return view('users.edit',compact('user','offices','regimes'));
     }
 
     /**
@@ -86,11 +126,34 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
-        $user->fill($request->all())
-            ->save();
+        
+        $user->name = $request['name'];
+        $user->ap_paterno = $request['ap_paterno'];
+        $user->ap_materno = $request['ap_materno'];
+        $user->dni  =  $request['dni'];
+        $user->gender  =  $request['gender'];
+        $user->f_birth  =  $request['f_birth'];
+        $user->office_id  =  $request['office_id'];
+        $user->position  =  $request['position'];
+        $user->regime_id  =  $request['regime_id'];
+        $user->phone  =  $request['phone'];
+        $user->email  =  $request['email'];
+        
+        if($request['password']!=null)
+        {
+            $user->password  =  bcrypt($request['password']);
+        }
+        $user->save();
+
+        
+
+
+        //actualize los roles
+       /*  $user->roles()->sync($request->get('roles')); */
+
 
         return redirect()->route('users.index')
-            ->with('info', 'AÑO ACTUALIZADO CON EXITO');
+            ->with('info','USUARIO ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -104,6 +167,6 @@ class UserController extends Controller
         $user->update(['status' => 'INACTIVO']);
 
 
-        return back()->with('danger', 'AÑO ELIMINADO CORRECTAMENTE ');
+        return back()->with('danger', 'USUARIO ELIMINADO CORRECTAMENTE ');
     }
 }

@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('office_id')->unsigned();
-
+            $table->integer('regime_id')->unsigned();
 
             $table->string('name');
             $table->string('email',128)->unique();
@@ -26,11 +26,10 @@ class CreateUsersTable extends Migration
             $table->string('ap_materno');
             $table->string('gender');
             $table->date('f_birth');
-            
-            $table->string('position');
-            $table->enum('regime',['DECRETO LEGISLATIVO N° 276','DECRETO LEGISLATIVO N° 1057',
-            'LEY N° 29944','LEY N° 30512','LEY N° 30328','LEY N° 30493'])->default('DECRETO LEGISLATIVO N° 276');
             $table->string('phone');
+
+            $table->string('position');
+           
             $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
 
 
@@ -40,6 +39,9 @@ class CreateUsersTable extends Migration
 
             //relaciones
             $table->foreign('office_id')->references('id')->on('offices')
+                ->onUpdate('cascade');
+            
+            $table->foreign('regime_id')->references('id')->on('regimes')
                 ->onUpdate('cascade');
 
                

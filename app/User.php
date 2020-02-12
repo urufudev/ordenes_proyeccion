@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name','email','ap_paterno','ap_materno','dni', 'password','gender',
-        'f_birth','office_id','position','regime','phone','status'
+        'f_birth','office_id','position','regime_id','phone','status'
     ];
     protected $appends =['full_name'];
     /**
@@ -47,6 +47,10 @@ class User extends Authenticatable
     public function office()
     {
         return $this->belongsTo(Office::class);
+    }
+    public function regime()
+    {
+        return $this->belongsTo(Regime::class);
     }
 
     public function getFullNameAttribute()

@@ -66,7 +66,7 @@ Ver Usuarios | Sistema de Administración de Personal
           </div>
           <div class="col-md-4 mb-3">
             <label for="regime"><b>REGIMEN</b></label>
-            <p type="text" class="form-control" id="regime">{{$user->regime}}</p>
+            <p type="text" class="form-control" id="regime_id">{{$user->regime->name}}</p>
           </div>
       </div>
 

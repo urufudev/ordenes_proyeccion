@@ -19,6 +19,7 @@ use Faker\Generator as Faker;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'office_id'=>rand(1,20),
+        'regime_id'=>rand(1,20),
         'name' => $faker->name,
         
         'email' => $faker->unique()->safeEmail,
@@ -30,9 +31,8 @@ $factory->define(User::class, function (Faker $faker) {
         'f_birth'=>$faker->dateTime($max = 'now', $timezone = null),
         
         'position'=>$faker->text(10),
-        'regime'=>$faker->randomElement(['DECRETO LEGISLATIVO N° 276','DECRETO LEGISLATIVO N° 1057',
-        'LEY N° 29944','LEY N° 30512','LEY N° 30328','LEY N° 30493']),
         'phone'=>$faker->phoneNumber,
+        
         'status'=>$faker->randomElement(['ACTIVO','INACTIVO']),
 
         'remember_token' => Str::random(10),

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{asset('js/vendor/datepicker/bootstrap-datepicker3.min.css')}}">
 @endsection
 @section('title')
-Crear Año | Sistema de Administración de Personal
+Crear Usuario | Sistema de Administración de Personal
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@ Crear Año | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>CREAR AÑO</h4>
+                <h4>CREAR USUARIO</h4>
             </div>
             <div class="col-md-6">
                 <a href="{{route('users.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
@@ -38,6 +38,8 @@ Crear Año | Sistema de Administración de Personal
 @section('scripts')
 
 <script src="{{asset('js/vendor/datepicker/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('js/vendor/datepicker/bootstrap-datepicker.es.min.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
        
@@ -47,6 +49,7 @@ Crear Año | Sistema de Administración de Personal
           startdate: "11/05/2011", enddate: "11/05/2100",
           orientation: "bottom auto",
           autoclose: true,
+          format: "yyyy-mm-dd",
 
           });
 
