@@ -17,6 +17,7 @@ class CreateProvidedsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('regime_id')->unsigned();
+            $table->integer('gestion_id')->unsigned();
             $table->integer('afp_id')->unsigned();
             $table->integer('position_id')->unsigned();
             $table->integer('remunerative_id')->unsigned();
@@ -50,6 +51,8 @@ class CreateProvidedsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade');
             $table->foreign('regime_id')->references('id')->on('regimes')
+                ->onUpdate('cascade');
+            $table->foreign('gestion_id')->references('id')->on('regimes')
                 ->onUpdate('cascade');
             $table->foreign('afp_id')->references('id')->on('afps')
                 ->onUpdate('cascade');
