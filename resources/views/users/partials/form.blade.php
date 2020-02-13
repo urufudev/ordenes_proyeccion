@@ -84,8 +84,28 @@
         
     </div>
     
+    
 </div>
 
+<div class="form-row">
+    <div class="col-md-12 mb-3">
+        <div class="pdn-15 pdn-sm-20 bdr d-flex flex-column">
+             <p>ROLES</p>
+             @foreach ($roles as $role)
+             <div class="custom-control custom-checkbox checkbox-primary m-2">
+                
+                {!! Form::checkbox('roles[]', $role->id,null,['id'=>$role->id,'class'=>'custom-control-input']) !!}
+                
+                <label class="custom-control-label" for="{{$role->id}}">{{$role->name}}
+                    <em>({{$role->description ?: 'Sin Descripcion'}})</em>
+                </label>
+              </div>
+             @endforeach
+              
+            
+          </div>
+    </div>
+</div>
 
 <div class="form-group">
     <button type="submit" class="btn btn-outline-dark  text-white text-blod btn-block"> <h4><b>GRABAR</b></h4> </button>

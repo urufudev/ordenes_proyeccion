@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Caffeinated\Shinobi\Models\Permission;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -13,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::paginate();
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -23,7 +25,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::get();
+        return view('roles.create', compact('permissions'));
     }
 
     /**
@@ -34,7 +37,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::create($request->all());
+
+        //actualize los Permisos
+        $role->permissions()->sync($request->get('permissions'));
+
+        return redirect()->route('roles.index')
+            ->with('info', 'ROL REGISTRADO CON EXITO');
     }
 
     /**
@@ -43,9 +52,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        return view('roles.show', compact('role'));
     }
 
     /**
@@ -54,9 +63,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        $permissions = Permission::get();
+
+        return view('roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -66,9 +77,16 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        //actualice el Rol
+        $role->update($request->all());
+
+        //actualize los Permisos
+        $role->permissions()->sync($request->get('permissions'));
+
+        return redirect()->route('roles.index')
+            ->with('info', 'ROL ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -77,8 +95,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return back()->with('danger', 'ROL ELIMINADO CORRECTAMENTE');
     }
 }

@@ -58,16 +58,21 @@ Lista de Años | Sistema de Administración de Personal
 
 
                         <div class="btn-group pull-right" role="group" aria-label="Basic example">
-
+                          @can('users.show')
                             <a href="{{route('years.show',$year->id)}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10"  data-toggle="tooltip" data-placement="top" title="VER">
                                 <i class="fas fa-search"></i>
                               </a>
+                              @endcan
+                              @can('users.edit')
                               <a  href="{{route('years.edit',$year->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
                                 <i class="far fa-edit"></i>
                               </a>
+                              @endcan
+                              @can('users.delete')
                               <a href="" data-target="#modal-delete-{{$year->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ELIMINAR">
                                 <i class="far fa-trash-alt"></i>
                               </a>
+                              @endcan
 
                             
                         </div>

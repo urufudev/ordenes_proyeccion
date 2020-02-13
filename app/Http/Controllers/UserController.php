@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Office;
 use App\Regime;
+use Caffeinated\Shinobi\Models\Role;
 
 use Illuminate\Http\Request;
 use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
@@ -38,11 +39,12 @@ class UserController extends Controller
         $regimes=Regime::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
+        $roles = Role::get();
 
 
         
 
-        return view('users.create',compact('offices','regimes'));
+        return view('users.create',compact('offices','regimes','roles'));
     }
 
     /**
@@ -53,7 +55,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $user=new User;
 
         $user->name = $request['name'];
@@ -75,8 +76,8 @@ class UserController extends Controller
 
 
         //actualize los roles
-/*         $user->roles()->sync($request->get('roles'));
- */
+        $user->roles()->sync($request->get('roles'));
+
 
         return redirect()->route('users.index')
             ->with('info','USUARIO ACTUALIZADO CON EXITO');
@@ -111,9 +112,11 @@ class UserController extends Controller
         $regimes=Regime::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
+        $roles = Role::get();
 
 
-        return view('users.edit',compact('user','offices','regimes'));
+
+        return view('users.edit',compact('user','offices','regimes','roles'));
     }
 
     /**
@@ -149,7 +152,7 @@ class UserController extends Controller
 
 
         //actualize los roles
-       /*  $user->roles()->sync($request->get('roles')); */
+        $user->roles()->sync($request->get('roles'));
 
 
         return redirect()->route('users.index')
