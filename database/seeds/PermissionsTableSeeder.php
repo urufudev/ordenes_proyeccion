@@ -234,6 +234,232 @@ class PermissionsTableSeeder extends Seeder
         
         ]);
 
+         //Oficina
+         Permission::create([
+
+            'name' => 'Navegar oficina',
+            'slug'=> 'offices.index',
+            'description' => 'Lista y navega todos los niveles del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de oficina',
+            'slug'=> 'offices.show',
+            'description' => 'Ver en detalle cada oficina del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de oficina',
+            'slug'=> 'offices.create',
+            'description' => 'Crear un oficina del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de oficina',
+            'slug'=> 'offices.edit',
+            'description' => 'Edita cualquier oficina del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar oficina',
+            'slug'=> 'offices.destroy',
+            'description' => 'Elimina cualquier oficina del sistema',
+        
+        ]);
+
+        //Cargo
+        Permission::create([
+
+            'name' => 'Navegar cargo',
+            'slug'=> 'positions.index',
+            'description' => 'Lista y navega todos los cargos del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de cargo',
+            'slug'=> 'positions.show',
+            'description' => 'Ver en detalle cada cargo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de cargo',
+            'slug'=> 'positions.create',
+            'description' => 'Crear un cargo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de cargo',
+            'slug'=> 'positions.edit',
+            'description' => 'Edita cualquier cargo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar cargo',
+            'slug'=> 'positions.destroy',
+            'description' => 'Elimina cualquier cargo del sistema',
+        
+        ]);
+
+        //Regimen Laboral
+        Permission::create([
+
+            'name' => 'Navegar regimen laborarl',
+            'slug'=> 'regimes.index',
+            'description' => 'Lista y navega todos los niveles del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de regimen laborarl',
+            'slug'=> 'regimes.show',
+            'description' => 'Ver en detalle cada regimen laborarl del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de regimen laborarl',
+            'slug'=> 'regimes.create',
+            'description' => 'Crear un regimen laborarl del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de regimen laborarl',
+            'slug'=> 'regimes.edit',
+            'description' => 'Edita cualquier regimen laborarl del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar regimen laborarl',
+            'slug'=> 'regimes.destroy',
+            'description' => 'Elimina cualquier regimen laborarl del sistema',
+        
+        ]);
+
+
+        //AFP
+        Permission::create([
+
+            'name' => 'Navegar afp',
+            'slug'=> 'afps.index',
+            'description' => 'Lista y navega todos los afp del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de afp',
+            'slug'=> 'afps.show',
+            'description' => 'Ver en detalle cada afp del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de afp',
+            'slug'=> 'afps.create',
+            'description' => 'Crear un afp del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de afp',
+            'slug'=> 'afps.edit',
+            'description' => 'Edita cualquier afp del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar afp',
+            'slug'=> 'afps.destroy',
+            'description' => 'Elimina cualquier afp del sistema',
+        
+        ]);
+
+        //Regimen Remunerativo
+        Permission::create([
+
+            'name' => 'Navegar regimen remunerativo',
+            'slug'=> 'remuneratives.index',
+            'description' => 'Lista y navega todos los regimen remunerativo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de regimen remunerativo',
+            'slug'=> 'remuneratives.show',
+            'description' => 'Ver en detalle cada regimen remunerativo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de regimen remunerativo',
+            'slug'=> 'remuneratives.create',
+            'description' => 'Crear un regimen remunerativo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de regimen remunerativo',
+            'slug'=> 'remuneratives.edit',
+            'description' => 'Edita cualquier regimen remunerativo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar regimen remunerativo',
+            'slug'=> 'remuneratives.destroy',
+            'description' => 'Elimina cualquier regimen remunerativo del sistema',
+        
+        ]);
+
+
+        //Hora de Trabajo
+        Permission::create([
+
+            'name' => 'Navegar hora de trabajo',
+            'slug'=> 'workdays.index',
+            'description' => 'Lista y navega todos las horas de trabajo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de hora de trabajo',
+            'slug'=> 'workdays.show',
+            'description' => 'Ver en detalle cada hora de trabajo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de hora de trabajo',
+            'slug'=> 'workdays.create',
+            'description' => 'Crear un hora de trabajo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de hora de trabajo',
+            'slug'=> 'workdays.edit',
+            'description' => 'Edita cualquier hora de trabajo del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar hora de trabajo',
+            'slug'=> 'workdays.destroy',
+            'description' => 'Elimina cualquier hora de trabajo del sistema',
+        
+        ]);
+
+       
+
         //Ordenes
         Permission::create([
 
@@ -268,6 +494,43 @@ class PermissionsTableSeeder extends Seeder
             'name' => 'Eliminar ordenes de proyeccion',
             'slug'=> 'orders.destroy',
             'description' => 'Elimina cualquier orden de proyeccion del sistema',
+        
+        ]);
+
+         //Proveido Presupuestal
+         Permission::create([
+
+            'name' => 'Navegar proveido presupuestal',
+            'slug'=> 'provideds.index',
+            'description' => 'Lista y navega todos los proveido presupuestal del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de proveido presupuestal',
+            'slug'=> 'provideds.show',
+            'description' => 'Ver en detalle cada proveido presupuestal del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de proveido presupuestal',
+            'slug'=> 'provideds.create',
+            'description' => 'Crear un proveido presupuestal del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de proveido presupuestal',
+            'slug'=> 'provideds.edit',
+            'description' => 'Edita cualquier proveido presupuestal del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar proveido presupuestal',
+            'slug'=> 'provideds.destroy',
+            'description' => 'Elimina cualquier proveido presupuestal del sistema',
         
         ]);
     }

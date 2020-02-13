@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Regime;
 
 class RegimesTableSeeder extends Seeder
 {
@@ -11,6 +12,12 @@ class RegimesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Regime::class,20)->create();
+        Regime::create([
+            'name'=>'DL 19990',
+            'description'=>'DL 19990',
+            'status'=>'ACTIVO'
+        ]);
+
+        factory(Regime::class,20)->create();
     }
 }

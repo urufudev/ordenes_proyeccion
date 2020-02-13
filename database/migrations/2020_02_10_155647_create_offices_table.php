@@ -17,8 +17,8 @@ class CreateOfficesTable extends Migration
             $table->increments('id');
 
             $table->string('name',128);
-            $table->string('slug',128)->unique();
-            $table->mediumtext('body')->nullable();
+            
+            $table->mediumtext('description')->nullable();
             $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
 
             $table->timestamps();
