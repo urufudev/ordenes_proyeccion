@@ -37,7 +37,7 @@
                   <span class="sad-face position-absolute mgn-l-5">:(</span>
                 </h1>
 
-                <a class="btn btn-primary-soft" href="{{ url('/dashboard') }}"><b>REGRESAR A INICIO</b> </a>
+                <a class="btn btn-primary-soft" href="{{ url('/home') }}"><b>REGRESAR A INICIO</b> </a>
 
               </div>
             </div>

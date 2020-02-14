@@ -1,99 +1,177 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="es">
 
-        <title>Laravel</title>
+<!-- Mirrored from www.pxdraft.com/themeforest/axoma/axoma/index-8.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Feb 2020 15:34:17 GMT -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Axoma">
+  <meta name="keywords" content="Axoma">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!--
+  ========================================================================
+  EXCLUSIVE ON themeforest.net
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Template Name   : Axoma
+  Author          : PXdraft
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Copyright (c) 2018 - Axoma
+  ========================================================================
+  -->
+  <title>Sistema de Administración de Personal</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- Plugin CSS -->
+  <link href="{{asset('landing/plugin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('landing/plugin/font-awesome/css/fontawesome-all.min.css')}}" rel="stylesheet">
+  <link href="{{asset('landing/plugin/et-line/style.css')}}" rel="stylesheet">
+  <!-- <link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet"> -->
+ <!--  <link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet">
+  <link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet"> -->
+  <!-- End -->
+  
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+  <!-- Theme css -->
+  <link href="{{asset('landing/css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('landing/css/color/default.css')}}" rel="stylesheet" id="color_theme">
+  <!-- End -->
 
-            .full-height {
-                height: 100vh;
-            }
+</head>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+<!-- ========== Body Starts ========== -->
+<!-- Body Start -->
+<body data-spy="scroll" data-target="#navbar" data-offset="98">
 
-            .position-ref {
-                position: relative;
-            }
+ 
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+  <!-- Header -->
+  <header>
+    <nav class="navbar header-nav navbar-expand-lg">
+      <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="{{ url('/') }}">
+          <img src="{{asset('landing/img/logo_admin.png')}}" title="" alt=""  width="80" height="80">
+          <b>SAP DREA</b> 
+         
+        </a>
+        <!-- / -->
 
-            .content {
-                text-align: center;
-            }
 
-            .title {
-                font-size: 84px;
-            }
+        <!-- Top Menu -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbar">
+          <ul class="navbar-nav ml-auto align-items-center">
+            @auth
+            <li><a class="nav-link-btn btn btn-white m-25px-l md-m-0px-l" href="{{ url('/home') }}">IR A PANEL</a></li>
+            
+        @else
+        @if (Route::has('register'))
+        <li><a class="nav-link" href="{{ route('register') }}">REGISTRARSE</a></li>    
+        
+        @endif
+            <li><a class="nav-link-btn btn btn-white m-25px-l md-m-0px-l" href="{{ route('login') }}">INICIAR SESION</a></li>
+            
+        @endauth
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+           
+            
+            
+          </ul>
         </div>
-    </body>
+        <!-- / -->
+
+      </div><!-- Container -->
+    </nav> <!-- Navbar -->
+  </header>
+  <!-- Header End -->
+
+  <!-- Main -->
+  <main>
+
+
+
+    <!-- 
+    =============================
+      Home Banner
+    =============================
+    -->
+    <section id="home" class="home-banner-04 theme-bg bg-effect-box">
+      <div class="bg-effect bg-fixed bg-cover" style="background-image: url({{asset('landing/img/fondo_landing.jpg')}});"></div>
+      <div id="particles_effect" style="background-image: url({{asset('landing/img/banner-effect-6.svg')}});" class="particles-effect"></div>
+      <div class="container">
+        <div class="row  full-screen align-items-center justify-content-center p-100px-tb md-p-50px-b">
+          <div class="col-lg-5 md-p-30px-tb">
+           
+            <h1 class="font-alt white-color"> <b>SAP :: SISTEMA DE ADMINISTRACIÓN DE PERSONAL</b> </h1>
+            <p class="white-color-light large-text">Lorem ipsum dolor sit amet, consectetur.</p>
+            <p class="white-color-light">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <div class="btn-bar p-15px-t">
+
+                @auth
+            
+                    <a href="{{ url('/home') }}" class="btn  btn-primary"> <b>IR A PANEL</b> </a>
+                @else
+                
+                    <a href="{{ route('login') }}" class="btn  btn-primary"> <b>INICIAR SESION</b> </a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="btn  btn-success"> <b>REGISTRARSE</b> </a>   
+                    
+                    @endif
+                @endauth
+              
+              
+            </div>
+          </div> <!-- col -->
+          <div class="col-lg-7 text-center">
+            <img src="{{asset('landing/img/slider-image.png')}}" title="" alt="">
+          </div>
+        </div> <!-- row -->
+      </div>
+    </section>
+    <!-- / -->
+    
+
+    <!-- 
+    =============================
+      About us
+    =============================
+    -->
+   
+
+  </main>
+  <!-- / -->
+
+  
+  
+
+  <!-- Jquery -->
+  <script src="{{asset('landing/js/jquery-3.2.1.min.js')}}"></script>
+<!--   <script src="static/js/jquery-migrate-3.0.0.min.js"></script> -->
+  <!-- End -->
+
+  <!-- Plugin JS -->
+  <!-- <script src="static/plugin/appear/jquery.appear.js"></script> --><!--appear-->
+  <!-- <script src="static/plugin/bootstrap/js/popper.min.js"></script> --><!--popper-->
+  <script src="{{asset('landing/plugin/bootstrap/js/bootstrap.js')}}"></script><!--bootstrap-->
+  <script src="{{asset('landing/plugin/particles/particles.min.js')}}"></script>
+  <script src="{{asset('landing/plugin/particles/particles-app.js')}}"></script>
+  <!-- End -->
+
+  <!-- Jquery -->
+  
+<!--   <script src="static/js/jquery-migrate-3.0.0.min.js"></script> -->
+  <!-- End -->
+
+ 
+  <!-- Custom -->
+  <!-- 
+  <script src="landing/js/jquery.parallax-scroll.js"></script> -->
+  <script src="{{asset('landing/js/custom.js')}}"></script>
+  <!-- End -->
+
+</body>
+<!-- ========== End of Body ========== -->
+
+<!-- Mirrored from www.pxdraft.com/themeforest/axoma/axoma/index-8.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 14 Feb 2020 15:34:39 GMT -->
 </html>

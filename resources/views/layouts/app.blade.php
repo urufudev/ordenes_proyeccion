@@ -36,7 +36,7 @@
             <a href="index.html" class="madmin-logo-link">
               <img src="{{asset('images/madmin-logo-icon.png')}}" class="logo" alt="Madmin logo">
             </a>
-            <a href="index.html" class="logo-text">Madmin</a>
+            <a href="index.html" class="logo-text">SAP - DREA</a>
           </div>
         </div>
         <!--Topbar Logo section end-->
@@ -70,8 +70,8 @@
                 <div class="media">
                   <img src="{{asset('images/user/thumb/default.png')}}" alt="Notification" class="user-thumb rounded-circle mr-3">
                   <div class="media-body">
-                    <h5 class="mgn-0">Sirus Holding</h5>
-                    krista@example.com
+                  <h5 class="mgn-0">{{Auth::user()->name}}</h5>
+                  {{Auth::user()->position}}
                   </div>
                 </div>
                 <ul class="list-group list-group-borderless mgn-t-15">
@@ -123,7 +123,7 @@
           <!-- .aisde-header start -->
           <div class="aisde-header">
             <img src="{{asset('images/user/thumb/user-thumb-7.png')}}" alt="User image">
-            <h6 class="user-name mgn-t-15">YIMY DAVID HUAMANCUSI CAMPOS</h6>
+            <h6 class="user-name mgn-t-15">{{Auth::user()->name}}</h6>
           </div>
           <!-- .aisde-header end -->
 
@@ -146,7 +146,7 @@
                 @can('roles.index')
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
-                      <i class="fab fa-gg"></i>
+                      <i class="fas fa-user-shield"></i>
                       <span>ROLES</span>
                     </a>
                     <ul>
@@ -164,6 +164,77 @@
                       </li>
                     </ul>
                 </li>
+                @endcan
+
+                @can('years.index')
+                <li class="nav-item has-submenu">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>AÑOS</span>
+                  </a>
+                  <ul>
+                    @can('years.create')
+                    <li>
+                      <a href="{{route('years.create')}}">
+                        CREAR AÑOS
+                      </a>
+                    </li>
+                    @endcan
+                    <li>
+                    <a href="{{route('years.index')}}">
+                        GESTIONAR AÑOS
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                @endcan
+
+
+                @can('gestions.index')
+                <li class="nav-item has-submenu">
+                  <a href="#" class="nav-link">
+                    <i class="fab fa-black-tie"></i>
+                    <span>GESTIONES</span>
+                  </a>
+                  <ul>
+                    @can('gestions.create')
+                    <li>
+                      <a href="{{route('gestions.create')}}">
+                        CREAR GESTION
+                      </a>
+                    </li>
+                    @endcan
+                    <li>
+                    <a href="{{route('gestions.index')}}">
+                        ADMINISTRAR GESTION
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                @endcan
+                
+
+                  @can('offices.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="fab fa-houzz"></i>
+                      <span>OFICINAS</span>
+                    </a>
+                    <ul>
+                        @can('offices.create')
+                      <li>
+                        <a href="{{route('offices.create')}}">
+                          CREAR OFICINA
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('offices.index')}}">
+                          GESTIONAR OFICINA
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
                 @endcan
 
                 @can('users.index')
@@ -188,103 +259,218 @@
                     </ul>
                   </li>
                 @endcan
-                @can('years.index')
-                <li class="nav-item has-submenu">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-calendar-alt"></i>
-                    <span>AÑOS</span>
-                  </a>
-                  <ul>
-                    @can('years.create')
-                    <li>
-                      <a href="{{route('years.create')}}">
-                        CREAR AÑOS
-                      </a>
-                    </li>
-                    @endcan
-                    <li>
-                    <a href="{{route('years.index')}}">
-                        GESTIONAR AÑOS
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                @endcan
+
+                @can('positions.index')
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
-                      <i class="far fa-id-card"></i>
-                      <span>GESTIONES</span>
+                      <i class="fab fa-gg"></i>
+                      <span>CARGOS</span>
                     </a>
                     <ul>
+                        @can('positions.create')
                       <li>
-                        <a href="analytics-dashboard.html">
-                          CREAR GESTIONES
+                        <a href="{{route('positions.create')}}">
+                          CREAR CARGO
                         </a>
                       </li>
+                      @endcan
                       <li>
-                        <a href="analytics-customers.html">
-                          ADMINISTRAR GESTIONES
+                        <a href="{{route('positions.index')}}">
+                          GESTIONAR CARGO
                         </a>
                       </li>
                     </ul>
                   </li>
+                @endcan
 
-                  <li class="nav-item has-submenu">
+                @can('regimes.index')
+                <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
                       <i class="fab fa-stack-overflow"></i>
+                      <span>REGIMEN LABORAL</span>
+                    </a>
+                    <ul>
+                        @can('regimes.create')
+                      <li>
+                        <a href="{{route('regimes.create')}}">
+                          CREAR R. LABORAL
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('regimes.index')}}">
+                          GESTIONAR R. LABORAL
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+
+                @can('remuneratives.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="fal fa-file-invoice-dollar"></i>
+                      <span>REGIMEN REMUNERATIVO</span>
+                    </a>
+                    <ul>
+                        @can('remuneratives.create')
+                      <li>
+                        <a href="{{route('remuneratives.create')}}">
+                          CREAR R. REMUNERATIVO
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('remuneratives.index')}}">
+                          GESTIONAR R. REMUNERATIVO
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+
+                @can('afps.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-piggy-bank"></i>
+                      <span>AFP</span>
+                    </a>
+                    <ul>
+                        @can('afps.create')
+                      <li>
+                        <a href="{{route('afps.create')}}">
+                          CREAR AFP
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('afps.index')}}">
+                          GESTIONAR AFP
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+
+                @can('workdays.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-clock"></i>
+                      <span>HORAS DE TRABAJO</span>
+                    </a>
+                    <ul>
+                        @can('workdays.create')
+                      <li>
+                        <a href="{{route('workdays.create')}}">
+                          CREAR H. DE TRABAJO
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('workdays.index')}}">
+                          GESTIONAR H. DE TRABAJO
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+                
+                @can('levels.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-code-branch"></i>
                       <span>NIVELES</span>
                     </a>
                     <ul>
+                        @can('levels.create')
                       <li>
-                        <a href="analytics-dashboard.html">
-                          CREAR NIVELES
+                        <a href="{{route('levels.create')}}">
+                          CREAR NIVEL
                         </a>
                       </li>
+                      @endcan
                       <li>
-                        <a href="analytics-customers.html">
-                            GESTIONAR NIVELES
+                        <a href="{{route('levels.index')}}">
+                          GESTIONAR NIVEL
                         </a>
                       </li>
                     </ul>
                   </li>
+                @endcan
 
-                  <li class="nav-item has-submenu">
+
+                @can('institutions.index')
+                <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
                       <i class="far fa-building"></i>
-                      <span>INSITUCIONES</span>
+                      <span>INSTITUCIONES</span>
                     </a>
                     <ul>
+                        @can('institutions.create')
                       <li>
-                        <a href="analytics-dashboard.html">
+                        <a href="{{route('institutions.create')}}">
                           CREAR INSTITUCIONES
                         </a>
                       </li>
+                      @endcan
                       <li>
-                        <a href="analytics-customers.html">
-                            GESTIONAR INSTITUCIONES
+                        <a href="{{route('institutions.index')}}">
+                          GESTIONAR NIVEL
                         </a>
                       </li>
                     </ul>
                   </li>
+                @endcan
 
-                  <li class="nav-item has-submenu">
+                @can('orders.index')
+                <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
                       <i class="far fa-file"></i>
                       <span>ORDENES DE PROYECCIÓN</span>
                     </a>
                     <ul>
+                        @can('orders.create')
                       <li>
-                        <a href="analytics-dashboard.html">
+                        <a href="{{route('orders.create')}}">
                           CREAR O. PROYECCIÓN
                         </a>
                       </li>
+                      @endcan
                       <li>
-                        <a href="analytics-customers.html">
+                        <a href="{{route('orders.index')}}">
                           GESTIONAR O. PROYECCIÓN
                         </a>
                       </li>
                     </ul>
                   </li>
+                @endcan
+
+                @can('orders.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-file-powerpoint"></i>
+                      <span>PROVEIDO PRESUPUESTAL</span>
+                    </a>
+                    <ul>
+                        @can('orders.create')
+                      <li>
+                        <a href="{{route('orders.create')}}">
+                          CREAR P. PRESUPUESTAL
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('orders.index')}}">
+                          GESTIONAR P. PRESUPUESTAL
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+                
+
+
+                  
                 
                 
                 
