@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Gestion;
+use App\Http\Requests\GestionStoreRequest;
+use App\Http\Requests\GestionUpdateRequest;
 use Illuminate\Http\Request;
 
 class GestionController extends Controller
@@ -33,7 +35,7 @@ class GestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GestionStoreRequest $request)
     {
         //
     }
@@ -67,7 +69,7 @@ class GestionController extends Controller
      * @param  \App\Gestion  $gestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gestion $gestion)
+    public function update(GestionUpdateRequest $request, Gestion $gestion)
     {
         //
     }

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Year;
 use Illuminate\Http\Request;
+
+use App\Http\Requests\YearStoreRequest;
+use App\Http\Requests\YearUpdateRequest;
+
 use Caffeinated\Shinobi\Concerns\HasRolesAndPermissions;
 use DB;
 class YearController extends Controller
@@ -38,7 +42,7 @@ class YearController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(YearStoreRequest $request)
     {
         $year = Year::create($request->all());
 
@@ -77,7 +81,7 @@ class YearController extends Controller
      * @param  \App\Year  $year
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Year $year)
+    public function update(YearUpdateRequest $request, Year $year)
     {
 
         $year->fill($request->all())

@@ -1,6 +1,16 @@
+@if ($errors->any())
+    <div class="alert alert-danger solid bdr-0 text-white" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li><b>{{$error}}</b> </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="form-group">
     {{Form::label('name','AÑO')}}
-    {{Form::text('name',null,['class'=>'form-control bestupper'])}}
+    {{Form::number('name',null,['class'=>'form-control bestupper'])}}
 </div>
 <div class="form-group">
     {{Form::label('description','DESCRIPCIÓN')}}
