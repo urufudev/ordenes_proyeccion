@@ -46,10 +46,7 @@ class GestionStoreRequest extends FormRequest
     {
     return [
     
-        'name.required' =>'EL CAMPO NOMBRE ES OBLIGATORIO',
-        'name.unique' =>'EL NOMBRE YA SE ENCUENTRA REGISTRADO',
-        'description.required' => 'EL CAMPO DESCRIPCION ES OBLIGATORIO',
-        
+      
         'cod_gestion.required' =>'EL CAMPO CODIGO DE GESTIÓN ES OBLIGATORIO',
         'cod_gestion.unique' =>'EL  CODIGO DE GESTIÓN YA SE ENCUENTRA REGISTRADO',
         'n_resolucion.required' =>'EL CAMPO N° DE RESOLUCIÓN ES OBLIGATORIO',

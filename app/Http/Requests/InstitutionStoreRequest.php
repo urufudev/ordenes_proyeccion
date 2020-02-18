@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Requests;
-use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class YearUpdateRequest extends FormRequest
+class InstitutionStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,13 @@ class YearUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            
-            'name' => ['required', Rule::unique('years', 'name')->ignore($this->route('year'))],
+            'codigo' =>'required|unique:institutions,codigo',
 
-            'description' =>'required'
+            'nombre' =>'required',
+            'nivel' =>'required',
             
             
+  
         ];
     }
 
@@ -39,9 +38,11 @@ class YearUpdateRequest extends FormRequest
     {
     return [
     
-        'name.required' =>'EL CAMPO NOMBRE ES OBLIGATORIO',
-        'name.unique' =>'EL NOMBRE YA SE ENCUENTRA REGISTRADO',
-        'description.required' => 'EL CAMPO DESCRIPCION ES OBLIGATORIO',
+        'codigo.required' =>'EL CAMPO CODIGO ES OBLIGATORIO',
+        'codigo.unique' =>'EL CODIGO YA SE ENCUENTRA REGISTRADO',
+        'nombre.required' => 'EL CAMPO NOMBRE ES OBLIGATORIO',
+        'nivel.required' => 'EL CAMPO NIVEL ES OBLIGATORIO',
+
         
     ];
     }

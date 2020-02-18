@@ -38,5 +38,8 @@ class UsersTableSeeder extends Seeder
             'slug'=>'admin',
             'special'=>'all-access'
         ]);
+
+        User::first()->assignRoles('admin');
+
     }
 }

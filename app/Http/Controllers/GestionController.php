@@ -16,7 +16,11 @@ class GestionController extends Controller
      */
     public function index()
     {
-        //
+        $gestions = Gestion::orderBy('id', 'DESC')
+            /* ->where('status', '=', 'ACTIVO') */
+            ->get();
+        
+        return view('gestions.index', compact('gestions'));
     }
 
     /**
@@ -26,7 +30,7 @@ class GestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('gestions.create');
     }
 
     /**
@@ -37,7 +41,10 @@ class GestionController extends Controller
      */
     public function store(GestionStoreRequest $request)
     {
-        //
+        $gestion = Gestion::create($request->all());
+
+        return redirect()->route('gestions.index')
+            ->with('info', 'GESTION CREADA CON ÉXITO');
     }
 
     /**
@@ -48,7 +55,7 @@ class GestionController extends Controller
      */
     public function show(Gestion $gestion)
     {
-        //
+        return view('gestions.show', compact('gestion'));
     }
 
     /**
@@ -59,7 +66,7 @@ class GestionController extends Controller
      */
     public function edit(Gestion $gestion)
     {
-        //
+        return view('gestions.edit',compact('gestion'));
     }
 
     /**
@@ -71,7 +78,11 @@ class GestionController extends Controller
      */
     public function update(GestionUpdateRequest $request, Gestion $gestion)
     {
-        //
+       $gestion->fill($request->all())
+            ->save();
+
+        return redirect()->route('gestions.index')
+            ->with('info', 'GESTION ACTUALIZADA CON EXITO');
     }
 
     /**
@@ -82,6 +93,13 @@ class GestionController extends Controller
      */
     public function destroy(Gestion $gestion)
     {
-        //
+        if ($gestion->status == 'ACTIVO') {
+            $gestion->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $gestion->update(['status' => 'ACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

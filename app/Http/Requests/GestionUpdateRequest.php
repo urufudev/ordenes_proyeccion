@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class GestionUpdateRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class GestionUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +26,10 @@ class GestionUpdateRequest extends FormRequest
     {
         return [
 
-            'cod_gestion' =>'required|unique:gestions,cod_gestion,'.$this->cod_gestion,
-            'n_resolucion' =>'required|unique:gestions,n_resolucion,'.$this->n_resolucion,
+            
+            'cod_gestion' => ['required', Rule::unique('gestions', 'cod_gestion')->ignore($this->route('gestion'))],
+            'n_resolucion' => ['required', Rule::unique('gestions', 'n_resolucion')->ignore($this->route('gestion'))],
+            
             's_direccion' =>'required',
             'r_direccion' =>'required',
             's_administracion' =>'required',

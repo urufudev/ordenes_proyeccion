@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Level;
+use App\Http\Requests\LevelStoreRequest;
+use App\Http\Requests\LevelUpdateRequest;
 use Illuminate\Http\Request;
 
 class LevelController extends Controller
@@ -14,7 +16,11 @@ class LevelController extends Controller
      */
     public function index()
     {
-        //
+        $levels = Level::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('levels.index', compact('levels'));
     }
 
     /**
@@ -24,7 +30,7 @@ class LevelController extends Controller
      */
     public function create()
     {
-        //
+        return view('levels.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class LevelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LevelStoreRequest $request)
     {
-        //
+        $level = Level::create($request->all());
+
+        return redirect()->route('levels.index')
+            ->with('info', 'NIVEL CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class LevelController extends Controller
      */
     public function show(Level $level)
     {
-        //
+        return view('levels.show', compact('level'));
     }
 
     /**
@@ -57,7 +66,7 @@ class LevelController extends Controller
      */
     public function edit(Level $level)
     {
-        //
+        return view('levels.edit',compact('level'));
     }
 
     /**
@@ -67,9 +76,13 @@ class LevelController extends Controller
      * @param  \App\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Level $level)
+    public function update(LevelUpdateRequest $request, Level $level)
     {
-        //
+        $level->fill($request->all())
+            ->save();
+
+        return redirect()->route('levels.index')
+            ->with('info', 'NIVEL ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,14 @@ class LevelController extends Controller
      */
     public function destroy(Level $level)
     {
-        //
+        if ($level->status == 'ACTIVO') {
+            $level->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $level->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
+        
     }
 }

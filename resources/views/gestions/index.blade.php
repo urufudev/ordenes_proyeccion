@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Lista de Años | Sistema de Administración de Personal
+Lista de Gestiones | Sistema de Administración de Personal
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@ Lista de Años | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>LISTA DE AÑOS</h4>
+                <h4>LISTA DE GESTIONES</h4>
             </div>
-            @can('years.create')
+            @can('gestions.create')
             <div class="col-md-6">
-                <a href="{{route('years.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
+                <a href="{{route('gestions.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>CREAR</b> 
             </a>        
             </div>   
@@ -26,23 +26,26 @@ Lista de Años | Sistema de Administración de Personal
             <thead >
                 <tr>
                     <th width="3%">ID</th>
-                    <th>NOMBRE</th>
-                    <th>DESCRIPCIÓN</th>
+                    <th>COD. GESTION</th>
+                    <th>N° RESOLUCION</th>
+                    <th>DIRECTOR</th>
                     <th width="7%">ESTADO</th>
+                    
                     <th width="5%" class="text-center">OPCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($years as $year)
+                @foreach($gestions as $gestion)
                 <tr>
-                    <td>{{$year->id}}</td>
-                    <td>{{$year->name}}</td>
-                    <td>{{$year->description}}</td>
-                    @if($year->status=='ACTIVO')
-                      <td class="text-success"><b>{{$year->status}}</b></td>
+                    <td><b>{{$gestion->id}}</b></td>
+                    <td>{{$gestion->cod_gestion}}</td>
+                    <td>{{$gestion->n_resolucion}}</td>
+                    <td>{{$gestion->r_direccion}}</td>
+                    @if($gestion->status=='ACTIVO')
+                      <th width="7%" class=" text-success"><b>{{$gestion->status}}</b></th>
 
-                    @elseif($year->status=='INACTIVO')
-                      <td class="text-danger"><b>{{$year->status}}</b></td>
+                    @elseif($gestion->status=='INACTIVO')
+                      <th width="7%" class="text-danger"><b>{{$gestion->status}}</b></th>
 
                     @endif
                     <td class="text-center">
@@ -51,33 +54,36 @@ Lista de Años | Sistema de Administración de Personal
                               Opciones
                             </button>
                             <div class="dropdown-menu">
-                              <a href="{{route('years.show',$year->id)}}" class="dropdown-item" >Ver</a>
-                              <a href="{{route('years.edit',$year->id)}}" class="dropdown-item" >Editar</a>
-                              <a data-target="#modal-delete-{{$year->id}}" class="dropdown-item" >Eliminar</a>
+                              <a href="{{route('gestions.show',$gestion->id)}}" class="dropdown-item" >Ver</a>
+                              <a href="{{route('gestions.edit',$gestion->id)}}" class="dropdown-item" >Editar</a>
+                              <a data-target="#modal-delete-{{$gestion->id}}" class="dropdown-item" >Eliminar</a>
 
                             </div>
                           </div> --}}
 
 
                         <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                          @can('users.show')
-                            <a href="" data-target="#modal-show-{{$year->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
+                          @can('gestions.show')
+                            {{-- <a href="{{route('gestions.show',$gestion->id)}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10"  data-toggle="tooltip" data-placement="top" title="VER">
+                                <i class="fas fa-search"></i>
+                              </a> --}}
+                              <a href="" data-target="#modal-show-{{$gestion->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
                                 <i class="fas fa-search"></i>
                               </a>
                               @endcan
-                              @can('users.edit')
-                              <a  href="{{route('years.edit',$year->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
+                              @can('gestions.edit')
+                              <a  href="{{route('gestions.edit',$gestion->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
                                 <i class="far fa-edit"></i>
                               </a>
                               @endcan
-                              @can('users.destroy')
-                              @if($year->status=='ACTIVO')
-                                <a href="" data-target="#modal-delete-{{$year->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
+                              @can('gestions.destroy')
+                                @if($gestion->status=='ACTIVO')
+                                <a href="" data-target="#modal-delete-{{$gestion->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
                                   <i class="far fa-trash-alt"></i>
                                 </a>
 
-                                @elseif($year->status=='INACTIVO')
-                                <a href="" data-target="#modal-delete-{{$year->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
+                                @elseif($gestion->status=='INACTIVO')
+                                <a href="" data-target="#modal-delete-{{$gestion->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
                                   <i class="far fa-check-square"></i>
                                 </a>
 
@@ -88,8 +94,8 @@ Lista de Años | Sistema de Administración de Personal
                         </div>
                         
                     </td>
-                    @include('years.modal')
-                    @include('years.show')
+                    @include('gestions.modal')
+                    @include('gestions.show')
                 </tr>
                 
                 @endforeach

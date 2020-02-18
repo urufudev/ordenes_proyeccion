@@ -24,7 +24,7 @@ class YearStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required|unique:years,name',
+            'name' =>'required|integer|unique:years,name',
             'description' =>'required',
             
             

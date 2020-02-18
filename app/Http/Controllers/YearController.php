@@ -20,7 +20,7 @@ class YearController extends Controller
     public function index()
     {
         $years = Year::orderBy('id', 'DESC')
-            ->where('status', '=', 'ACTIVO')
+            /* ->where('status', '=', 'ACTIVO') */
             ->get();
         
         return view('years.index', compact('years'));
@@ -99,9 +99,13 @@ class YearController extends Controller
      */
     public function destroy(Year $year)
     {
-        $year->update(['status' => 'INACTIVO']);
-
-
-        return back()->with('danger', 'AÑO ELIMINADO CORRECTAMENTE ');
+        if ($year->status == 'ACTIVO') {
+            $year->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $year->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

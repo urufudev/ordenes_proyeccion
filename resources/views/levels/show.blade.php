@@ -1,10 +1,10 @@
 
  <!-- Modal right -->
- <div class="modal fade modal-right" id="modal-show-{{$year->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal fade modal-right" id="modal-show-{{$level->id}}" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">VER AÑO</h5>
+        <h5 class="modal-title">VER GESTION</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -12,13 +12,13 @@
       <div class="modal-body">
         <div class="form-row">
               <div class="col-md-12">
-                <label for="name">AÑO</label>
-                <p type="text" class="form-control" id="name" >{{$year->name}}</p>
+                <label for="name"><b>NOMBRE</b></label>
+                <p type="text" class="form-control" id="name" >{{$level->name}}</p>
           
               </div>
               <div class="col-md-12">
-                <label for="description">DESCRIPCIÓN</label>
-              <textarea class="form-control" id="description" readonly>{{$year->description}}</textarea>
+                <label for="description"><b>DESCRIPCIÓN</b></label>
+                <p type="text" class="form-control" id="description" >{{$level->description}}</p>
                   
               </div>
               

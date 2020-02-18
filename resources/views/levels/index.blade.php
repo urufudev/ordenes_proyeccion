@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Lista de Años | Sistema de Administración de Personal
+Lista de Niveles | Sistema de Administración de Personal
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@ Lista de Años | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>LISTA DE AÑOS</h4>
+                <h4>LISTA DE NIVELES</h4>
             </div>
-            @can('years.create')
+            @can('levels.create')
             <div class="col-md-6">
-                <a href="{{route('years.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
+                <a href="{{route('levels.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>CREAR</b> 
             </a>        
             </div>   
@@ -29,55 +29,48 @@ Lista de Años | Sistema de Administración de Personal
                     <th>NOMBRE</th>
                     <th>DESCRIPCIÓN</th>
                     <th width="7%">ESTADO</th>
+                    
                     <th width="5%" class="text-center">OPCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($years as $year)
+                @foreach($levels as $level)
                 <tr>
-                    <td>{{$year->id}}</td>
-                    <td>{{$year->name}}</td>
-                    <td>{{$year->description}}</td>
-                    @if($year->status=='ACTIVO')
-                      <td class="text-success"><b>{{$year->status}}</b></td>
+                    <td><b>{{$level->id}}</b></td>
+                    <td>{{$level->name}}</td>
+                    <td>{{$level->description}}</td>
+                   
+                    @if($level->status=='ACTIVO')
+                      <td class="text-success"><b>{{$level->status}}</b></td>
 
-                    @elseif($year->status=='INACTIVO')
-                      <td class="text-danger"><b>{{$year->status}}</b></td>
+                    @elseif($level->status=='INACTIVO')
+                      <td class="text-danger"><b>{{$level->status}}</b></td>
 
                     @endif
+                    
+                    
                     <td class="text-center">
-                       {{--  <div class="btn-group m-2">
-                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Opciones
-                            </button>
-                            <div class="dropdown-menu">
-                              <a href="{{route('years.show',$year->id)}}" class="dropdown-item" >Ver</a>
-                              <a href="{{route('years.edit',$year->id)}}" class="dropdown-item" >Editar</a>
-                              <a data-target="#modal-delete-{{$year->id}}" class="dropdown-item" >Eliminar</a>
-
-                            </div>
-                          </div> --}}
-
-
+                      
                         <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                          @can('users.show')
-                            <a href="" data-target="#modal-show-{{$year->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
+                          @can('levels.show')
+                              <a href="" data-target="#modal-show-{{$level->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
                                 <i class="fas fa-search"></i>
                               </a>
                               @endcan
-                              @can('users.edit')
-                              <a  href="{{route('years.edit',$year->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
+                              @can('levels.edit')
+                              <a  href="{{route('levels.edit',$level->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
                                 <i class="far fa-edit"></i>
                               </a>
                               @endcan
-                              @can('users.destroy')
-                              @if($year->status=='ACTIVO')
-                                <a href="" data-target="#modal-delete-{{$year->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
+                              @can('levels.destroy')
+                              
+                                @if($level->status=='ACTIVO')
+                                <a href="" data-target="#modal-delete-{{$level->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
                                   <i class="far fa-trash-alt"></i>
                                 </a>
 
-                                @elseif($year->status=='INACTIVO')
-                                <a href="" data-target="#modal-delete-{{$year->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
+                                @elseif($level->status=='INACTIVO')
+                                <a href="" data-target="#modal-delete-{{$level->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
                                   <i class="far fa-check-square"></i>
                                 </a>
 
@@ -88,8 +81,8 @@ Lista de Años | Sistema de Administración de Personal
                         </div>
                         
                     </td>
-                    @include('years.modal')
-                    @include('years.show')
+                    @include('levels.modal')
+                    @include('levels.show')
                 </tr>
                 
                 @endforeach

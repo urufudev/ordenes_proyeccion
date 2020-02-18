@@ -5,8 +5,8 @@
 
 
 
-    <div class="modal fade" id="modal-delete-{{$year->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        {{Form::Open(array('action' =>array('YearController@destroy',$year->id),'method'=>'delete'))}}
+    <div class="modal fade" id="modal-delete-{{$level->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{Form::Open(array('action' =>array('LevelController@destroy',$level->id),'method'=>'delete'))}}
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">

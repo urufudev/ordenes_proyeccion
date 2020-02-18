@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Institution;
+use App\Http\Requests\InstitutionStoreRequest;
+use App\Http\Requests\InstitutionUpdateRequest;
 use Illuminate\Http\Request;
 
 class InstitutionController extends Controller
@@ -14,7 +16,11 @@ class InstitutionController extends Controller
      */
     public function index()
     {
-        //
+        $institutions = Institution::orderBy('id', 'DESC')
+            /* institution */
+            ->get();
+        
+        return view('institutions.index', compact('institutions'));
     }
 
     /**
@@ -24,7 +30,7 @@ class InstitutionController extends Controller
      */
     public function create()
     {
-        //
+        return view('institutions.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class InstitutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InstitutionStoreRequest $request)
     {
-        //
+        $institution = Institution::create($request->all());
+
+        return redirect()->route('institutions.index')
+            ->with('info', 'INSTITUCION CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class InstitutionController extends Controller
      */
     public function show(Institution $institution)
     {
-        //
+        return view('institutions.show', compact('institution'));
     }
 
     /**
@@ -57,7 +66,7 @@ class InstitutionController extends Controller
      */
     public function edit(Institution $institution)
     {
-        //
+        return view('institutions.edit',compact('institution'));
     }
 
     /**
@@ -67,9 +76,13 @@ class InstitutionController extends Controller
      * @param  \App\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institution $institution)
+    public function update(InstitutionUpdateRequest $request, Institution $institution)
     {
-        //
+        $institution->fill($request->all())
+            ->save();
+
+        return redirect()->route('institutions.index')
+            ->with('info', 'INSTITUCION ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class InstitutionController extends Controller
      */
     public function destroy(Institution $institution)
     {
-        //
+        if ($institution->status == 'ACTIVO') {
+            $institution->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $institution->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }
