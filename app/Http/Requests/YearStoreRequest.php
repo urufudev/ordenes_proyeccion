@@ -39,6 +39,6 @@ class YearStoreRequest extends FormRequest
         'name.unique' =>'EL NOMBRE YA SE ENCUENTRA REGISTRADO',
         'description.required' => 'EL CAMPO DESCRIPCION ES OBLIGATORIO',
         
-    ];
+        ];
     }
 }

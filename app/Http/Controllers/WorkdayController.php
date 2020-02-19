@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Workday;
+use App\Http\Requests\WorkdayStoreRequest;
+use App\Http\Requests\WorkdayUpdateRequest;
 use Illuminate\Http\Request;
 
 class WorkdayController extends Controller
@@ -14,7 +16,11 @@ class WorkdayController extends Controller
      */
     public function index()
     {
-        //
+       $workdays = Workday::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('workdays.index', compact('workdays'));
     }
 
     /**
@@ -24,7 +30,7 @@ class WorkdayController extends Controller
      */
     public function create()
     {
-        //
+        return view('workdays.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class WorkdayController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WorkdayStoreRequest $request)
     {
-        //
+        $workday = Workday::create($request->all());
+
+        return redirect()->route('workdays.index')
+            ->with('info', 'HORAS DE TRABAJO CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class WorkdayController extends Controller
      */
     public function show(Workday $workday)
     {
-        //
+        return view('workdays.show', compact('workday'));
     }
 
     /**
@@ -57,7 +66,7 @@ class WorkdayController extends Controller
      */
     public function edit(Workday $workday)
     {
-        //
+        return view('workdays.edit',compact('workday'));
     }
 
     /**
@@ -67,9 +76,13 @@ class WorkdayController extends Controller
      * @param  \App\Workday  $workday
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Workday $workday)
+    public function update(WorkdayUpdateRequest $request, Workday $workday)
     {
-        //
+        $workday->fill($request->all())
+            ->save();
+
+        return redirect()->route('workdays.index')
+            ->with('info', 'HORAS DE TRABAJO ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class WorkdayController extends Controller
      */
     public function destroy(Workday $workday)
     {
-        //
+        if ($workday->status == 'ACTIVO') {
+            $workday->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $workday->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

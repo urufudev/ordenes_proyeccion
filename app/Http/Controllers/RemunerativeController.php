@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Remunerative;
+use App\Http\Requests\RemunerativeStoreRequest;
+use App\Http\Requests\RemunerativeUpdateRequest;
 use Illuminate\Http\Request;
 
 class RemunerativeController extends Controller
@@ -14,7 +16,11 @@ class RemunerativeController extends Controller
      */
     public function index()
     {
-        //
+        $remuneratives = Remunerative::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('remuneratives.index', compact('remuneratives'));
     }
 
     /**
@@ -24,7 +30,7 @@ class RemunerativeController extends Controller
      */
     public function create()
     {
-        //
+        return view('remuneratives.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class RemunerativeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RemunerativeStoreRequest $request)
     {
-        //
+        $remunerative = Remunerative::create($request->all());
+
+        return redirect()->route('remuneratives.index')
+            ->with('info', 'NIVEL REMUNERATIVO CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class RemunerativeController extends Controller
      */
     public function show(Remunerative $remunerative)
     {
-        //
+        return view('remuneratives.show', compact('remunerative'));
     }
 
     /**
@@ -57,7 +66,7 @@ class RemunerativeController extends Controller
      */
     public function edit(Remunerative $remunerative)
     {
-        //
+        return view('remuneratives.edit',compact('remunerative'));
     }
 
     /**
@@ -67,9 +76,13 @@ class RemunerativeController extends Controller
      * @param  \App\Remunerative  $remunerative
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Remunerative $remunerative)
+    public function update(RemunerativeUpdateRequest $request, Remunerative $remunerative)
     {
-        //
+        $remunerative->fill($request->all())
+            ->save();
+
+        return redirect()->route('remuneratives.index')
+            ->with('info', 'NIVEL REMUNERATIVO ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class RemunerativeController extends Controller
      */
     public function destroy(Remunerative $remunerative)
     {
-        //
+        if ($remunerative->status == 'ACTIVO') {
+            $remunerative->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $remunerative->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

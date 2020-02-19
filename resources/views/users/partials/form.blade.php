@@ -3,16 +3,16 @@
 
 <div class="form-row">
     <div class="col-md-4 mb-3">
-        {{Form::label('name','NOMBRE')}}
+        <b>{{Form::label('name','NOMBRE')}}</b>
         {{Form::text('name',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
     </div>
     <div class="col-md-4 mb-3">
-        {{Form::label('ap_paterno','APELLIDO PATERNO')}}
+        <b>{{Form::label('ap_paterno','APELLIDO PATERNO')}}</b>
         {{Form::text('ap_paterno',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
         
     </div>
     <div class="col-md-4 mb-3">
-        {{Form::label('ap_materno','APELLIDO MATERNO')}}
+        <b>{{Form::label('ap_materno','APELLIDO MATERNO')}}</b>
         {{Form::text('ap_materno',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
       
     </div>
@@ -20,7 +20,7 @@
 
 <div class="form-row">
   <div class="col-md-3 mb-3">
-    {{Form::label('dni','DNI')}}
+    <b>{{Form::label('dni','DNI')}}</b>
     {{Form::text('dni',null,['class'=>'form-control bestupper','autocomplete'=>'off','maxlength'=>'8'])}}
       
   </div>
@@ -28,7 +28,7 @@
     
 
   <div class="col-md-3 mb-3">
-    {{Form::label('gender','GENERO')}} 
+    <b>{{Form::label('gender','GENERO')}} </b>
     
     <div class="form-row">
         
@@ -44,11 +44,11 @@
     </div>
   </div>
   <div class="col-md-3 mb-3">
-    {{Form::label('f_birth','FECHA DE NACIMIENTO')}}
+    <b>{{Form::label('f_birth','FECHA DE NACIMIENTO')}}</b>
     {{Form::text('f_birth',null,['class'=>'form-control datepicker bestupper','autocomplete'=>'off'])}}
   </div>
   <div class="col-md-3 mb-3">
-    {{Form::label('phone','CELULAR')}}
+    <b>{{Form::label('phone','CELULAR')}}</b>
     {{Form::text('phone',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
   </div>
 </div>
@@ -56,16 +56,16 @@
 <div class="form-row">
 
     <div class="col-md-5 mb-3">
-        {{Form::label('office_id','OFICINA')}}
+        <b>{{Form::label('office_id','OFICINA')}}</b>
         {{Form::select('office_id',$offices,null,['class'=>'form-control'])}}
         
     </div>
     <div class="col-md-4 mb-3">
-        {{Form::label('position','CARGO')}}
+        <b>{{Form::label('position','CARGO')}}</b>
         {{Form::text('position',null,['class'=>'form-control bestupper'])}}
     </div>
     <div class="col-md-3 mb-3">
-        {{Form::label('regime_id','REGIMEN')}}
+        <b>{{Form::label('regime_id','REGIMEN')}}</b>
         {{Form::select('regime_id',$regimes,null,['class'=>'form-control'])}}
     
     </div>
@@ -73,12 +73,12 @@
 
 <div class="form-row">
     <div class="col-md-3 mb-3">
-        {{Form::label('email','EMAIL')}}
+        <b>{{Form::label('email','EMAIL')}}</b>
         {{Form::text('email',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
         
     </div>
     <div class="col-md-3 mb-3">
-        {{Form::label('password','CONTRASEÑA')}}
+        <b>{{Form::label('password','CONTRASEÑA')}}</b>
         <input name="password" type="password" class="form-control bestupper"  >
 
         
@@ -90,7 +90,7 @@
 <div class="form-row">
     <div class="col-md-12 mb-3">
         <div class="pdn-15 pdn-sm-20 bdr d-flex flex-column">
-             <p>ROLES</p>
+            <b><p>ROLES</p></b>
              @foreach ($roles as $role)
              <div class="custom-control custom-checkbox checkbox-primary m-2">
                 

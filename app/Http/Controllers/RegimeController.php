@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Regime;
+use App\Http\Requests\RegimeStoreRequest;
+use App\Http\Requests\RegimeUpdateRequest;
 use Illuminate\Http\Request;
 
 class RegimeController extends Controller
@@ -14,7 +16,11 @@ class RegimeController extends Controller
      */
     public function index()
     {
-        //
+        $regimes = Regime::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('regimes.index', compact('regimes'));
     }
 
     /**
@@ -24,7 +30,7 @@ class RegimeController extends Controller
      */
     public function create()
     {
-        //
+        return view('regimes.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class RegimeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegimeStoreRequest $request)
     {
-        //
+        $regime = Regime::create($request->all());
+
+        return redirect()->route('regimes.index')
+            ->with('info', 'REGIMEN LABORAL CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class RegimeController extends Controller
      */
     public function show(Regime $regime)
     {
-        //
+        return view('regimes.show', compact('regime'));
     }
 
     /**
@@ -57,7 +66,7 @@ class RegimeController extends Controller
      */
     public function edit(Regime $regime)
     {
-        //
+        return view('regimes.edit',compact('regime'));
     }
 
     /**
@@ -67,9 +76,13 @@ class RegimeController extends Controller
      * @param  \App\Regime  $regime
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Regime $regime)
+    public function update(RegimeUpdateRequest $request, Regime $regime)
     {
-        //
+        $regime->fill($request->all())
+            ->save();
+
+        return redirect()->route('regimes.index')
+            ->with('info', 'REGIMEN LABORAL ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class RegimeController extends Controller
      */
     public function destroy(Regime $regime)
     {
-        //
+        if ($regime->status == 'ACTIVO') {
+            $regime->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $regime->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

@@ -18,7 +18,16 @@
               </div>
               <div class="col-md-12">
                 <label for="description">DESCRIPCIÓN</label>
-              <textarea class="form-control" id="description" readonly>{{$year->description}}</textarea>
+              <textarea class="form-control mb-3" id="description" readonly>{{$year->description}}</textarea>
+                  
+              </div>
+              <div class="col-md-12">
+                <label for="description"><b>ESTADO</b></label>
+                @if($year->status=='ACTIVO')
+                  <p class="text-success"><b>{{$year->status}}</b></p>
+                @elseif($year->status=='INACTIVO')
+                  <p class="text-danger"><b>{{$year->status}}</b></p>
+                @endif
                   
               </div>
               

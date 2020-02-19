@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Office;
+use App\Http\Requests\OfficeStoreRequest;
+use App\Http\Requests\OfficeUpdateRequest;
 use Illuminate\Http\Request;
 
 class OfficeController extends Controller
@@ -14,7 +16,11 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        //
+        $offices = Office::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('offices.index', compact('offices'));
     }
 
     /**
@@ -24,7 +30,7 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        //
+        return view('offices.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class OfficeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OfficeStoreRequest $request)
     {
-        //
+        $office = Office::create($request->all());
+
+        return redirect()->route('offices.index')
+            ->with('info', 'OFICINA CREADA CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class OfficeController extends Controller
      */
     public function show(Office $office)
     {
-        //
+        return view('offices.show', compact('office'));
     }
 
     /**
@@ -57,7 +66,7 @@ class OfficeController extends Controller
      */
     public function edit(Office $office)
     {
-        //
+        return view('offices.edit',compact('office'));
     }
 
     /**
@@ -67,9 +76,13 @@ class OfficeController extends Controller
      * @param  \App\Office  $office
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Office $office)
+    public function update(OfficeUpdateRequest $request, Office $office)
     {
-        //
+        $office->fill($request->all())
+            ->save();
+
+        return redirect()->route('offices.index')
+            ->with('info', 'OFICINA ACTUALIZADA CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
-        //
+        if ($office->status == 'ACTIVO') {
+            $office->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $office->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

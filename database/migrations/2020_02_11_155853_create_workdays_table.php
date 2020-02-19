@@ -15,8 +15,8 @@ class CreateWorkdaysTable extends Migration
     {
         Schema::create('workdays', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('name');
-            $table->string('description');
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->timestamps();
         });

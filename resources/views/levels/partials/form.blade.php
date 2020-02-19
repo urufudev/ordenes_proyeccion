@@ -9,11 +9,11 @@
 @endif
 
 <div class="form-group">
-    {{Form::label('name','NIVEL')}}
+    <b>{{Form::label('name','NIVEL')}}</b>
     {{Form::text('name',null,['class'=>'form-control bestupper'])}}
 </div>
 <div class="form-group">
-    {{Form::label('description','DESCRIPCIÓN')}}
+    <b>{{Form::label('description','DESCRIPCIÓN')}}</b>
     {{Form::textarea('description',null,['class'=>'form-control  bestupper'])}}
 </div>
 

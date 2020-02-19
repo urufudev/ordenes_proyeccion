@@ -1,13 +1,13 @@
 <div class="form-group">
-    {{Form::label('name','NOMBRE')}}
+    <b>{{Form::label('name','NOMBRE')}}</b>
     {{Form::text('name',null,['class'=>'form-control bestupper'])}}
 </div>
 <div class="form-group">
-    {{Form::label('slug','SLUG')}}
+    <b>{{Form::label('slug','SLUG')}}</b>
     {{Form::text('slug',null,['class'=>'form-control'])}}
 </div>
 <div class="form-group">
-    {{Form::label('description','DESCRIPCIÓN')}}
+    <b>{{Form::label('description','DESCRIPCIÓN')}}</b>
     {{Form::textarea('description',null,['class'=>'form-control  bestupper'])}}
 </div>
 <hr>

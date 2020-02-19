@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Position;
+use App\Http\Requests\PositionStoreRequest;
+use App\Http\Requests\PositionUpdateRequest;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -14,7 +16,11 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('positions.index', compact('positions'));
     }
 
     /**
@@ -24,7 +30,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('positions.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PositionStoreRequest $request)
     {
-        //
+        $position = Position::create($request->all());
+
+        return redirect()->route('positions.index')
+            ->with('info', 'NIVEL CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        //
+        return view('positions.show', compact('position'));
     }
 
     /**
@@ -57,7 +66,7 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        return view('positions.edit',compact('position'));
     }
 
     /**
@@ -67,9 +76,13 @@ class PositionController extends Controller
      * @param  \App\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Position $position)
+    public function update(PositionUpdateRequest $request, Position $position)
     {
-        //
+        $position->fill($request->all())
+            ->save();
+
+        return redirect()->route('positions.index')
+            ->with('info', 'NIVEL ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        if ($position->status == 'ACTIVO') {
+            $position->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $position->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

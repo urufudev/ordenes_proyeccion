@@ -54,6 +54,15 @@
                 <p type="text" class="form-control" id="lugar" >{{$institution->lugar}}</p>
                 
               </div>
+              <div class="col-md-12">
+                <label for="description"><b>ESTADO</b></label>
+                @if($institution->status=='ACTIVO')
+                  <p class="text-success"><b>{{$institution->status}}</b></p>
+                @elseif($institution->status=='INACTIVO')
+                  <p class="text-danger"><b>{{$institution->status}}</b></p>
+                @endif
+                  
+              </div>
           </div>
           
           

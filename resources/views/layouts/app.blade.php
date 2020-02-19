@@ -33,10 +33,10 @@
         <!--navbar Logo section left-->
         <div class="topbar-left">
           <div class="main-logo">
-            <a href="index.html" class="madmin-logo-link">
-              <img src="{{asset('images/madmin-logo-icon.png')}}" class="logo" alt="Madmin logo">
+            <a href="{{route('home')}}" class="madmin-logo-link">
+              <img src="{{asset('images/logo_admin.png')}}" class="logo" alt="SAP DREA">
             </a>
-            <a href="index.html" class="logo-text">SAP - DREA</a>
+            <a href="{{route('home')}}" class="logo-text">SAP - DREA</a>
           </div>
         </div>
         <!--Topbar Logo section end-->
@@ -62,13 +62,23 @@
             <li class="dropdown">
 
               <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link user-dropdown-icon">
-                <img src="{{asset('images/user/thumb/default.png')}}" alt="Notification" class="list-thumbnail  rounded-circle">
+                
+                @if (Auth::user()->gender == 'MASCULINO')
+                      <img src="{{asset('images/user/user_m.png')}}" alt="Notification" class="list-thumbnail  rounded-circle">
+                    @else
+                      <img src="{{asset('images/user/user_f.png')}}" alt="Notification" class="list-thumbnail  rounded-circle">
+                  @endif
               </a>
 
               <!-- .user-dropdown start -->
               <div class="user-dropdown dropdown-menu pdn-15" aria-labelledby="dropdownMenuButton">
                 <div class="media">
-                  <img src="{{asset('images/user/thumb/default.png')}}" alt="Notification" class="user-thumb rounded-circle mr-3">
+                  @if (Auth::user()->gender == 'MASCULINO')
+                      <img src="{{asset('images/user/user_m.png')}}" alt="User image" class="user-thumb rounded-circle mr-3">
+                    @else
+                      <img src="{{asset('images/user/user_f.png')}}" alt="User image" class="user-thumb rounded-circle mr-3">
+                  @endif
+                  
                   <div class="media-body">
                   <h5 class="mgn-0">{{Auth::user()->name}}</h5>
                   {{Auth::user()->position}}
@@ -78,26 +88,29 @@
                   <li class="list-group-item pdn-y-5 pdn-x-0">
                     <i class="icon-user"></i>
                     <a href="#">
-                      <span class="mgn-l-10">Profile</span>
+                      <span class="mgn-l-10">PERFIL</span>
                     </a>
                   </li>
                   <li class="list-group-item pdn-y-5 pdn-x-0">
                     <i class="icon-key"></i>
                     <a href="#">
-                      <span class="mgn-l-10">Change password</span>
+                      <span class="mgn-l-10">CAMBIAR CONTRASEÑA</span>
                     </a>
                   </li>
-                  <li class="list-group-item pdn-y-5 pdn-x-0">
-                    <i class="icon-settings"></i>
-                    <a href="#">
-                      <span class="mgn-l-10">Settings</span>
-                    </a>
-                  </li>
+                  
                   <li class="list-group-item pdn-y-5 pdn-x-0">
                     <i class="icon-logout"></i>
-                    <a href="#">
-                      <span class="mgn-l-10">Signout</span>
+                    <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                             <span class="mgn-l-10">SALIR</span>
+                            </a>
+                    
                     </a>
+
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
                   </li>
                 </ul>
               </div>
@@ -122,8 +135,14 @@
 
           <!-- .aisde-header start -->
           <div class="aisde-header">
-            <img src="{{asset('images/user/thumb/user-thumb-7.png')}}" alt="User image">
-            <h6 class="user-name mgn-t-15">{{Auth::user()->name}}</h6>
+            @if (Auth::user()->gender == 'MASCULINO')
+                <img src="{{asset('images/user/user_m.png')}}" alt="User image">
+              @else
+                <img src="{{asset('images/user/user_f.png')}}" alt="User image">
+            @endif
+            
+            <h6 class="user-name mgn-t-15"><b>{{Auth::user()->name}}</b></h6>
+            <label>{{Auth::user()->position}}</label>
           </div>
           <!-- .aisde-header end -->
 
@@ -136,6 +155,9 @@
               <!-- ul.aside-nav start -->
               <ul class="nav aside-nav">
                 <!-- Index Dashboard -->
+                <li class="nav-title">
+                  MENU DE NAVEGACIÓN 
+                </li>
                 <li class="nav-item">
                   <a href="index.html" class="nav-link">
                     <i class="icon-grid"></i>
@@ -356,19 +378,19 @@
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
                       <i class="fas fa-clock"></i>
-                      <span>HORAS DE TRABAJO</span>
+                      <span>JORNADA LABORAL</span>
                     </a>
                     <ul>
                         @can('workdays.create')
                       <li>
                         <a href="{{route('workdays.create')}}">
-                          CREAR H. DE TRABAJO
+                          CREAR J. LABORAL
                         </a>
                       </li>
                       @endcan
                       <li>
                         <a href="{{route('workdays.index')}}">
-                          GESTIONAR H. DE TRABAJO
+                          GESTIONAR J. LABORAL
                         </a>
                       </li>
                     </ul>
@@ -415,7 +437,7 @@
                       @endcan
                       <li>
                         <a href="{{route('institutions.index')}}">
-                          GESTIONAR NIVEL
+                          GESTIONAR INSTITUCIONES
                         </a>
                       </li>
                     </ul>

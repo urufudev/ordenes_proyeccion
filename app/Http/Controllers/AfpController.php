@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Afp;
+use App\Http\Requests\AfpStoreRequest;
+use App\Http\Requests\AfpUpdateRequest;
 use Illuminate\Http\Request;
 
 class AfpController extends Controller
@@ -14,7 +16,11 @@ class AfpController extends Controller
      */
     public function index()
     {
-        //
+        $afps = Afp::orderBy('id', 'DESC')
+            
+            ->get();
+        
+        return view('afps.index', compact('afps'));
     }
 
     /**
@@ -24,7 +30,7 @@ class AfpController extends Controller
      */
     public function create()
     {
-        //
+        return view('afps.create');
     }
 
     /**
@@ -33,9 +39,12 @@ class AfpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AfpStoreRequest $request)
     {
-        //
+        $afp = Afp::create($request->all());
+
+        return redirect()->route('afps.index')
+            ->with('info', 'AFP CREADO CON ÉXITO');
     }
 
     /**
@@ -46,7 +55,7 @@ class AfpController extends Controller
      */
     public function show(Afp $afp)
     {
-        //
+        return view('afps.show', compact('afp'));
     }
 
     /**
@@ -57,7 +66,7 @@ class AfpController extends Controller
      */
     public function edit(Afp $afp)
     {
-        //
+        return view('afps.edit',compact('afp'));
     }
 
     /**
@@ -67,9 +76,13 @@ class AfpController extends Controller
      * @param  \App\Afp  $afp
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Afp $afp)
+    public function update(AfpUpdateRequest $request, Afp $afp)
     {
-        //
+        $afp->fill($request->all())
+            ->save();
+
+        return redirect()->route('afps.index')
+            ->with('info', 'AFP ACTUALIZADO CON EXITO');
     }
 
     /**
@@ -80,6 +93,13 @@ class AfpController extends Controller
      */
     public function destroy(Afp $afp)
     {
-        //
+        if ($afp->status == 'ACTIVO') {
+            $afp->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $afp->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

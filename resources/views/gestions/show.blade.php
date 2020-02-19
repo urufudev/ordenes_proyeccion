@@ -92,6 +92,15 @@
                 <p type="text" class="form-control" id="r_finanzas" >{{$gestion->r_finanzas}}</p>
                  
               </div>
+              <div class="col-md-12">
+                <label for="description"><b>ESTADO</b></label>
+                @if($gestion->status=='ACTIVO')
+                  <p class="text-success"><b>{{$gestion->status}}</b></p>
+                @elseif($gestion->status=='INACTIVO')
+                  <p class="text-danger"><b>{{$gestion->status}}</b></p>
+                @endif
+                  
+              </div>
           </div>
       </div>
       <div class="modal-footer">

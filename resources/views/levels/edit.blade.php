@@ -9,7 +9,7 @@ Editar Nivel | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>EDITAR LEVEL</h4>
+                <h4>EDITAR NIVEL</h4>
             </div>
             <div class="col-md-6">
                 <a href="{{route('levels.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
