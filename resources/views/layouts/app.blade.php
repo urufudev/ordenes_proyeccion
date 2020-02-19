@@ -156,7 +156,7 @@
               <ul class="nav aside-nav">
                 <!-- Index Dashboard -->
                 <li class="nav-title">
-                  MENU DE NAVEGACIÓN 
+                  <b>MENU DE NAVEGACIÓN</b>  
                 </li>
                 <li class="nav-item">
                   <a href="index.html" class="nav-link">
