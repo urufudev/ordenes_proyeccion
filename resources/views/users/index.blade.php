@@ -32,8 +32,8 @@ Lista de Usuarios | Sistema de Administración de Personal
                     <th>ID</th>
                     <th>NOMBRE</th>
                     
-                    <th>NOMBRE</th>
-                    <th>NOMBRE</th>
+                    <th>OFICINA</th>
+                    
                     
                     <th class="text-center">OPCIONES</th>
                 </tr>
@@ -41,13 +41,13 @@ Lista de Usuarios | Sistema de Administración de Personal
             <tbody>
                 @foreach($users as $user)
                 <tr>
-                    <td><b>{{$user->id}}</b></td>
+                    <td width="3%"><b>{{$user->id}}</b></td>
                     <td>{{$user->full_name}}</td>
                     
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->name}}</td>
+                    <td>{{$user->office->name}}</td>
                     
-                    <td class="text-center">
+                    
+                    <td width="5%" class="text-center">
                        {{--  <div class="btn-group m-2">
                             <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Opciones
@@ -72,7 +72,7 @@ Lista de Usuarios | Sistema de Administración de Personal
                                 <i class="far fa-edit"></i>
                               </a>
                               @endcan
-                              @can('users.delete')
+                              @can('users.destroy')
                               <a href="" data-target="#modal-delete-{{$user->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ELIMINAR">
                                 <i class="far fa-trash-alt"></i>
                               </a>

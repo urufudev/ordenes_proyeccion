@@ -40,7 +40,8 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                 @foreach($orders as $order)
                 <tr>
                     <td><b>{{$order->id}}</b></td>
-                    <td>{{$order->nombre}} {{$order->ap_paterno}} {{$order->ap_materno}}</td>
+                   
+                    <td>{{$order->full_name}}</td>
                     <td>{{$order->position->name}}</td>
                     <td>{{$order->institution->nombre}}</td>
                     <td>{{$order->fecha}}</td>

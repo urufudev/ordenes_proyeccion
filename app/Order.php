@@ -12,7 +12,8 @@ class Order extends Model
         'o_plaza','d_plaza','lugar','distrito','provincia','accion','referencia',
         'i_vigencia','f_vigencia','status'
     ];
-
+    protected $appends =['full_name'];
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -38,5 +39,9 @@ class Order extends Model
     public function position()
     {
         return $this->belongsTo(Position::class);
+    }
+    public function getFullNameAttribute()
+    {
+        return "{$this->ap_paterno} {$this->ap_materno}, {$this->nombre}";
     }
 }

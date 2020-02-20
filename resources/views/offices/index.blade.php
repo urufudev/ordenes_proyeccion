@@ -61,6 +61,13 @@ Lista de Oficinas | Sistema de Administración de Personal
                               <a  href="{{route('offices.edit',$office->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
                                 <i class="far fa-edit"></i>
                               </a>
+                              <a  href="{{route('offices.roledit',$office->id)}}" class="btn btn-outline-secondary  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="ROLES">
+                                <i class="fas fa-shield-alt"></i>
+                              </a>
+                              
+
+                            
+
                               @endcan
                               @can('offices.destroy')
                               

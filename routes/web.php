@@ -185,6 +185,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('offices/{office}/edit', 'OfficeController@edit')->name('offices.edit')
         ->middleware('can:offices.edit');
+    
+        Route::get('offices/{office}/roledit', 'OfficeController@roledit')->name('offices.roledit')
+        ->middleware('can:offices.edit');
+
+    Route::put('offices/{office}', 'OfficeController@rolupdate')->name('offices.rolupdate')
+        ->middleware('can:offices.edit');
 
 
                 //Cargos

@@ -13,7 +13,7 @@
         <div class="form-row">
               <div class="col-md-6">
                 <label for="n_expediente"><b>SISGEDO</b></label>
-                <p type="text" class="form-control" id="n_expediente" >{{$order->n_expediente}}</p>
+                <textarea type="text" class="form-control" id="n_expediente" >{{$order->n_expediente}}</textarea>
           
               </div>
               <div class="col-md-6">
@@ -24,7 +24,7 @@
 
               <div class="col-md-12">
                 <label for="name"><b>NOMBRE COMPLETO</b></label>
-                <p class="form-control mb-3" id="name" readonly>{{$order->nombre}} {{$order->ap_paterno}} {{$order->ap_materno}}</p>
+                <textarea class="form-control mb-3" id="name" readonly>{{$order->nombre}} {{$order->ap_paterno}} {{$order->ap_materno}}</textarea>
                   
               </div>
               <div class="col-md-12">
@@ -34,21 +34,24 @@
               </div>
               <div class="col-md-12">
                 <label for="institution_id"><b>INSTITUCIÓNS</b></label>
-                <p class="form-control mb-3" id="institution_id" readonly>{{$order->institution->nombre}}</p>
+                <textarea class="form-control mb-3" id="institution_id" readonly>{{$order->institution->nombre}}</textarea>
                   
               </div>
               <div class="col-md-12">
                 <label for="acciones"><b>ACCIONES A TOMAR</b></label>
-                {!! $order->accion !!}
-                  
+                  {{-- <div class="pdn-10 pdn-sm-15 bdr d-flex flex-column">
+                    {!! $order->accion !!}
+                  </div> --}}
+                  {!! $order->accion !!}
+                  <hr>
               </div>
               <div class="col-md-12">
                 <label for="referencia"><b>REFERENCIA</b></label>
-                <p class="form-control mb-3" id="referencia" readonly>{{$order->referencia}}</p>
+                <textarea class="form-control mb-3" id="referencia" readonly>{{$order->referencia}}</textarea>
                   
               </div>
               
-              <div class="col-md-12">
+              {{-- <div class="col-md-12">
                 <label for="description"><b>ESTADO</b></label>
                 @if($order->status=='ACTIVO')
                   <p class="text-success"><b>{{$order->status}}</b></p>
@@ -56,7 +59,7 @@
                   <p class="text-danger"><b>{{$order->status}}</b></p>
                 @endif
                   
-              </div>
+              </div> --}}
               
           </div>
           

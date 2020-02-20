@@ -6,7 +6,10 @@ use App\Office;
 use App\Http\Requests\OfficeStoreRequest;
 use App\Http\Requests\OfficeUpdateRequest;
 use Illuminate\Http\Request;
-
+use Caffeinated\Shinobi\Models\Role;
+use App\RoleUser;
+use DB;
+use App\User;
 class OfficeController extends Controller
 {
     /**
@@ -81,6 +84,61 @@ class OfficeController extends Controller
         $office->fill($request->all())
             ->save();
 
+        return redirect()->route('offices.index')
+            ->with('info', 'OFICINA ACTUALIZADA CON EXITO');
+    }
+
+    public function roledit($id)
+    {
+        $office = Office::find($id);
+        $roles = Role::all();
+        $users = User::where('office_id', $office->id)
+            ->get();
+
+        return view('offices.roledit', compact('office', 'users', 'roles'));
+    }
+
+    public function rolupdate(Request $request, $id)
+    {
+        if ($request->roles == []) {
+            return redirect()->back()
+            ->with('danger', 'SELEECCIONE UN ROL');
+        }
+        foreach ($request->roles as $key => $value) {
+            foreach ($request->users as $user_id) {
+                
+                if ($key == $user_id) {
+                    
+                        
+                   /*  for ($i=0; $i <= count($roles_users); $i++) { 
+                        DB::table('role_user')
+                        ->where('user_id', $user_id)
+                        ->delete();
+                    }     */
+                    $roleUsers = RoleUser::where('user_id', $user_id)->get();
+                        
+                        foreach ($roleUsers as $role_user) {
+                            $role_user->delete();
+                        }
+                    
+                    foreach ($value as $key => $rol_id) {
+                        DB::table('role_user')
+                            ->insert([
+                                'role_id' => $rol_id,
+                                'user_id' => $user_id,
+                                
+                            ]);
+                            
+
+                    }
+
+
+                } else {
+                    echo 'no existe el usuario';
+                }
+
+            }
+        }
         return redirect()->route('offices.index')
             ->with('info', 'OFICINA ACTUALIZADA CON EXITO');
     }
