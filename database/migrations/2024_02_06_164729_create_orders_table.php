@@ -22,7 +22,6 @@ class CreateOrdersTable extends Migration
             $table->integer('level_id')->unsigned();
             $table->integer('position_id')->unsigned();
 
-            $table->integer('n_orden');
             $table->date('fecha');
             $table->string('n_expediente');
             $table->integer('folio');
