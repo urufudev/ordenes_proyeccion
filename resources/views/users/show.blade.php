@@ -65,8 +65,8 @@ Ver Usuarios | Sistema de Administración de Personal
               <p type="text" class="form-control" id="position">{{$user->position}}</p>
           </div>
           <div class="col-md-4 mb-3">
-            <label for="regime"><b>REGIMEN</b></label>
-            <p type="text" class="form-control" id="regime_id">{{$user->regime->name}}</p>
+            <label for="regime"><b>REGIMEN LABORAL</b></label>
+            <p type="text" class="form-control" id="regime_id">{{$user->laboral->name}}</p>
           </div>
       </div>
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Office;
-use App\Regime;
+use App\Laboral;
 use Caffeinated\Shinobi\Models\Role;
 
 use Illuminate\Http\Request;
@@ -36,7 +36,7 @@ class UserController extends Controller
         $offices=Office::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
-        $regimes=Regime::orderBy('name','ASC')
+        $laborals=Laboral::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
         $roles = Role::get();
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         
 
-        return view('users.create',compact('offices','regimes','roles'));
+        return view('users.create',compact('offices','laborals','roles'));
     }
 
     /**
@@ -64,7 +64,7 @@ class UserController extends Controller
         $user->gender  =  $request['gender'];
         $user->f_birth  =  $request['f_birth'];
         $user->office_id  =  $request['office_id'];
-        $user->regime_id  =  $request['regime_id'];
+        $user->laboral_id  =  $request['laboral_id'];
         $user->position  =  $request['position'];
         $user->phone  =  $request['phone'];
         $user->email  =  $request['email'];
@@ -109,14 +109,14 @@ class UserController extends Controller
         $offices=Office::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
-        $regimes=Regime::orderBy('name','ASC')
+        $laborals=Laboral::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
         $roles = Role::get();
 
 
 
-        return view('users.edit',compact('user','offices','regimes','roles'));
+        return view('users.edit',compact('user','offices','laborals','roles'));
     }
 
     /**
@@ -138,7 +138,7 @@ class UserController extends Controller
         $user->f_birth  =  $request['f_birth'];
         $user->office_id  =  $request['office_id'];
         $user->position  =  $request['position'];
-        $user->regime_id  =  $request['regime_id'];
+        $user->laboral_id  =  $request['laboral_id'];
         $user->phone  =  $request['phone'];
         $user->email  =  $request['email'];
         

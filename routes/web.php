@@ -174,7 +174,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('offices/create', 'OfficeController@create')->name('offices.create')
         ->middleware('can:offices.create');
 
-    Route::put('offices/{office}', 'OfficeController@update')->name('offices.update')
+    Route::put('offices/{office}/update', 'OfficeController@update')->name('offices.update')
         ->middleware('can:offices.edit');
 
     Route::get('offices/{office}', 'OfficeController@show')->name('offices.show')
@@ -217,8 +217,30 @@ Route::middleware(['auth'])->group(function () {
 
 
         //Regimen Laboral
+    Route::post('laborals/store', 'LaboralController@store')->name('laborals.store')
+        ->middleware('can:laborals.create');
+
+    Route::get('laborals', 'LaboralController@index')->name('laborals.index')
+        ->middleware('can:laborals.index');
+
+    Route::get('laborals/create', 'LaboralController@create')->name('laborals.create')
+        ->middleware('can:laborals.create');
+
+    Route::put('laborals/{laboral}', 'LaboralController@update')->name('laborals.update')
+        ->middleware('can:laborals.edit');
+
+    Route::get('laborals/{laboral}', 'LaboralController@show')->name('laborals.show')
+        ->middleware('can:laborals.show');
+
+    Route::delete('laborals/{laboral}', 'LaboralController@destroy')->name('laborals.destroy')
+        ->middleware('can:laborals.destroy');
+
+    Route::get('laborals/{laboral}/edit', 'LaboralController@edit')->name('laborals.edit')
+        ->middleware('can:laborals.edit');
+
+        //Regimen de Pensiones
     Route::post('regimes/store', 'RegimeController@store')->name('regimes.store')
-        ->middleware('can:regimes.create');
+    ->middleware('can:regimes.create');
 
     Route::get('regimes', 'RegimeController@index')->name('regimes.index')
         ->middleware('can:regimes.index');

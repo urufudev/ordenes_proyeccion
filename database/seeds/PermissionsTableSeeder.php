@@ -311,37 +311,74 @@ class PermissionsTableSeeder extends Seeder
         //Regimen Laboral
         Permission::create([
 
-            'name' => 'Navegar regimen laborarl',
+            'name' => 'Navegar regimen laboral',
+            'slug'=> 'laborals.index',
+            'description' => 'Lista y navega todos los regimens laborales del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de regimen laboral',
+            'slug'=> 'laborals.show',
+            'description' => 'Ver en detalle cada regimen laboral del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de regimen laboral',
+            'slug'=> 'laborals.create',
+            'description' => 'Crear un regimen laboral del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de regimen laboral',
+            'slug'=> 'laborals.edit',
+            'description' => 'Edita cualquier regimen laboral del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar regimen laboral',
+            'slug'=> 'laborals.destroy',
+            'description' => 'Elimina cualquier regimen laboral del sistema',
+        
+        ]);
+
+        //Regimen de Pensiones
+        Permission::create([
+
+            'name' => 'Navegar regimen de pensiones',
             'slug'=> 'regimes.index',
-            'description' => 'Lista y navega todos los niveles del sistema',
+            'description' => 'Lista y navega todos los regimens de pensiones del sistema',
         
         ]);
         Permission::create([
 
-            'name' => 'Ver detalle de regimen laborarl',
+            'name' => 'Ver detalle de regimen de pensiones',
             'slug'=> 'regimes.show',
-            'description' => 'Ver en detalle cada regimen laborarl del sistema',
+            'description' => 'Ver en detalle cada regimen de pensiones del sistema',
         
         ]);
         Permission::create([
 
-            'name' => 'Creacion de regimen laborarl',
+            'name' => 'Creacion de regimen de pensiones',
             'slug'=> 'regimes.create',
-            'description' => 'Crear un regimen laborarl del sistema',
+            'description' => 'Crear un regimen de pensiones del sistema',
         
         ]);
         Permission::create([
 
-            'name' => 'Edicion de regimen laborarl',
+            'name' => 'Edicion de regimen de pensiones',
             'slug'=> 'regimes.edit',
             'description' => 'Edita cualquier regimen laborarl del sistema',
         
         ]);
         Permission::create([
 
-            'name' => 'Eliminar regimen laborarl',
+            'name' => 'Eliminar regimen de pensiones',
             'slug'=> 'regimes.destroy',
-            'description' => 'Elimina cualquier regimen laborarl del sistema',
+            'description' => 'Elimina cualquier regimen de pensiones del sistema',
         
         ]);
 

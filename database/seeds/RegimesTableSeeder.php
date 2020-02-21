@@ -12,11 +12,7 @@ class RegimesTableSeeder extends Seeder
      */
     public function run()
     {
-        Regime::create([
-            'name'=>'DL 19990',
-            'description'=>'DL 19990',
-            'status'=>'ACTIVO'
-        ]);
+       
 
         factory(Regime::class,20)->create();
     }

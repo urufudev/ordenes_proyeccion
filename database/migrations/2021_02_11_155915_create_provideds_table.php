@@ -18,7 +18,7 @@ class CreateProvidedsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('regime_id')->unsigned();
             $table->integer('gestion_id')->unsigned();
-            $table->integer('afp_id')->unsigned();
+            $table->integer('afp_id')->unsigned()->nullable();
             $table->integer('position_id')->unsigned();
             $table->integer('remunerative_id')->unsigned();
             $table->integer('workday_id')->unsigned();
@@ -29,9 +29,11 @@ class CreateProvidedsTable extends Migration
             $table->string('nombre');
             $table->string('ap_paterno');
             $table->string('ap_materno');
-            $table->integer('dni');
+            $table->enum('t_documento',['DNI','CE','PTP'])->default('DNI');
+            $table->integer('n_documento');
             $table->date('f_nacimiento');
-            $table->string('c_multired');
+            $table->string('c_multired')->nullable();
+            $table->string('cussp')->nullable();
             $table->mediumtext('estudios')->nullable();
             $table->string('n_expediente');
             $table->string('c_plaza');

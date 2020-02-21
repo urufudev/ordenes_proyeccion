@@ -65,8 +65,8 @@
         {{Form::text('position',null,['class'=>'form-control bestupper'])}}
     </div>
     <div class="col-md-3 mb-3">
-        <b>{{Form::label('regime_id','REGIMEN')}}</b>
-        {{Form::select('regime_id',$regimes,null,['class'=>'form-control'])}}
+        <b>{{Form::label('laboral_id','REGIMEN LABORAL')}}</b>
+        {{Form::select('laboral_id',$laborals,null,['class'=>'form-control'])}}
     
     </div>
 </div>

@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class RegimeUpdateRequest extends FormRequest
+class LaboralStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +24,8 @@ class RegimeUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'name' => ['required', Rule::unique('regimes', 'name')->ignore($this->route('regime'))],
-
+            'name' =>'required|unique:regimes,name',
+           
         ];
     }
 
@@ -37,7 +35,6 @@ class RegimeUpdateRequest extends FormRequest
     
         'name.required' =>'EL CAMPO NOMBRE ES OBLIGATORIO',
         'name.unique' =>'EL NOMBRE YA SE ENCUENTRA REGISTRADO',
-        
         
         ];
     }

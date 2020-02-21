@@ -18,7 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'office_id'=>rand(1,20),
+        /* 'office_id'=>rand(1,20),
         'regime_id'=>rand(1,20),
         'name' => $faker->name,
         
@@ -35,6 +35,6 @@ $factory->define(User::class, function (Faker $faker) {
         
         'status'=>$faker->randomElement(['ACTIVO','INACTIVO']),
 
-        'remember_token' => Str::random(10),
+        'remember_token' => Str::random(10), */
     ];
 });

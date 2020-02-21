@@ -289,7 +289,7 @@
                       <span>CARGOS</span>
                     </a>
                     <ul>
-                        @can('positions.create')
+                      @can('positions.create')
                       <li>
                         <a href="{{route('positions.create')}}">
                           CREAR CARGO
@@ -305,23 +305,46 @@
                   </li>
                 @endcan
 
-                @can('regimes.index')
+                @can('laborals.index')
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
-                      <i class="fab fa-stack-overflow"></i>
+                      <i class="fas fa-people-carry"></i>
                       <span>REGIMEN LABORAL</span>
                     </a>
                     <ul>
-                        @can('regimes.create')
+                        @can('laborals.create')
                       <li>
-                        <a href="{{route('regimes.create')}}">
+                        <a href="{{route('laborals.create')}}">
                           CREAR R. LABORAL
                         </a>
                       </li>
                       @endcan
                       <li>
-                        <a href="{{route('regimes.index')}}">
+                        <a href="{{route('laborals.index')}}">
                           GESTIONAR R. LABORAL
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+
+                @can('regimes.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="fab fa-stack-overflow"></i>
+                      <span>REGIMEN DE PENSIONES</span>
+                    </a>
+                    <ul>
+                        @can('regimes.create')
+                      <li>
+                        <a href="{{route('regimes.create')}}">
+                          CREAR R. PENSIONES
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('regimes.index')}}">
+                          GESTIONAR R. PENSIONES
                         </a>
                       </li>
                     </ul>
@@ -467,22 +490,22 @@
                   </li>
                 @endcan
 
-                @can('orders.index')
+                @can('provideds.index')
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">
                       <i class="far fa-file-powerpoint"></i>
                       <span>PROVEIDO PRESUPUESTAL</span>
                     </a>
                     <ul>
-                        @can('orders.create')
+                        @can('provideds.create')
                       <li>
-                        <a href="{{route('orders.create')}}">
+                        <a href="{{route('provideds.create')}}">
                           CREAR P. PRESUPUESTAL
                         </a>
                       </li>
                       @endcan
                       <li>
-                        <a href="{{route('orders.index')}}">
+                        <a href="{{route('provideds.index')}}">
                           GESTIONAR P. PRESUPUESTAL
                         </a>
                       </li>

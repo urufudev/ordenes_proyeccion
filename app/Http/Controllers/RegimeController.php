@@ -44,7 +44,7 @@ class RegimeController extends Controller
         $regime = Regime::create($request->all());
 
         return redirect()->route('regimes.index')
-            ->with('info', 'REGIMEN LABORAL CREADO CON ÉXITO');
+            ->with('info', 'REGIMEN DE PENSIONES CREADO CON ÉXITO');
     }
 
     /**
@@ -82,7 +82,7 @@ class RegimeController extends Controller
             ->save();
 
         return redirect()->route('regimes.index')
-            ->with('info', 'REGIMEN LABORAL ACTUALIZADO CON EXITO');
+            ->with('info', 'REGIMEN DE PENSIONES ACTUALIZADO CON EXITO');
     }
 
     /**

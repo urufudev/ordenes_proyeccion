@@ -48,9 +48,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Office::class);
     }
-    public function regime()
+    public function laboral()
     {
-        return $this->belongsTo(Regime::class);
+        return $this->belongsTo(Laboral::class);
     }
 
     public function getFullNameAttribute()

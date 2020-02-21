@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('office_id')->unsigned();
-            $table->integer('regime_id')->unsigned();
+            $table->integer('laboral_id')->unsigned();
 
             $table->string('name');
             $table->string('email',128)->unique();
@@ -41,7 +41,7 @@ class CreateUsersTable extends Migration
             $table->foreign('office_id')->references('id')->on('offices')
                 ->onUpdate('cascade');
             
-            $table->foreign('regime_id')->references('id')->on('regimes')
+            $table->foreign('laboral_id')->references('id')->on('laborals')
                 ->onUpdate('cascade');
 
                
