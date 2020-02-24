@@ -12,7 +12,7 @@ Crear Proveido Presupuestal | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>CREAR PROVEIDO PRESUPUESTAL xd  </h4>
+                <h4>CREAR PROVEIDO PRESUPUESTAL</h4>
             </div>
             <div class="col-md-6">
                 <a href="{{route('provideds.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
@@ -59,7 +59,7 @@ Crear Proveido Presupuestal | Sistema de Administración de Personal
 
     });
 
-    CKEDITOR.config.height= 200;
+    CKEDITOR.config.height= 100;
     CKEDITOR.config.widht= 400;
     CKEDITOR.config.skin = 'office2013';
 

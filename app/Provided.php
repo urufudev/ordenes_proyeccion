@@ -12,6 +12,7 @@ class Provided extends Model
         'dni','f_nacimiento','c_multired','estudios','n_expediente','c_plaza','motivo',
         'resolucion','i_contrato','f_contrato','referencia','status'
     ];
+    protected $appends =['full_name'];
 
     public function user()
     {
@@ -54,5 +55,9 @@ class Provided extends Model
     public function year()
     {
         return $this->belongsTo(Year::class);
+    }
+    public function getFullNameAttribute()
+    {
+        return "{$this->ap_paterno} {$this->ap_materno}, {$this->nombre}";
     }
 }

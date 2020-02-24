@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Editar Orden de Proyección | Sistema de Administración de Personal
+Editar Proveido Presupuestal | Sistema de Administración de Personal
 @endsection
 
 @section('content')
@@ -9,10 +9,10 @@ Editar Orden de Proyección | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>EDITAR ORDEN DE PROYECCIÓN</h4>
+                <h4>EDITAR PROVEIDO PRESUPUESTAL</h4>
             </div>
             <div class="col-md-6">
-                <a href="{{route('orders.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
+                <a href="{{route('provideds.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>VOLVER</b> 
             </a>        
             </div> 
@@ -21,9 +21,9 @@ Editar Orden de Proyección | Sistema de Administración de Personal
       </div>
       <div class="card-body ">
 
-        {!! Form::model($order,['route'=>['orders.update', $order->id],'method'=>'PUT']) !!}
+        {!! Form::model($provided,['route'=>['provideds.update', $provided->id],'method'=>'PUT']) !!}
             
-            @include('orders.partials.form')
+            @include('provideds.partials.form')
 
         {!! Form::close() !!}  
            
@@ -58,7 +58,7 @@ Editar Orden de Proyección | Sistema de Administración de Personal
 
     });
 
-    CKEDITOR.config.height= 200;
+    CKEDITOR.config.height= 100;
     CKEDITOR.config.widht= 400;
     CKEDITOR.config.skin = 'office2013';
 

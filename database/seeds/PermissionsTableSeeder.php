@@ -533,6 +533,13 @@ class PermissionsTableSeeder extends Seeder
             'description' => 'Elimina cualquier orden de proyeccion del sistema',
         
         ]);
+        Permission::create([
+
+            'name' => 'Imprimir  orden presupuestal',
+            'slug'=> 'orders.pdf',
+            'description' => 'Imprimir la orden presupuestal.',
+        
+        ]);
 
          //Proveido Presupuestal
          Permission::create([
@@ -568,6 +575,13 @@ class PermissionsTableSeeder extends Seeder
             'name' => 'Eliminar proveido presupuestal',
             'slug'=> 'provideds.destroy',
             'description' => 'Elimina cualquier proveido presupuestal del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Imprimir  proveido presupuestal',
+            'slug'=> 'provideds.pdf',
+            'description' => 'Imprimir proveido presupuestal.',
         
         ]);
     }

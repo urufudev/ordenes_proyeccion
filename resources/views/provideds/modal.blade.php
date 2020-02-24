@@ -5,8 +5,8 @@
 
 
 
-    <div class="modal fade" id="modal-delete-{{$order->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        {{Form::Open(array('action' =>array('OrderController@destroy',$order->id),'method'=>'delete'))}}
+    <div class="modal fade" id="modal-delete-{{$provided->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{Form::Open(array('action' =>array('ProvidedController@destroy',$provided->id),'method'=>'delete'))}}
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">

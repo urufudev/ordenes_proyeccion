@@ -152,4 +152,15 @@ class OrderController extends Controller
         $year->update(['status' => 'INACTIVO']);
             return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
     }
+
+    public function pdf(Request $request,Order $order){
+        
+        /* $order = Order::find($order); */
+              
+
+            $pdf = \PDF::loadView('pdf.order',compact('order'))->setPaper('A5', 'portrait');
+            return $pdf->stream();
+        
+
+    }
 }

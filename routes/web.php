@@ -351,7 +351,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('orders/{order}/edit', 'OrderController@edit')->name('orders.edit')
         ->middleware('can:orders.edit');
-
+    
+        Route::get('orders/{order}/pdf', 'OrderController@pdf')->name('orders.pdf')
+        ->middleware('can:orders.pdf');
 
         //Proveido Presupuestal
     Route::post('provideds/store', 'ProvidedController@store')->name('provideds.store')

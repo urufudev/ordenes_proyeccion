@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Lista de Ordenes de Proyección | Sistema de Administración de Personal
+Lista de Proveido Presupuestal | Sistema de Administración de Personal
 @endsection
 
 @section('content')
@@ -9,11 +9,11 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
       <div class="card-header pdn-20  ">
         <div class="row">
             <div class="col-md-6 pdn-sm-y-10">
-                <h4>LISTA DE ORDENES DE PROYECCIÓN</h4>
+                <h4>LISTA DE PROVEIDO PRESUPUESTAL</h4>
             </div>
-            @can('orders.create')
+            @can('provideds.create')
             <div class="col-md-6">
-                <a href="{{route('orders.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
+                <a href="{{route('provideds.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>CREAR</b> 
             </a>        
             </div>   
@@ -22,11 +22,12 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
         
       </div>
       <div class="card-body table-responsive">
-        <table data-order='[[ 0, "desc" ]]' id="dgwTabla" class="table js-exportable">
+        <table data-provided='[[ 0, "desc" ]]' id="dgwTabla" class="table js-exportable">
             <thead >
                 <tr>
                     <th width="3%">ID</th>
                     <th>NOMBRE</th>
+                    <th>SISGEDO</th>
                     <th>CARGO</th>
                     <th>INSTITUCIÓN</th>
                     <th>FECHA</th>
@@ -37,21 +38,22 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                 </tr>
             </thead>
             <tbody>
-                @foreach($orders as $order)
+                @foreach($provideds as $provided)
                 <tr>
-                    <td><b>{{$order->id}}</b></td>
+                    <td><b>{{$provided->id}}</b></td>
                    
-                    <td>{{$order->full_name}}</td>
-                    <td>{{$order->position->name}}</td>
-                    <td>{{$order->institution->nombre}}</td>
-                    <td>{{$order->fecha}}</td>
-                    <td>{{$order->referencia}}</td>
+                    <td>{{$provided->full_name}}</td>
+                    <td>{{$provided->n_expediente}}</td>
+                    <td>{{$provided->position->name}}</td>
+                    <td>{{$provided->institution->nombre}}</td>
+                    <td>{{$provided->fecha}}</td>
+                    <td>{{$provided->referencia}}</td>
                    
-                    {{-- @if($order->status=='ACTIVO')
-                      <td class="text-success"><b>{{$order->status}}</b></td>
+                    {{-- @if($provided->status=='ACTIVO')
+                      <td class="text-success"><b>{{$provided->status}}</b></td>
 
-                    @elseif($order->status=='INACTIVO')
-                      <td class="text-danger"><b>{{$order->status}}</b></td>
+                    @elseif($provided->status=='INACTIVO')
+                      <td class="text-danger"><b>{{$provided->status}}</b></td>
 
                     @endif --}}
                     
@@ -59,27 +61,27 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                     <td class="text-center">
                       
                         <div class="btn-group pull-right" role="group" aria-label="Basic example">
-                          @can('orders.show')
-                              <a href="" data-target="#modal-show-{{$order->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
+                          @can('provideds.show')
+                              <a href="" data-target="#modal-show-{{$provided->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
                                 <i class="fas fa-search"></i>
                               </a>
                               @endcan
-                              @can('orders.edit')
-                              <a  href="{{route('orders.edit',$order->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
+                              @can('provideds.edit')
+                              <a  href="{{route('provideds.edit',$provided->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">
                                 <i class="far fa-edit"></i>
                               </a>
                               @endcan
-                              @can('orders.destroy')
-                              <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
+                              @can('provideds.destroy')
+                              <a href="" data-target="#modal-delete-{{$provided->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
                                 <i class="far fa-trash-alt"></i>
                               </a>
-                                {{-- @if($order->status=='ACTIVO')
-                                <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
+                                {{-- @if($provided->status=='ACTIVO')
+                                <a href="" data-target="#modal-delete-{{$provided->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
                                   <i class="far fa-trash-alt"></i>
                                 </a>
 
-                                @elseif($order->status=='INACTIVO')
-                                <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
+                                @elseif($provided->status=='INACTIVO')
+                                <a href="" data-target="#modal-delete-{{$provided->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
                                   <i class="far fa-check-square"></i>
                                 </a>
 
@@ -90,8 +92,8 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                         </div>
                         
                     </td>
-                    @include('orders.modal')
-                    @include('orders.show')
+                    @include('provideds.modal')
+                    @include('provideds.show')
                 </tr>
                 
                 @endforeach

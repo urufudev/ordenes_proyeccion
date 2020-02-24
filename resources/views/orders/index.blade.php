@@ -70,20 +70,18 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                               </a>
                               @endcan
                               @can('orders.destroy')
-                              <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
+                              <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-danger btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
                                 <i class="far fa-trash-alt"></i>
                               </a>
-                                {{-- @if($order->status=='ACTIVO')
-                                <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-danger btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="SUSPENDER">
-                                  <i class="far fa-trash-alt"></i>
-                                </a>
-
-                                @elseif($order->status=='INACTIVO')
-                                <a href="" data-target="#modal-delete-{{$order->id}}" class="btn btn-outline-warning btn-rounded btn-floating" data-toggle="modal" id="modal-delete" class="btn btn-sm btn-danger"  data-placement="top" title="ACTIVAR">
-                                  <i class="far fa-check-square"></i>
-                                </a>
-
-                                @endif --}}
+                              
+                              @endcan
+                              @can('orders.pdf')
+                                
+                                    
+                                    <a href="{{route('orders.pdf',$order->id)}}" class="btn btn-outline-info btn-rounded btn-floating" target="_blank"  data-toggle="tooltip" data-placement="top" title="IMPRIMIR">
+                                    <i class="fas fa-print" ></i>
+                                    </a>
+                               
                               @endcan
 
                             
