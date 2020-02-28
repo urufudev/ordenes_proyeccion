@@ -73,8 +73,47 @@ class OrderController extends Controller
      */
     public function store(OrderStoreRequest $request)
     {
-        $order = Order::create($request->all());
+        /* $order = Order::create($request->all()); */
 
+        $order = new Order();
+        $order->user_id = $request->user_id;
+        $order->gestion_id = $request->gestion_id;
+        $order->institution_id = $request->institution_id;
+        $order->year_id = $request->year_id;
+        $order->level_id = $request->level_id;
+        $order->position_id = $request->position_id;
+        
+        $order->fecha = $request->fecha;
+        $order->n_expediente = $request->n_expediente;
+        $order->folio = $request->folio;
+        $order->nombre = $request->nombre;
+        $order->ap_paterno = $request->ap_paterno;
+        $order->ap_materno = $request->ap_materno;
+        $order->o_plaza = $request->o_plaza;
+        $order->d_plaza = $request->d_plaza;
+        $order->lugar = $request->lugar;
+        $order->distrito = $request->distrito;
+        $order->provincia = $request->provincia;
+        $order->accion = $request->accion;
+        $order->referencia = $request->referencia;
+        $order->i_vigencia = $request->i_vigencia;
+        $order->f_vigencia = $request->f_vigencia;
+
+        $record = Order::latest()->first();
+        $invoiceArr = explode('-', $record->c_interno);
+    
+    
+        if ( date('l',strtotime(date('Y-01-01'))) ){
+            $nextInvoiceNumber = 'INV-'.date('Y').'-0001';
+            $order->c_interno = $nextInvoiceNumber;
+        } else {
+            //increase 1 with last invoice number
+            $nextInvoiceNumber = $expNum[0].'-'.$expNum[1].'-'. $expNum[2]+1;
+            $order->c_interno = $nextInvoiceNumber;
+        }
+        
+        $order->save();
+                
         return redirect()->route('orders.index')
             ->with('info', 'ORDEN DE PROYECCIÓN CREADO CON ÉXITO');
     }

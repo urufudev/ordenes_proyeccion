@@ -8,7 +8,7 @@ class Order extends Model
 {
     protected $fillable=[
         'user_id','gestion_id','institution_id','year_id','level_id','position_id',
-        'n_orden','fecha','n_expediente','folio','nombre','ap_paterno','ap_materno',
+        'n_orden','c_interno','fecha','n_expediente','folio','nombre','ap_paterno','ap_materno',
         'o_plaza','d_plaza','lugar','distrito','provincia','accion','referencia',
         'i_vigencia','f_vigencia','status'
     ];

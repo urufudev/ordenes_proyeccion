@@ -21,7 +21,8 @@ class CreateOrdersTable extends Migration
             $table->integer('year_id')->unsigned();
             $table->integer('level_id')->unsigned();
             $table->integer('position_id')->unsigned();
-
+            
+            $table->string('c_interno')->unique();
             $table->date('fecha');
             $table->string('n_expediente');
             $table->integer('folio');

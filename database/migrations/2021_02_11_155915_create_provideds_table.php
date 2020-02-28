@@ -26,6 +26,9 @@ class CreateProvidedsTable extends Migration
             $table->integer('level_id')->unsigned();
             $table->integer('year_id')->unsigned();
 
+            
+            $table->string('c_interno')->unique();
+
             $table->string('nombre');
             $table->string('ap_paterno');
             $table->string('ap_materno');
