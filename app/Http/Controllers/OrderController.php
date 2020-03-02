@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use App\Http\Requests\OrderStoreRequest;
 use App\Http\Requests\OrderUpdateRequest;
 use Illuminate\Http\Request;
+use Haruncpi\LaravelIdGenerator\IdGenerator; 
 
 class OrderController extends Controller
 {
@@ -83,6 +84,7 @@ class OrderController extends Controller
         $order->level_id = $request->level_id;
         $order->position_id = $request->position_id;
         
+        $order->c_interno =  $id = IdGenerator::generate(['table' => 'orders','field'=>'c_interno', 'length' => 9, 'prefix' =>date('Y-'),'reset_on_prefix_change'=>true]); //output: P00001 
         $order->fecha = $request->fecha;
         $order->n_expediente = $request->n_expediente;
         $order->folio = $request->folio;
@@ -99,18 +101,8 @@ class OrderController extends Controller
         $order->i_vigencia = $request->i_vigencia;
         $order->f_vigencia = $request->f_vigencia;
 
-        $record = Order::latest()->first();
-        $invoiceArr = explode('-', $record->c_interno);
-    
-    
-        if ( date('l',strtotime(date('Y-01-01'))) ){
-            $nextInvoiceNumber = 'INV-'.date('Y').'-0001';
-            $order->c_interno = $nextInvoiceNumber;
-        } else {
-            //increase 1 with last invoice number
-            $nextInvoiceNumber = $expNum[0].'-'.$expNum[1].'-'. $expNum[2]+1;
-            $order->c_interno = $nextInvoiceNumber;
-        }
+        
+        
         
         $order->save();
                 
