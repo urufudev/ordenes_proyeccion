@@ -7,7 +7,7 @@
     <title>ORDEN DE PROYECCIÓN</title>
     <link href="{{public_path().'/css/pdf.css'}}" rel="stylesheet"> 
 </head>
-<body>
+<body style="margin:-4.5% 0;">
     
     <table class="table table-borderless">
         <thead>
@@ -24,7 +24,7 @@
                 <th scope="col-10" width="95%"> 
                  
                     
-                        <p class="text-center" style="font-size:12px;margin-bottom: 0px;">ORDEN DE PROYECCIÓN N° {{$order->id}}-{{$order->year->name}}-GRA/GG-GRDS-DREA-OA-AP</p> 
+                        <p class="text-center" style="font-size:12px;margin-bottom: 0px;">ORDEN DE PROYECCIÓN N° {{$codigo}}-{{$year}}-GRA/GG-GRDS-DREA-OA-AP</p> 
                        
                 </th>
         
@@ -32,7 +32,7 @@
             </tr>
         </thead>
     </table>
-    <table class="table table-sm ">
+    <table class="table table-sm  ">
         
         <tbody>
           <tr>
@@ -65,11 +65,11 @@
         </tbody>
       </table>
 
-      <table class="table table-sm "  style="font-size:14px">
+      <table class="table table-sm "  style="font-size:12px">
         
         <tbody>
           <tr>
-            <td class="text-justify">Al Equipo de Administración de Personal, sírvase proyectar una Resolución Directoral Regional Sectorial de acuerdo a los antecedentes que se anexan, a favor de:  </td>
+            <td class="text-justify p-1">Al Equipo de Administración de Personal, sírvase proyectar una Resolución Directoral Regional Sectorial de acuerdo a los antecedentes que se anexan, a favor de:  </td>
             
             
           </tr>
@@ -78,129 +78,124 @@
       </table>
 
 
-      <table class="table table-sm table-bordered" style="font-size:14px" >
+      <table class="table table-sm table-bordered" style="font-size:12px" >
         
         <tbody>
           <tr>
-            <th scope="row" width="40%">SISGEDO</th>
-            <td  class="text-center">
-                {{$order->n_expediente}}
+            <th scope="row" class="align-middle" width="30%" >APELLIDOS Y NOMBRES</th>
+            <td class="align-middle" colspan="3" >
+                {{$order->full_name}}
             </td>
             
           </tr>
           <tr>
-            <th scope="row" width="40%">FOLIO</th>
-            <td  class="text-center">
-                {{$order->folio}}
+            <th scope="row" class="align-middle"  width="30%">CARGO</th>
+            <td class="align-middle" colspan="3" >
+                {{$order->position->name}}
             </td>
             
           </tr>
+          <tr>
+            <th scope="row" class="align-middle" width="30%" >CENTRO DE TRABAJO</th>
+            <td class="align-middle"  colspan="3">
+                {{$order->institution->nombre}}
+            </td>
+            
+          </tr>
+          <tr>
+            <th scope="row" class="align-middle" width="30%" >LUGAR - DISTRITO</th>
+            <td class="align-middle"  colspan="3">
+                {{$order->lugar}} - {{$order->distrito}}
+            </td>
+            
+          </tr>
+          <tr>
+            <th scope="row" class="align-middle" width="30%" >NIVEL/MODALIDAD</th>
+            <td class="align-middle"  colspan="3">
+                {{$order->level->name}}
+            </td>
+            
+          </tr>
+          
+          <tr>
+            <th  width="20%">P. ORIGEN</th>
+            <td width="25%"  class="text-center">
+                {{$order->o_plaza}}
+            </td>
+            <th  width="30%">P. DESTINO</th>
+            <td  class="text-center">
+                {{$order->d_plaza}}
+            </td>
+            
+          </tr>
+          <tr>
+            <th scope="row" class="align-middle" height="100px" width="30%" >ACCIÓN</th>
+            <td class="align-middle text-justify"  colspan="3">
+              {!! $order->accion !!}
+            </td>
+            
+          </tr>
+          <tr>
+            <th scope="row" class="align-middle" width="30%" >REFERENCIA</th>
+            <td class="align-middle"  colspan="3">
+                {{$order->referencia}}
+            </td>
+            
+          </tr>
+          <tr>
+            <th  width="20%">INICIO</th>
+            <td width="25%"  class="text-center">
+                {{ date('d/m/Y', strtotime($order->i_vigencia)) }}
+            </td>
+            <th  width="30%">FIN</th>
+            <td  class="text-center">
+              {{ date('d/m/Y', strtotime($order->f_vigencia)) }}
+            </td>
+            
+          </tr>
+         {{--  <tr>
+           
+            <td class="align-middle"  colspan="4">
+              Ayacucho, {{$order->fecha->format('d \\d\\e F \\d\\e\\l Y')}}
+              
+              
+            </td>
+            
+          </tr> --}}
         
         </tbody>
       </table>
-    <table class="table  table-bordered">
+   
+      
+      <p class="text-right p-1" style="font-size:12px">Ayacucho, {{$order->fecha->format('d \\d\\e F \\d\\e\\l Y')}}</p>
+
+   {{--  <table class="table  table-bordered">
         <thead>
-            {{-- 
-                
-                <th scope="row"><b>SISGEDO</b> </th>
-            <td class="text-center">{{$order->n_expediente}}</td>
-            <td><b>Folio</b> </td>
-            <td class="text-center">{{$order->folio}}</td>
-                
-                <tr>
-                <th scope="col-6" >  
-
-                    <p class="text-left" style="font-size:15px; text-">TRABAJADOR/A: </p>
-                    <p class="text-left font-weight-normal">{{$leave->user->ap_paterno}} {{$leave->user->ap_materno}}, {{$leave->user->name}} </p>
-                   
-                </th>
-                <th scope="col-6"  >  
-
-                    <p class="text-left" style="font-size:15px; text-">REGIMEN LABORAL: </p>
-                    <p class="text-left font-weight-normal">{{$leave->user->regime}}</p>
-                   
-                </th>
-            </tr>
-            <tr>
-                <th scope="col-6" colspan="2">  
-
-                    <p class="text-left" style="font-size:15px; text-">DEPENDENCIA: </p>
-                    <p class="text-left font-weight-normal">{{$leave->user->office->name}}</p>
-                   
-                </th>
-            </tr>
-            <tr>
-                <th scope="col-6"  width="40%" >  
-
-                    <p class="text-left"  style="font-size:15px; text-">TIPO DE PAPELETA: </p>
-                    <p class="text-left font-weight-normal">{{$leave->leavetype->name}}</p>
-                   
-                </th>
-                <th scope="col-6" >  
-
-                    <p class="text-left" style="font-size:15px; text-">DESCRIPCION: </p>
-                    <p class="text-left font-weight-normal">{{$leave->description}}</p>
-                   
-                </th>
-            </tr>
-            
-            
-            <tr>
-                <th scope="col-6">  
-
-                    <p class="text-right" style="font-size:15px;">F/H DE SALIDA: </p>
-                    <p class="text-right font-weight-normal">{{ date('d/m/Y H:i', strtotime($leave->fh_from)) }}</p>
-                    
-
-                </th>
-                <th scope="col-6">  
-
-                <p class="text-center" style="font-size:15px;">FECHA DE EMISIÓN: </p>
-                    <p class="text-center font-weight-normal">{{$leave->created_at->format('d/m/Y H:i')}}</p>
-        
-                </th>
-                
-            </tr>
-            <tr>
-                <th scope="col-6">  
-
-                    <p class="text-right" style="font-size:15px;">F/H DE RETORNO: </p>
-                    <p class="text-right font-weight-normal">{{ date('d/m/Y H:i', strtotime($leave->fh_to)) }} </p>
-                    
-                   
-
-                </th>
-                <th scope="col-6">  
-
-                <p class="text-center" style="font-size:15px;">FECHA DE AUTORIZACIÓN / RESPONSABLE: </p>
-                    <p class="text-center font-weight-normal">{{ date('d/m/Y H:i', strtotime($leave->resp_chdate)) }}  </p>
-                    <p class="text-center font-weight-normal">{{$leave->resp_name}} </p>
-                
-                </th>
-                    
-            </tr>
- --}}
+  
 
            
             
         </thead>
-    </table>
+    </table> --}}
 
     
-    <table class="table table-borderless">
+    <table class="table table-borderless table-sm">
         <thead>
         <tr>
-                <th scope="col-6" height="140" width="50%" class="text-center">  
+                <th scope="col-6" height="50px" width="50%" class="text-center">  
 
-              {{--   <img style="border:1px solid black;margin:0"  src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->size(170)->generate('LA PAPELETA N° '.$leave->id.' ES '.$leave->resp_status.' POR '.$leave->resp_name.' A LAS '.$leave->resp_chdate)) }} ">
-                  --}}   </th>
-                <th scope="col-6" height="140">  
+                  <p class="text-center" style="font-size:12px; border-top:1px solid black;">{{$order->gestion->r_personal}} </p>
+                  <p class="text-center" style="font-size:10px; margin:-2.5% 0;">{{$order->gestion->s_personal}} </p>
+                 
+              </th>
+                <th scope="col-6" height="50px">  
 
-                <p class="text-center" style="font-size:15px; border-top:1px solid black;">FIRMA DEL/LA TRABAJADOR/A </p>
-        
+                <p class="text-center" style="font-size:12px; border-top:1px solid black;">{{$order->gestion->r_administracion}} </p>
+                <p class="text-center" style="font-size:10px; margin:-2.5% 0;">{{$order->gestion->s_administracion}} </p>
                 </th>
 
             </tr>
+            
         
         </thead>
     

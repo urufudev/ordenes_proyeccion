@@ -187,9 +187,11 @@ class OrderController extends Controller
     public function pdf(Request $request,Order $order){
         
         /* $order = Order::find($order); */
-              
+        $id_generate = explode('-',$order->c_interno);
+        $codigo = $id_generate[1];
+        $year = $id_generate[0];
 
-            $pdf = \PDF::loadView('pdf.order',compact('order'))->setPaper('A5', 'portrait');
+            $pdf = \PDF::loadView('pdf.order',compact('order','codigo','year'))->setPaper('A5', 'portrait');
             return $pdf->stream();
         
 

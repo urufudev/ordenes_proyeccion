@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -43,5 +43,9 @@ class Order extends Model
     public function getFullNameAttribute()
     {
         return "{$this->ap_paterno} {$this->ap_materno}, {$this->nombre}";
+    }
+    public function getFechaAttribute($date)
+    {
+        return new Date($date);
     }
 }
