@@ -86,6 +86,16 @@
         {{Form::text('r_finanzas',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
       
     </div>
+    <div class="col-md-2 mb-3">
+        <b>{{Form::label('s_secretaria','SIGLAS DE SECRETARIA GENERAL')}}</b>
+        {{Form::text('s_secretaria',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
+      
+    </div>
+    <div class="col-md-4 mb-3">
+        <b>{{Form::label('r_secretaria','RESPONSABLE DE SECRETARIA GENERAL')}}</b>
+        {{Form::text('r_secretaria',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
+      
+    </div>
 </div>
 
 <div class="form-group">

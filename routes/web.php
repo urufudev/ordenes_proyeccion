@@ -329,6 +329,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('workdays/{workday}/edit', 'WorkdayController@edit')->name('workdays.edit')
         ->middleware('can:workdays.edit');
 
+        //Resoluciones
+    Route::post('resolutions/store', 'ResolutionController@store')->name('resolutions.store')
+        ->middleware('can:resolutions.create');
+
+    Route::get('resolutions', 'ResolutionController@index')->name('resolutions.index')
+        ->middleware('can:resolutions.index');
+
+    Route::get('resolutions/create', 'ResolutionController@create')->name('resolutions.create')
+        ->middleware('can:resolutions.create');
+
+    Route::put('resolutions/{resolution}', 'ResolutionController@update')->name('resolutions.update')
+        ->middleware('can:resolutions.edit');
+
+    Route::get('resolutions/{resolution}', 'ResolutionController@show')->name('resolutions.show')
+        ->middleware('can:resolutions.show');
+
+    Route::delete('resolutions/{resolution}', 'ResolutionController@destroy')->name('resolutions.destroy')
+        ->middleware('can:resolutions.destroy');
+
+    Route::get('resolutions/{resolution}/edit', 'ResolutionController@edit')->name('resolutions.edit')
+        ->middleware('can:resolutions.edit');
+
 
         //Orden de Proyeccion
     Route::post('orders/store', 'OrderController@store')->name('orders.store')

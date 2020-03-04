@@ -93,6 +93,16 @@
                  
               </div>
               <div class="col-md-12">
+                <label for="s_secretaria">SIGLAS DE SECRETARIA GENERAL</label>
+                <p type="text" class="form-control" id="s_secretaria" >{{$gestion->s_secretaria}}</p>
+                  
+              </div>
+              <div class="col-md-12">
+                <label for="r_secretaria">RESPONSABLE DE SECRETARIA GENERAL</label>
+                <p type="text" class="form-control" id="r_secretaria" >{{$gestion->r_secretaria}}</p>
+                 
+              </div>
+              <div class="col-md-12">
                 <label for="description"><b>ESTADO</b></label>
                 @if($gestion->status=='ACTIVO')
                   <p class="text-success"><b>{{$gestion->status}}</b></p>

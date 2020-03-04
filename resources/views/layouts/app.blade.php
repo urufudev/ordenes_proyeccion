@@ -467,6 +467,29 @@
                   </li>
                 @endcan
 
+                @can('resolutions.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-file-pdf"></i>
+                      <span>RESOLUCIONES</span>
+                    </a>
+                    <ul>
+                        @can('resolutions.create')
+                      <li>
+                        <a href="{{route('resolutions.create')}}">
+                          CREAR RESOLUCIONES
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('resolutions.index')}}">
+                          GESTIONAR RESOLUCIONES
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+
                 @can('orders.index')
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">

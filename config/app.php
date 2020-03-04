@@ -178,6 +178,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        Conner\Tagging\Providers\TaggingServiceProvider::class,
 
 
     ],

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gestion extends Model
 {
     protected $fillable=[
-        'cod_gestion','n_resolucion','s_direccion','r_direccion','s_administracion','r_administracion',
+        'cod_gestion','n_resolucion','s_direccion','r_direccion','s_secretaria','r_secretaria','s_administracion','r_administracion',
         's_dgi','r_dgi','s_dgp','r_dgp','s_personal','r_personal','s_finanzas','r_finanzas',
         'status'
     ];

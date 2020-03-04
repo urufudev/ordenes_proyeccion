@@ -19,6 +19,8 @@ class CreateGestionsTable extends Migration
             $table->string('n_resolucion');
             $table->string('s_direccion');
             $table->string('r_direccion');
+            $table->string('s_secretaria');
+            $table->string('r_secretaria');
             $table->string('s_administracion');
             $table->string('r_administracion');
             $table->string('s_dgi');

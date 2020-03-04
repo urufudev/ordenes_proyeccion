@@ -495,6 +495,44 @@ class PermissionsTableSeeder extends Seeder
         
         ]);
 
+        //Resoluciones
+        Permission::create([
+
+            'name' => 'Navegar resoluciones',
+            'slug'=> 'resolutions.index',
+            'description' => 'Lista y navega todos las resoluciones del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de resolucion',
+            'slug'=> 'resolutions.show',
+            'description' => 'Ver en detalle cada resolucion del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de resoluciones',
+            'slug'=> 'resolutions.create',
+            'description' => 'Crear una resolucion del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de resoluciones',
+            'slug'=> 'resolutions.edit',
+            'description' => 'Edita cualquier resolucion del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar resoluciones',
+            'slug'=> 'resolutions.destroy',
+            'description' => 'Elimina cualquier resolucion del sistema',
+        
+        ]);
+
+
        
 
         //Ordenes
