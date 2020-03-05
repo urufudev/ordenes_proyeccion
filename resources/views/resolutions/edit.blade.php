@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('styles')
+<link href="{{asset('js/vendor/bootstrap-tags/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+@endsection
 @section('title')
 Editar Nivel | Sistema de Administración de Personal
 @endsection
@@ -12,7 +15,7 @@ Editar Nivel | Sistema de Administración de Personal
                 <h4>EDITAR NIVEL</h4>
             </div>
             <div class="col-md-6">
-                <a href="{{route('levels.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
+                <a href="{{route('resolutions.index')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>VOLVER</b> 
             </a>        
             </div> 
@@ -21,9 +24,9 @@ Editar Nivel | Sistema de Administración de Personal
       </div>
       <div class="card-body ">
 
-        {!! Form::model($level,['route'=>['levels.update', $level->id],'method'=>'PUT','files'=>true]) !!}
+        {!! Form::model($resolution,['route'=>['resolutions.update', $resolution->id],'method'=>'PUT','files'=>true]) !!}
             
-            @include('levels.partials.form')
+            @include('resolutions.partials.form')
 
         {!! Form::close() !!}  
            
@@ -35,7 +38,7 @@ Editar Nivel | Sistema de Administración de Personal
   </div>
 @endsection
 @section('scripts')
-
+<script src="{{asset('js/vendor/bootstrap-tags/bootstrap-tagsinput.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
        

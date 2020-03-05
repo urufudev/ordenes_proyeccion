@@ -48,12 +48,12 @@ class ResolutionController extends Controller
      */
     public function store(/* ResolutionStore */Request $request)
     {
-        $tags=explode(',',$request->interesados);
+        $tags=explode(',',$request->tags);
         $resolution = Resolution::create($request->all());
-       /*  $resolution ->tag($tags) */;
+        $resolution ->tag($tags);
         
         if($request->file('file')){
-            $path = Storage::disk('public')->put('image',$request->file('file'));
+            $path = Storage::disk('public')->put('pdf',$request->file('file'));
              
             $resolution->fill(['file'=>asset($path)])->save();
         }
@@ -83,7 +83,11 @@ class ResolutionController extends Controller
      */
     public function edit(Resolution $resolution)
     {
-        return view('resolutions.edit',compact('resolution'));
+        $orders=Order::orderBy('c_interno','DESC')
+        ->where('status','=','ACTIVO')
+        ->pluck('c_interno','id');
+        
+        return view('resolutions.edit',compact('resolution','orders'));
     }
 
     /**
@@ -95,15 +99,19 @@ class ResolutionController extends Controller
      */
     public function update(/* ResolutionUpdate */Request $request, Resolution $resolution)
     {
+        $tags=explode(',',$request->tags);
         $resolution->fill($request->all())
             ->save();
         $resolution ->tag($tags);
-        
+        /* $resolution->tag()->sync($request->get('tags')); */
+
         if($request->file('file')){
-                $path = Storage::disk('public')->put('pdf',$request->file('file'));
-                 
-                $resolution->fill(['file'=>asset($path)])->save();
-            }
+            $path = Storage::disk('public')->put('pdf',$request->file('file'));
+             
+            $resolution->fill(['file'=>asset($path)])->save();
+        }
+
+        dd($resolution);
         return redirect()->route('resolutions.index')
             ->with('info', 'RESOLUCION ACTUALIZADA CON EXITO');
     }
