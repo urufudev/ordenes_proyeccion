@@ -68,16 +68,15 @@
                     <div class="pdn-15 pdn-sm-20 bdr d-flex custom-control-inline">
                         
                         
-                        <h4>PERMISOS ESPECIALES</h4>
                         
                         <div class="custom-control custom-radio radio-info custom-control m-2">
-                            {{Form::radio('notificado','notificado',null,['id'=>'notificado','class'=>'custom-control-input'])}}    
-                            {{Form::label('notificado','ACCESO TOTAL',['class'=>'custom-control-label'])}}
-                    
+                            {{Form::radio('notificado','NOTIFICADO',null,['id'=>'NOTIFICADO','class'=>'custom-control-input'])}}    
+                            {{Form::label('NOTIFICADO','NOTIFICADO',['class'=>'custom-control-label'])}}
+                      
                         </div>
-                        <div class="custom-control custom-radio radio-info custom-control m-2">
-                            {{Form::radio('notificado','no notificado',null,['id'=>'no notificado','class'=>'custom-control-input'])}}    
-                            {{Form::label('no notificado','NINGUN ACCESO',['class'=>'custom-control-label'])}}    
+                          <div class="custom-control custom-radio radio-info custom-control m-2">
+                            {{Form::radio('notificado','NO NOTIFICADO',null,['id'=>'NO NOTIFICADO','class'=>'custom-control-input'])}}    
+                            {{Form::label('NO NOTIFICADO','NO NOTIFICADO',['class'=>'custom-control-label'])}}    
                         </div>
                     </div>
             

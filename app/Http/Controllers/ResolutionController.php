@@ -49,13 +49,32 @@ class ResolutionController extends Controller
     public function store(/* ResolutionStore */Request $request)
     {
         $tags=explode(',',$request->tags);
-        $resolution = Resolution::create($request->all());
+        /* $resolution = Resolution::create($request->all()); */
+        $resolution = new Resolution();
+        $resolution->order_id = $request['order_id'];
+        $resolution->user_id = $request['user_id'];
+        $resolution->n_resolucion = $request['n_resolucion'];
+        $resolution->fecha  =  $request['fecha'];
+        $resolution->n_persona  =  $request['n_persona'];
+        $resolution->accion  =  $request['accion'];
+        $resolution->notificado  =  $request['notificado'];
+        $resolution->status  =  'ACTIVO';
+        $resolution->save();
+
         $resolution ->tag($tags);
         
         if($request->file('file')){
-            $path = Storage::disk('public')->put('pdf',$request->file('file'));
-             
-            $resolution->fill(['file'=>asset($path)])->save();
+            $file = $request->file('file');
+            
+
+            $name = $request->n_resolucion.'_'.date('dmy_His').'.'.$file->getClientOriginalExtension();
+            /* $path = Storage::disk('public')->put('pdf',$request->file('file',$name));
+            */
+            /* $path = $file->storeAs('pdf', $name); */
+
+            $file->move(public_path().'/pdf',$name);
+
+            $resolution->fill(['file'=>'/pdf/'.$name])->save();
         }
         
         dd($resolution);
@@ -87,6 +106,8 @@ class ResolutionController extends Controller
         ->where('status','=','ACTIVO')
         ->pluck('c_interno','id');
         
+        /* dd($resolution); */
+
         return view('resolutions.edit',compact('resolution','orders'));
     }
 

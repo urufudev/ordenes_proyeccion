@@ -115,6 +115,7 @@ class UserController extends Controller
         $roles = Role::get();
 
 
+       
 
         return view('users.edit',compact('user','offices','laborals','roles'));
     }

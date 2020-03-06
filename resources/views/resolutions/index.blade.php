@@ -62,6 +62,9 @@ Lista de Resoluciones | Sistema de Administración de Personal
                               <a href="" data-target="#modal-show-{{$resolution->id}}" class="btn btn-outline-primary  btn-rounded btn-floating mgn-r-10" data-toggle="modal" id="modal-show" class="btn btn-sm btn-danger"  data-placement="top" title="VER">
                                 <i class="fas fa-search"></i>
                               </a>
+                              <a href="{{$resolution->file}}" target="_blank" class="btn btn-outline-warning  btn-rounded btn-floating mgn-r-10"  class="btn btn-sm btn-danger"  data-placement="top" title="PDF">
+                                <i class="far fa-file-pdf"></i>
+                              </a>
                               @endcan
                               @can('resolutions.edit')
                               <a  href="{{route('resolutions.edit',$resolution->id)}}" class="btn btn-outline-success  btn-rounded btn-floating mgn-r-10" data-toggle="tooltip" data-placement="top" title="EDITAR">

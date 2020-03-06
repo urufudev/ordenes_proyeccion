@@ -16,15 +16,16 @@
     <div class="col-md-12 mb-3">
         <div class="pdn-15 pdn-sm-20 bdr d-flex flex-column">
             <h4>PERMISOS ESPECIALES</h4>
+            <b>{{Form::label('special','NOTIFICADO')}}</b>
             <code>SELECCIONE EN CASO DE SER NECESARIO</code>
             <div class="custom-control custom-radio radio-info custom-control m-2">
-                {{Form::radio('speccial','all-access',null,['id'=>'all-access','class'=>'custom-control-input'])}}    
+                {{Form::radio('special','all-access',null,['id'=>'all-access','class'=>'custom-control-input'])}}    
                 {{Form::label('all-access','ACCESO TOTAL',['class'=>'custom-control-label'])}}
           
             </div>
               <div class="custom-control custom-radio radio-info custom-control m-2">
-                {{Form::radio('speccial','no-access',null,['id'=>'access','class'=>'custom-control-input'])}}    
-                {{Form::label('access','NINGUN ACCESO',['class'=>'custom-control-label'])}}    
+                {{Form::radio('special','no-access',null,['id'=>'no-access','class'=>'custom-control-input'])}}    
+                {{Form::label('no-access','NINGUN ACCESO',['class'=>'custom-control-label'])}}    
             </div>
         </div>
 

@@ -66,7 +66,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::get();
-
+       /*  dd($role); */
         return view('roles.edit', compact('role', 'permissions'));
     }
 
