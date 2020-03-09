@@ -48,6 +48,8 @@ class ResolutionController extends Controller
      */
     public function store(/* ResolutionStore */Request $request)
     {
+        
+
         $tags=explode(',',$request->tags);
         /* $resolution = Resolution::create($request->all()); */
         $resolution = new Resolution();
@@ -106,9 +108,10 @@ class ResolutionController extends Controller
         ->where('status','=','ACTIVO')
         ->pluck('c_interno','id');
         
-        /* dd($resolution); */
+        $tags= $resolution->tagNames();
+      
 
-        return view('resolutions.edit',compact('resolution','orders'));
+        return view('resolutions.edit',compact('resolution','orders','tags'));
     }
 
     /**

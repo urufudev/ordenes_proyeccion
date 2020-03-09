@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-<link href="{{asset('js/vendor/bootstrap-tags/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+<link href="{{asset('js/vendor/select2/css/select2.min.css')}}" rel="stylesheet" />
 @endsection
 
 @section('title')
@@ -37,7 +37,7 @@ Crear Resolución | Sistema de Administración de Personal
   </div>
 @endsection
 @section('scripts')
-<script src="{{asset('js/vendor/bootstrap-tags/bootstrap-tagsinput.js')}}"></script>
+<script src="{{asset('js/vendor/select2/js/select2.min.js')}}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -45,9 +45,8 @@ Crear Resolución | Sistema de Administración de Personal
         $('.bestupper').caseEnforcer('uppercase');
 
     });
-    $(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
+  //multiple select
+	$('.js-example-basic-multiple').select2();
+
 </script>
 @endsection

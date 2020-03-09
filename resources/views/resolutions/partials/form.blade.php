@@ -59,9 +59,11 @@
             <div class="row">
                 <div class="col-md-8 mb-3">
                     <b>{{Form::label('tags','PERSONAS')}}</b>
-                    {{Form::text('tags',null,['class'=>'form-control bestupper','autocomplete'=>'off','data-role'=>'tagsinput'])}}
                     
-                </div>
+                   {{--  {{Form::select('size', array('L' => 'Large', 'S' => 'Small'), null, array('multiple' => true) )}} --}}
+                    {{Form::select('order_id',$orders,null,['class'=>'form-control js-example-basic-multiple'],array('multiple' => true))}}
+{{--                     <select class="js-example-basic-multiple" name="states[]" multiple="multiple" >
+ --}}                </div>
 
                 <div class="col-md-4 mb-3">
                     <b>{{Form::label('notificado','NOTIFICADO')}}</b>
