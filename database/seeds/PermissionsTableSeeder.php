@@ -533,6 +533,44 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
 
+        //Interesados
+        Permission::create([
+
+            'name' => 'Navegar interesados',
+            'slug'=> 'interesteds.index',
+            'description' => 'Lista y navega todos las interesados del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Ver detalle de interesado',
+            'slug'=> 'interesteds.show',
+            'description' => 'Ver en detalle cada interesado del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Creacion de interesados',
+            'slug'=> 'interesteds.create',
+            'description' => 'Crear un interesado del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Edicion de interesados',
+            'slug'=> 'interesteds.edit',
+            'description' => 'Edita cualquier interesado del sistema',
+        
+        ]);
+        Permission::create([
+
+            'name' => 'Eliminar interesados',
+            'slug'=> 'interesteds.destroy',
+            'description' => 'Elimina cualquier interesado del sistema',
+        
+        ]);
+
+
        
 
         //Ordenes

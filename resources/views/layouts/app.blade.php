@@ -467,6 +467,29 @@
                   </li>
                 @endcan
 
+                @can('interesteds.index')
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-users-class"></i>
+                      <span>INTERESADOS</span>
+                    </a>
+                    <ul>
+                        @can('interesteds.create')
+                      <li>
+                        <a href="{{route('interesteds.create')}}">
+                          CREAR INTERESADO
+                        </a>
+                      </li>
+                      @endcan
+                      <li>
+                        <a href="{{route('interesteds.index')}}">
+                          GESTIONAR INTERESADOS
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                @endcan
+
                 @can('resolutions.index')
                 <li class="nav-item has-submenu">
                     <a href="#" class="nav-link">

@@ -23,4 +23,9 @@ class Resolution extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+    public function interesteds()
+    {
+        return $this->belongsToMany(Interested::class);
+    }
 }

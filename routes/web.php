@@ -351,6 +351,28 @@ Route::middleware(['auth'])->group(function () {
     Route::get('resolutions/{resolution}/edit', 'ResolutionController@edit')->name('resolutions.edit')
         ->middleware('can:resolutions.edit');
 
+         //Interesados
+    Route::post('interesteds/store', 'InterestedController@store')->name('interesteds.store')
+        ->middleware('can:interesteds.create');
+
+    Route::get('interesteds', 'InterestedController@index')->name('interesteds.index')
+        ->middleware('can:interesteds.index');
+
+    Route::get('interesteds/create', 'InterestedController@create')->name('interesteds.create')
+        ->middleware('can:interesteds.create');
+
+    Route::put('interesteds/{interested}', 'InterestedController@update')->name('interesteds.update')
+        ->middleware('can:interesteds.edit');
+
+    Route::get('interesteds/{interested}', 'InterestedController@show')->name('interesteds.show')
+        ->middleware('can:interesteds.show');
+
+    Route::delete('interesteds/{interested}', 'InterestedController@destroy')->name('interesteds.destroy')
+        ->middleware('can:interesteds.destroy');
+
+    Route::get('interesteds/{interested}/edit', 'InterestedController@edit')->name('interesteds.edit')
+        ->middleware('can:interesteds.edit');
+
 
         //Orden de Proyeccion
     Route::post('orders/store', 'OrderController@store')->name('orders.store')
