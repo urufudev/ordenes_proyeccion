@@ -42,8 +42,8 @@ class InterestedController extends Controller
      */
     public function store(InterestedStoreRequest $request)
     {
-        /* $interested = Interested::create($request->all()); */
-        $interested = new Interested();
+        $interested = Interested::create($request->all());
+      /*   $interested = new Interested();
         $interested->dni = $request->dni;
         $interested->name = $request->name;
         $interested->ap_paterno = $request->ap_paterno;
@@ -52,7 +52,7 @@ class InterestedController extends Controller
 
 
         
-        $interested->save();
+        $interested->save(); */
 
         return redirect()->route('interesteds.index')
             ->with('info', 'INTERESADO CREADO CON ÉXITO');
@@ -92,9 +92,11 @@ class InterestedController extends Controller
     {
         $interested->fill($request->all())
             ->save();
+            
+
 
         return redirect()->route('interesteds.index')
-            ->with('info', 'AFP ACTUALIZADO CON EXITO');
+            ->with('info', 'INTERESADO ACTUALIZADO CON EXITO');
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('styles')
-<link href="{{asset('js/vendor/bootstrap-tags/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+<link href="{{asset('js/vendor/select2/css/select2.min.css')}}" rel="stylesheet" />
 @endsection
 @section('title')
 Editar Nivel | Sistema de Administración de Personal
@@ -38,12 +38,13 @@ Editar Nivel | Sistema de Administración de Personal
   </div>
 @endsection
 @section('scripts')
-<script src="{{asset('js/vendor/bootstrap-tags/bootstrap-tagsinput.js')}}"></script>
+<script src="{{asset('js/vendor/select2/js/select2.min.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
        
         $('.bestupper').caseEnforcer('uppercase');
-
+        $('.js-example-basic-multiple').select2();
     });
 </script>
 @endsection

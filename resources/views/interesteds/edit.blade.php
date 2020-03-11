@@ -35,11 +35,30 @@ Editar Interesado | Sistema de Administración de Personal
   </div>
 @endsection
 @section('scripts')
+<script src="{{asset('js/vendor/stringToSlug/jquery.stringToSlug.min.js')}}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
        
         $('.bestupper').caseEnforcer('uppercase');
+
+        $("#name, #slug").stringToSlug({
+          callback:function(text){
+            $("#slug_name").val(text);
+          }
+        });
+
+        $("#ap_paterno, #slug").stringToSlug({
+          callback:function(text){
+            $("#slug_appaterno").val(text);
+          }
+        });
+
+        $("#ap_materno, #slug").stringToSlug({
+          callback:function(text){
+            $("#slug_apmaterno").val(text);
+          }
+        });
 
     });
 </script>

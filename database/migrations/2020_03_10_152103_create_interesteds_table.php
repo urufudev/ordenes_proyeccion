@@ -19,7 +19,7 @@ class CreateInterestedsTable extends Migration
             $table->string('name');
             $table->string('ap_paterno');
             $table->string('ap_materno');
-            $table->string('slug');
+            /* $table->string('slug'); */
             $table->enum('status',['ACTIVO','INACTIVO'])->default('ACTIVO');
             $table->timestamps();
 

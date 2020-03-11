@@ -55,15 +55,31 @@
                     
                 </div>
             </div>
-
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <div class="pdn-15 pdn-sm-20 bdr d-flex flex-column">
+                         <h4>INTERESADOS</h4>
+                         @foreach ($interesteds as $interested)
+                         <div class="custom-control custom-checkbox checkbox-primary m-2">
+                            
+                            {!! Form::checkbox('interesteds[]', $interested->id,null,['id'=>$interested->id,'class'=>'custom-control-input']) !!}
+                            
+                            <label class="custom-control-label" for="{{$interested->id}}">{{$interested->full_name }}
+                                <em>({{$interested->dni ?: 'Sin DNI'}})</em>
+                            </label>
+                          </div>
+                         @endforeach
+                          
+                        
+                      </div>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-md-8 mb-3">
-                    <b>{{Form::label('tags','PERSONAS')}}</b>
-                    
-                   {{--  {{Form::select('size', array('L' => 'Large', 'S' => 'Small'), null, array('multiple' => true) )}} --}}
-                    {{Form::select('order_id',$orders,null,['class'=>'form-control js-example-basic-multiple'],array('multiple' => true))}}
-{{--                     <select class="js-example-basic-multiple" name="states[]" multiple="multiple" >
- --}}                </div>
+                {{-- <div class="col-md-8 mb-3">
+                    <b>{{Form::label('interesteds[]','PERSONAS')}}</b>
+                      {{Form::select('interesteds[]',$interesteds->pluck('full_name'),null,['id'=>$interesteds->pluck('id'),'class'=>'form-control js-example-basic-multiple','multiple'=>'true'])}}
+                </div> --}}
+                
 
                 <div class="col-md-4 mb-3">
                     <b>{{Form::label('notificado','NOTIFICADO')}}</b>

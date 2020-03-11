@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Resolution;
+use App\Interested;
 use App\Order;
 
 use Illuminate\Support\Facades\Storage;
@@ -33,11 +34,15 @@ class ResolutionController extends Controller
      */
     public function create()
     {
+        $interesteds=Interested::orderBy('id','DESC')
+        ->where('status','=','ACTIVO')
+        ->get();
+
         $orders=Order::orderBy('c_interno','DESC')
         ->where('status','=','ACTIVO')
         ->pluck('c_interno','id');
 
-        return view('resolutions.create', compact('orders'));
+        return view('resolutions.create', compact('orders','interesteds'));
     }
 
     /**
@@ -50,9 +55,9 @@ class ResolutionController extends Controller
     {
         
 
-        $tags=explode(',',$request->tags);
-        /* $resolution = Resolution::create($request->all()); */
-        $resolution = new Resolution();
+        
+        $resolution = Resolution::create($request->all());
+        /* $resolution = new Resolution();
         $resolution->order_id = $request['order_id'];
         $resolution->user_id = $request['user_id'];
         $resolution->n_resolucion = $request['n_resolucion'];
@@ -61,9 +66,9 @@ class ResolutionController extends Controller
         $resolution->accion  =  $request['accion'];
         $resolution->notificado  =  $request['notificado'];
         $resolution->status  =  'ACTIVO';
-        $resolution->save();
+        $resolution->save(); */
 
-        $resolution ->tag($tags);
+       /*  $resolution ->tag($tags); */
         
         if($request->file('file')){
             $file = $request->file('file');
@@ -79,7 +84,10 @@ class ResolutionController extends Controller
             $resolution->fill(['file'=>'/pdf/'.$name])->save();
         }
         
-        dd($resolution);
+        $resolution->interesteds()->attach($request->get('interesteds'));
+
+
+        /* dd($resolution); */
 
         return redirect()->route('resolutions.index')
             ->with('info', 'RESOLUCION CREADA CON ÉXITO');
@@ -104,14 +112,18 @@ class ResolutionController extends Controller
      */
     public function edit(Resolution $resolution)
     {
+        $interesteds=Interested::orderBy('id','DESC')
+        ->where('status','=','ACTIVO')
+        ->get();
+
         $orders=Order::orderBy('c_interno','DESC')
         ->where('status','=','ACTIVO')
         ->pluck('c_interno','id');
         
-        $tags= $resolution->tagNames();
+     
       
 
-        return view('resolutions.edit',compact('resolution','orders','tags'));
+        return view('resolutions.edit',compact('resolution','orders','interesteds'));
     }
 
     /**
@@ -123,10 +135,10 @@ class ResolutionController extends Controller
      */
     public function update(/* ResolutionUpdate */Request $request, Resolution $resolution)
     {
-        $tags=explode(',',$request->tags);
+        
         $resolution->fill($request->all())
             ->save();
-        $resolution ->tag($tags);
+       
         /* $resolution->tag()->sync($request->get('tags')); */
 
         if($request->file('file')){
@@ -134,8 +146,9 @@ class ResolutionController extends Controller
              
             $resolution->fill(['file'=>asset($path)])->save();
         }
+        $resolution->interesteds()->sync($request->get('interesteds'));
 
-        dd($resolution);
+        /* dd($resolution); */
         return redirect()->route('resolutions.index')
             ->with('info', 'RESOLUCION ACTUALIZADA CON EXITO');
     }

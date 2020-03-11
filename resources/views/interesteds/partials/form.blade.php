@@ -26,23 +26,6 @@
     {{Form::text('ap_materno',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
 </div>
 
-{{-- {{Form::hidden('slug_name',null)}}
-{{Form::hidden('slug_appaterno',null)}}
-{{Form::hidden('slug_apmaterno',null)}} --}}
-
-<div class="form-group" style="display: none">
-    <b>{{Form::label('slug_name','SLUG')}}</b>
-    {{Form::text('slug_name',null,['class'=>'form-control'])}}
-</div>
-<div class="form-group" style="display: none">
-    <b>{{Form::label('slug_appaterno','SLUG')}}</b>
-    {{Form::text('slug_appaterno',null,['class'=>'form-control'])}}
-</div>
-<div class="form-group" style="display: none">
-    <b>{{Form::label('slug_apmaterno','SLUG')}}</b>
-    {{Form::text('slug_apmaterno',null,['class'=>'form-control' ])}}
-</div>
-
 
 
 
