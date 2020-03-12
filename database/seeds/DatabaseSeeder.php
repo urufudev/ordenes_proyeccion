@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RegimesTableSeeder::class);
         $this->call(LaboralsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(YearsTableSeeder::class);
+        
     }
 }

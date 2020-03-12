@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Provided;
 use App\Gestion;
-use App\Year;
 use App\User;
 use App\Level;
 use App\Institution;
@@ -54,10 +53,6 @@ class ProvidedController extends Controller
         ->where('status','=','ACTIVO')
         ->pluck('nombre','id');
 
-        $years=Year::orderBy('name','DESC')
-        ->where('status','=','ACTIVO')   
-        ->pluck('name','id');
-
         $levels=Level::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
@@ -95,7 +90,7 @@ class ProvidedController extends Controller
          
 
 
-        return view('provideds.create',compact('orders','t_documents','gestions','institutions','years','levels','positions','regimes','workdays','afps','remuneratives'));
+        return view('provideds.create',compact('orders','t_documents','gestions','institutions','levels','positions','regimes','workdays','afps','remuneratives'));
     
     }
 
@@ -140,10 +135,6 @@ class ProvidedController extends Controller
         ->where('status','=','ACTIVO')
         ->pluck('nombre','id');
 
-        $years=Year::orderBy('name','DESC')
-        ->where('status','=','ACTIVO')   
-        ->pluck('name','id');
-
         $levels=Level::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
         ->pluck('name','id');
@@ -179,7 +170,7 @@ class ProvidedController extends Controller
             ['id'=>'3','name' => 'PTP']
         ])->pluck('name','id');
 
-        return view('provideds.edit',compact('orders','t_documents','gestions','institutions','years','levels','positions','regimes','workdays','afps','remuneratives'));
+        return view('provideds.edit',compact('orders','t_documents','gestions','institutions','levels','positions','regimes','workdays','afps','remuneratives'));
     
     }
 

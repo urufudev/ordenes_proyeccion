@@ -8,11 +8,23 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
     <div class="card">
       <div class="card-header pdn-20  ">
         <div class="row">
-            <div class="col-md-6 pdn-sm-y-10">
-                <h4>LISTA DE ORDENES DE PROYECCIÓN</h4>
+            <div class="col-md-8 pdn-sm-y-10">
+                
+                @foreach (auth()->user()->roles as $rol) 
+                      @if ($rol->name == 'ADMINISTRADOR')
+                        
+                      <h4>LISTA TOTAL DE ORDENES DE PROYECCIÓN</h4>
+                        
+                      @else
+                       
+                      <h4>LISTA DE ORDENES DE PROYECCIÓN DE LA OFICINA DE {{Auth::user()->office->name}}</h4> 
+                        
+                    
+                      @endif
+                    @endforeach
             </div>
             @can('orders.create')
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <a href="{{route('orders.create')}}" class="btn btn-outline-dark float-right text-white btn-lg">
                     <b>CREAR</b> 
             </a>        
@@ -26,11 +38,20 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
             <thead >
                 <tr>
                     <th width="3%">ID</th>
+                    <th>CODIGO</th>
                     <th>NOMBRE</th>
                     <th>CARGO</th>
-                    <th>INSTITUCIÓN</th>
+                    @foreach (auth()->user()->roles as $rol) 
+                      @if ($rol->name == 'ADMINISTRADOR')
+                          <th>OFICINA</th>
+                          <th>USUARIO</th>
+                      @else
+                          <th>INSTITUCIÓN</th>
+                      @endif
+                    @endforeach
+                    
                     <th>FECHA</th>
-                    <th>REFERENCIA</th>
+                    
                     
                     
                     <th width="5%" class="text-center">OPCIONES</th>
@@ -40,12 +61,26 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                 @foreach($orders as $order)
                 <tr>
                     <td><b>{{$order->id}}</b></td>
-                   
+                  
+                   <td>{{$order->c_interno}}</td>
                     <td>{{$order->full_name}}</td>
                     <td>{{$order->position->name}}</td>
-                    <td>{{$order->institution->nombre}}</td>
-                    <td>{{$order->fecha}}</td>
-                    <td>{{$order->referencia}}</td>
+                    @foreach (auth()->user()->roles as $rol) 
+                      @if ($rol->name == 'ADMINISTRADOR')
+                        
+                          <td>{{$order->user->office->name}}</td>
+                          <td>{{$order->user->full_name}}</td>
+                      @else
+                        
+                          <td>{{$order->institution->nombre}}</td>
+                        
+                    
+                      @endif
+                    @endforeach
+
+                    
+                    <td>{{ date('d/m/Y', strtotime($order->fecha)) }}</td>
+                    
                    
                     {{-- @if($order->status=='ACTIVO')
                       <td class="text-success"><b>{{$order->status}}</b></td>

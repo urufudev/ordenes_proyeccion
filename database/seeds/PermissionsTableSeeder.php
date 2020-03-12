@@ -86,43 +86,7 @@ class PermissionsTableSeeder extends Seeder
         
         ]);
 
-        //Años
-        Permission::create([
-
-            'name' => 'Navegar años',
-            'slug'=> 'years.index',
-            'description' => 'Lista y navega todos los años del sistema',
         
-        ]);
-        Permission::create([
-
-            'name' => 'Ver detalle de años',
-            'slug'=> 'years.show',
-            'description' => 'Ver en detalle cada año del sistema',
-        
-        ]);
-        Permission::create([
-
-            'name' => 'Creacion de años',
-            'slug'=> 'years.create',
-            'description' => 'Crear un año del sistema',
-        
-        ]);
-        Permission::create([
-
-            'name' => 'Edicion de año',
-            'slug'=> 'years.edit',
-            'description' => 'Edita cualquier año del sistema',
-        
-        ]);
-        Permission::create([
-
-            'name' => 'Eliminar año',
-            'slug'=> 'years.destroy',
-            'description' => 'Elimina cualquier año del sistema',
-        
-        ]);
-
          //Gestiones
          Permission::create([
 

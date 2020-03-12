@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Gestion;
-use App\Year;
 use App\User;
 use App\Level;
 use App\Institution;
@@ -26,6 +25,62 @@ class OrderController extends Controller
      */
     public function index()
     {
+        foreach (auth()->user()->roles as $rol) {
+            if ($rol->name == 'ADMINISTRADOR') {
+                
+                $orders=Order::orderBy('id','DESC')
+                /* ->where('user_id','auth'()->user()->id) */
+                ->where('status','=','ACTIVO')
+                ->paginate(7);
+            
+                return view('orders.index', compact('orders'));
+            }
+
+            elseif ($rol->name == 'ADMINISTRADOR OP') {
+                $oficina_id = auth()->user()->office->id;
+
+                $usuarios = User::         
+                where('status','=','ACTIVO')
+                ->where('office_id',$oficina_id)
+                
+                ->get();
+                
+                $ordersFromUser = array();
+
+
+
+                foreach($usuarios as $user){
+
+                    
+
+                    if($user->orders->count() > 0 ){
+                        foreach($user->orders->where('status','=','ACTIVO') as $order){
+                         /* foreach($user->orders->where('resp_name','=',$resp_name)->where('status','=','ACTIVO') as $order)   */ 
+                            array_push($ordersFromUser, $order);
+                        }
+                    }  
+                }
+                $orders = collect($ordersFromUser)->sortByDesc('id');
+                //$leavesC = new LengthAwarePaginator($ordersFromUser, count($ordersFromUser), 7, 1, ['path'=>url('evaluations')]);
+               /*  $ordersC = $this->paginate($ordersDesc, 7, $page, url('orders')); */
+            /*  return $leavesC;   */
+                
+               return view('orders.index', compact('orders'));
+            }
+
+            elseif ($rol->name == 'RESPONSABLE OP') {
+                
+                $orders=Order::orderBy('id','DESC')
+                ->where('user_id','auth'()->user()->id)
+                ->where('status','=','ACTIVO')
+                ->paginate(7);
+            
+                return view('orders.index', compact('orders'));
+            }
+        }
+
+        
+
         $orders=Order::orderBy('id','DESC')
             ->where('user_id','auth'()->user()->id)
             ->where('status','=','ACTIVO')
@@ -50,9 +105,6 @@ class OrderController extends Controller
         ->where('status','=','ACTIVO')
         ->pluck('nombre','id');
 
-        $years=Year::orderBy('name','DESC')
-        ->where('status','=','ACTIVO')   
-        ->pluck('name','id');
 
         $levels=Level::orderBy('name','ASC')
         ->where('status','=','ACTIVO')   
@@ -63,7 +115,7 @@ class OrderController extends Controller
         ->pluck('name','id');
 
 
-        return view('orders.create',compact('gestions','institutions','years','levels','positions'));
+        return view('orders.create',compact('gestions','institutions','levels','positions'));
     }
 
     /**
@@ -75,39 +127,45 @@ class OrderController extends Controller
     public function store(OrderStoreRequest $request)
     {
         /* $order = Order::create($request->all()); */
+        if($request->i_vigencia > $request->f_vigencia){
+            return back()->withInput()
+             ->withErrors(['fh_from' => 'LA FECHA DE INICIO ES MAYOR A LA FECHA DE FIN']);
+        }
+        else {
+            $order = new Order();
+            $order->user_id = $request->user_id;
+            $order->gestion_id = $request->gestion_id;
+            $order->institution_id = $request->institution_id;
+            $order->year_id = $request->year_id;
+            $order->level_id = $request->level_id;
+            $order->position_id = $request->position_id;
+            
+            $order->c_interno =  $id = IdGenerator::generate(['table' => 'orders','field'=>'c_interno', 'length' => 9, 'prefix' =>date('Y-'),'reset_on_prefix_change'=>true]); //output: P00001 
+            $order->fecha = $request->fecha;
+            $order->n_expediente = $request->n_expediente;
+            $order->folio = $request->folio;
+            $order->nombre = $request->nombre;
+            $order->ap_paterno = $request->ap_paterno;
+            $order->ap_materno = $request->ap_materno;
+            $order->o_plaza = $request->o_plaza;
+            $order->d_plaza = $request->d_plaza;
+            $order->lugar = $request->lugar;
+            $order->distrito = $request->distrito;
+            $order->provincia = $request->provincia;
+            $order->accion = $request->accion;
+            $order->referencia = $request->referencia;
+            $order->i_vigencia = $request->i_vigencia;
+            $order->f_vigencia = $request->f_vigencia;
 
-        $order = new Order();
-        $order->user_id = $request->user_id;
-        $order->gestion_id = $request->gestion_id;
-        $order->institution_id = $request->institution_id;
-        $order->year_id = $request->year_id;
-        $order->level_id = $request->level_id;
-        $order->position_id = $request->position_id;
+            
+            
+            
+            $order->save();
+                    
+            return redirect()->route('orders.index')
+                ->with('info', 'ORDEN DE PROYECCIÓN CREADO CON ÉXITO');
+        }
         
-        $order->c_interno =  $id = IdGenerator::generate(['table' => 'orders','field'=>'c_interno', 'length' => 9, 'prefix' =>date('Y-'),'reset_on_prefix_change'=>true]); //output: P00001 
-        $order->fecha = $request->fecha;
-        $order->n_expediente = $request->n_expediente;
-        $order->folio = $request->folio;
-        $order->nombre = $request->nombre;
-        $order->ap_paterno = $request->ap_paterno;
-        $order->ap_materno = $request->ap_materno;
-        $order->o_plaza = $request->o_plaza;
-        $order->d_plaza = $request->d_plaza;
-        $order->lugar = $request->lugar;
-        $order->distrito = $request->distrito;
-        $order->provincia = $request->provincia;
-        $order->accion = $request->accion;
-        $order->referencia = $request->referencia;
-        $order->i_vigencia = $request->i_vigencia;
-        $order->f_vigencia = $request->f_vigencia;
-
-        
-        
-        
-        $order->save();
-                
-        return redirect()->route('orders.index')
-            ->with('info', 'ORDEN DE PROYECCIÓN CREADO CON ÉXITO');
     }
 
     /**
@@ -136,12 +194,7 @@ class OrderController extends Controller
         $institutions=Institution::orderBy('nombre','ASC')
         ->where('status','=','ACTIVO')
         ->pluck('nombre','id');
-
-        $years=Year::orderBy('name','DESC')
-        ->where('status','=','ACTIVO')   
-        ->pluck('name','id');
-
-     
+    
        
 
         $levels=Level::orderBy('name','ASC')
@@ -153,7 +206,7 @@ class OrderController extends Controller
         ->pluck('name','id');
 
 
-        return view('orders.edit',compact('gestions','institutions','years','levels','positions','order'));
+        return view('orders.edit',compact('gestions','institutions','levels','positions','order'));
     }
 
     /**
@@ -165,9 +218,15 @@ class OrderController extends Controller
      */
     public function update(OrderUpdateRequest $request, Order $order)
     {
+
+        if($request->i_vigencia > $request->f_vigencia){
+            return back()->withInput()
+             ->withErrors(['fh_from' => 'LA FECHA DE INICIO ES MAYOR A LA FECHA DE FIN']);
+        }
+        else {
         $order->fill($request->all())
         ->save();
-
+            }
     return redirect()->route('orders.index')
         ->with('info', 'ORDEN DE PROYECCIÓN ACTUALIZADO CON EXITO');
     }
@@ -180,19 +239,34 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        $year->update(['status' => 'INACTIVO']);
+        if ($order->status == 'ACTIVO') {
+            $order->update(['status' => 'INACTIVO']);
             return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $order->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 
     public function pdf(Request $request,Order $order){
         
-        /* $order = Order::find($order); */
-        $id_generate = explode('-',$order->c_interno);
-        $codigo = $id_generate[1];
-        $year = $id_generate[0];
+
+        if ($order->status == 'ACTIVO') {
+            $id_generate = explode('-',$order->c_interno);
+            $codigo = $id_generate[1];
+            $year = $id_generate[0];
 
             $pdf = \PDF::loadView('pdf.order',compact('order','codigo','year'))->setPaper('A5', 'portrait');
             return $pdf->stream();
+        }
+        else {
+            
+            return back()->with('danger', 'LA ORDEN SE ENCUENTRA INACTIVA ');
+        }
+
+        /* $order = Order::find($order); */
+        
         
 
     }

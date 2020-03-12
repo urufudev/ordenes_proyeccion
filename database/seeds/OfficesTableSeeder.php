@@ -12,12 +12,30 @@ class OfficesTableSeeder extends Seeder
     public function run()
     {
         Office::create([
-            'name'=>'OFICINA DE ADMINISTRACIÓN/ÁREA DE PERSONAL',
-            'description'=>'OFICINA DE ADMINISTRACIÓN/ÁREA DE PERSONAL',
+            'name'=>'ÁREA DE PERSONAL',
+            'description'=>'ÁREA DE PERSONAL',
             'status'=>'ACTIVO'
         ]);
 
-        factory(App\Office::class,20)->create();
+        Office::create([
+            'name'=>'DIRECCIÓN DE GESTIÓN PEDAGÓGICA',
+            'description'=>'DIRECCIÓN DE GESTIÓN PEDAGÓGICA',
+            'status'=>'ACTIVO'
+        ]);
+
+        Office::create([
+            'name'=>'DIRECCIÓN DE GESTIÓN INSTITUCIONAL',
+            'description'=>'DIRECCIÓN DE GESTIÓN INSTITUCIONAL',
+            'status'=>'ACTIVO'
+        ]);
+
+        Office::create([
+            'name'=>'SECRETARÍA GENERAL',
+            'description'=>'SECRETARÍA GENERAL',
+            'status'=>'ACTIVO'
+        ]);
+
+       /*  factory(App\Office::class,20)->create(); */
 
         
     }

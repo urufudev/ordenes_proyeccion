@@ -21,7 +21,7 @@ class ResolutionController extends Controller
     public function index()
     {
         $resolutions = Resolution::orderBy('id', 'DESC')
-            
+        
             ->get();
         
         return view('resolutions.index', compact('resolutions'));
@@ -156,6 +156,13 @@ class ResolutionController extends Controller
 
     public function destroy(Resolution $resolution)
     {
-        //
+        if ($resolution->status == 'ACTIVO') {
+            $resolution->update(['status' => 'INACTIVO']);
+            return back()->with('danger', 'SE CAMBIO A INACTIVO CORRECTAMENTE ');
+        }
+        else {
+            $resolution->update(['status' => 'ACTIVO']);
+            return back()->with('info', 'SE CAMBIO A ACTIVO CORRECTAMENTE ');
+        }
     }
 }

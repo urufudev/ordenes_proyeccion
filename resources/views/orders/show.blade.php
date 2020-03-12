@@ -4,21 +4,21 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">VER GESTION</h5>
+        <h5 class="modal-title">VER ORDEN</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label for="n_expediente"><b>SISGEDO</b></label>
                 <textarea type="text" class="form-control" id="n_expediente" >{{$order->n_expediente}}</textarea>
           
               </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label for="fecha"><b>FECHA</b></label>
-                <p class="form-control mb-3" id="fecha" readonly>{{$order->fecha}}</p>
+                <p class="form-control mb-3" id="fecha" readonly>{{ date('d/m/Y', strtotime($order->fecha)) }}</p>
                   
               </div>
 

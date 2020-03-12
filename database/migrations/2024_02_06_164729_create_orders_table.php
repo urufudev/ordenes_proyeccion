@@ -18,13 +18,12 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('gestion_id')->unsigned();
             $table->integer('institution_id')->unsigned();
-            $table->integer('year_id')->unsigned();
             $table->integer('level_id')->unsigned();
             $table->integer('position_id')->unsigned();
             
             $table->string('c_interno')->unique();
             $table->date('fecha');
-            $table->string('n_expediente');
+            $table->mediumtext('n_expediente');
             $table->integer('folio');
             $table->string('nombre');
             $table->string('ap_paterno');
@@ -57,8 +56,7 @@ class CreateOrdersTable extends Migration
                 ->onUpdate('cascade');
             $table->foreign('institution_id')->references('id')->on('institutions')
                 ->onUpdate('cascade');
-                $table->foreign('year_id')->references('id')->on('years')
-                ->onUpdate('cascade');
+               
         });
     }
 

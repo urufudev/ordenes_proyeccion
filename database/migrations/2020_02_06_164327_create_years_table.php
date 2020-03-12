@@ -11,7 +11,7 @@ class CreateYearsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    /* public function up()
     {
         Schema::create('years', function (Blueprint $table) {
             $table->increments('id');
@@ -22,7 +22,7 @@ class CreateYearsTable extends Migration
 
             $table->timestamps();
         });
-    }
+    } */
 
     /**
      * Reverse the migrations.

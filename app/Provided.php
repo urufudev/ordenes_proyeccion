@@ -8,7 +8,7 @@ class Provided extends Model
 {
     protected $fillable=[
         'user_id','regime_id','gestion_id','afp_id','position_id','remunerative_id',
-        'workday_id','institution_id','level_id','year_id','nombre','ap_paterno','ap_materno',
+        'workday_id','institution_id','level_id','nombre','ap_paterno','ap_materno',
         'dni','f_nacimiento','c_multired','estudios','n_expediente','c_plaza','motivo',
         'resolucion','i_contrato','f_contrato','referencia','status'
     ];
@@ -52,10 +52,7 @@ class Provided extends Model
     {
         return $this->belongsTo(Level::class);
     }
-    public function year()
-    {
-        return $this->belongsTo(Year::class);
-    }
+
     public function getFullNameAttribute()
     {
         return "{$this->ap_paterno} {$this->ap_materno}, {$this->nombre}";

@@ -17,9 +17,9 @@
             
             <div class="row">
                 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-5 mb-3">
                     <b>{{Form::label('n_expediente','SISGEDO')}}</b>
-                    {{Form::text('n_expediente',null,['class'=>'form-control bestupper','autocomplete'=>'off'])}}
+                    {{Form::textarea('n_expediente',null,['class'=>'form-control bestupper','autocomplete'=>'off','rows'=>'2'])}}
                     
                 </div>
 
@@ -39,17 +39,13 @@
                     {{Form::date('fecha', null ,['class'=>'form-control  bestupper','autocomplete'=>'off'])}}
                   </div>
                 @endisset
-                  <div class="col-md-2 mb-3">
+                  <div class="col-md-3 mb-3">
                     <b>{{Form::label('gestion_id','GESTION')}}</b>
                     {{Form::select('gestion_id',$gestions,null,['class'=>'form-control'])}}
                     
                 </div>
 
-                <div class="col-md-2 mb-3">
-                    <b>{{Form::label('year_id','AÑO')}}</b>
-                    {{Form::select('year_id',$years,null,['class'=>'form-control'])}}
-                    
-                </div>
+                
                 
             </div>
 

@@ -69,28 +69,6 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('can:users.edit');
 
 
-    //Años
-    Route::post('years/store', 'YearController@store')->name('years.store')
-        ->middleware('can:years.create');
-
-    Route::get('years', 'YearController@index')->name('years.index')
-        ->middleware('can:years.index');
-
-    Route::get('years/create', 'YearController@create')->name('years.create')
-        ->middleware('can:years.create');
-
-    Route::put('years/{year}', 'YearController@update')->name('years.update')
-        ->middleware('can:years.edit');
-
-    Route::get('years/{year}', 'YearController@show')->name('years.show')
-        ->middleware('can:years.show');
-
-    Route::delete('years/{year}', 'YearController@destroy')->name('years.destroy')
-        ->middleware('can:years.destroy');
-
-    Route::get('years/{year}/edit', 'YearController@edit')->name('years.edit')
-        ->middleware('can:years.edit');
-
     
         //Gestiones
     Route::post('gestions/store', 'GestionController@store')->name('gestions.store')

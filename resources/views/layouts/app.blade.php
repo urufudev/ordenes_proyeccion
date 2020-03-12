@@ -188,28 +188,7 @@
                 </li>
                 @endcan
 
-                @can('years.index')
-                <li class="nav-item has-submenu">
-                  <a href="#" class="nav-link">
-                    <i class="far fa-calendar-alt"></i>
-                    <span>AÑOS</span>
-                  </a>
-                  <ul>
-                    @can('years.create')
-                    <li>
-                      <a href="{{route('years.create')}}">
-                        CREAR AÑOS
-                      </a>
-                    </li>
-                    @endcan
-                    <li>
-                    <a href="{{route('years.index')}}">
-                        GESTIONAR AÑOS
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                @endcan
+                
 
 
                 @can('gestions.index')

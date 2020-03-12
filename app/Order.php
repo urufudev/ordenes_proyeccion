@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable=[
-        'user_id','gestion_id','institution_id','year_id','level_id','position_id',
+        'user_id','gestion_id','institution_id','level_id','position_id',
         'n_orden','c_interno','fecha','n_expediente','folio','nombre','ap_paterno','ap_materno',
         'o_plaza','d_plaza','lugar','distrito','provincia','accion','referencia',
         'i_vigencia','f_vigencia','status'
@@ -17,11 +17,6 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function year()
-    {
-        return $this->belongsTo(Year::class);
     }
 
     public function gestion()
