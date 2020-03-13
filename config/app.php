@@ -179,7 +179,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         Conner\Tagging\Providers\TaggingServiceProvider::class,
-
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 
@@ -236,6 +236,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Date' => Jenssegers\Date\Date::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
 
     ],
 

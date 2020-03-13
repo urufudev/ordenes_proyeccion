@@ -10,7 +10,7 @@ use App\Institution;
 use App\Position;
 
 use Carbon\Carbon;
-
+use yajra\Datatables\Datatables;
 use App\Http\Requests\OrderStoreRequest;
 use App\Http\Requests\OrderUpdateRequest;
 use Illuminate\Http\Request;
@@ -34,6 +34,8 @@ class OrderController extends Controller
                 ->paginate(7);
             
                 return view('orders.index', compact('orders'));
+
+
             }
 
             elseif ($rol->name == 'ADMINISTRADOR OP') {
@@ -136,7 +138,7 @@ class OrderController extends Controller
             $order->user_id = $request->user_id;
             $order->gestion_id = $request->gestion_id;
             $order->institution_id = $request->institution_id;
-            $order->year_id = $request->year_id;
+          
             $order->level_id = $request->level_id;
             $order->position_id = $request->position_id;
             

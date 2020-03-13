@@ -57,7 +57,7 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                     <th width="5%" class="text-center">OPCIONES</th>
                 </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @foreach($orders as $order)
                 <tr>
                     <td><b>{{$order->id}}</b></td>
@@ -81,14 +81,7 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                     
                     <td>{{ date('d/m/Y', strtotime($order->fecha)) }}</td>
                     
-                   
-                    {{-- @if($order->status=='ACTIVO')
-                      <td class="text-success"><b>{{$order->status}}</b></td>
-
-                    @elseif($order->status=='INACTIVO')
-                      <td class="text-danger"><b>{{$order->status}}</b></td>
-
-                    @endif --}}
+          
                     
                     
                     <td class="text-center">
@@ -128,7 +121,7 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
                 </tr>
                 
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
       </div>
     </div>
@@ -152,55 +145,92 @@ Lista de Ordenes de Proyección | Sistema de Administración de Personal
   <script src="{{asset('js/vendor/datatables/buttons.colVis.min.js')}}"></script>
 {{--   <script src="{{asset('js/vendor/datatables/buttons.print.min.js')}}"></script> --}}
 
-
-
+@foreach (auth()->user()->roles as $rol) 
+  @if ($rol->name == 'ADMINISTRADOR')
   <script>
-     $(document).ready(function(){
-         $('[data-toggle="tooltip"]').tooltip();
-         $('#modal-delete').tooltip();
-         $('#dgwTabla').DataTable({
- 
-         language: {
-                            "sProcessing":     "Procesando...",
-                     "sLengthMenu":     "Mostrar _MENU_ registros",
-                     "sZeroRecords":    "No se encontraron resultados",
-                     "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                     "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                     "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                     "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                     "sInfoPostFix":    "",
-                     "sSearch":         "Buscar:",
-                     "sUrl":            "",
-                     "sInfoThousands":  ",",
-                     "sLoadingRecords": "Cargando...",
-                     "oPaginate": {
-                         "sFirst":    "Primero",
-                         "sLast":     "Último",
-                         "sNext":     "Siguiente",
-                         "sPrevious": "Anterior"
-                     },
-                     "oAria": {
-                         "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                     },
-                     "buttons": {
-                        
-                            
-                            "copy":"Copiar",
-                            "colvis":"Filtro"
-                }
-                 },
-         dom: 'Bfrtip',
-         lengthChange: false,
-         autoWidth: false,
-         responsive: true,
-         buttons: [
-              'copy','excel', 'pdf','colvis'
-         ]
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#modal-delete').tooltip();
 
-     });
-     });
- </script>
+        var table= $('#dgwTabla').DataTable({
+         "serverSide":false,
+       "ajax":"{{url('api/orders')}}",
+       "columns": [
+           {data: 'id'},
+           {data: 'c_interno'},
+           {data:'full_name'},
+           {data:'position.name'},
+           
+           {data:'user.office.name'},
+           {data:'user.full_name'},
+           {data:'fecha.date'},
+           {data:'btn'}
+
+             ],
+        language: {
+         sUrl: 'js/vendor/datatables/spanish.json'
+        },
+        dom: 'Bfrtip',
+        lengthChange: false,
+        autoWidth: false,
+        responsive: true,
+        buttons: [
+             'copy','excel', 'pdf','colvis'
+        ]
+
+    });
+
+    $.fn.dataTable.ext.errMode = 'throw';
+   
+   setInterval (table.ajax.reload, 15000);
+   console.log('actualizado',table);
+    });
+</script>
+  @else
+  <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#modal-delete').tooltip();
+
+        var table= $('#dgwTabla').DataTable({
+         "serverSide":false,
+       "ajax":"{{url('api/orders')}}",
+       "columns": [
+           {data: 'id'},
+           {data: 'c_interno'},
+           {data:'full_name'},
+           {data:'position.name'},
+           
+           
+           {data:'institution.nombre'},
+           {data:'fecha.date'},
+           {data:'btn'}
+
+             ],
+        language: {
+         sUrl: 'js/vendor/datatables/spanish.json'
+        },
+        dom: 'Bfrtip',
+        lengthChange: false,
+        autoWidth: false,
+        responsive: true,
+        buttons: [
+             'copy','excel', 'pdf','colvis'
+        ]
+
+    });
+
+    $.fn.dataTable.ext.errMode = 'throw';
+   
+   setInterval (table.ajax.reload, 15000);
+   console.log('actualizado',table);
+    });
+</script>
+  @endif
+@endforeach
+
+
+  
  
  
  

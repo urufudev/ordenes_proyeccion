@@ -27,7 +27,7 @@ class OrderStoreRequest extends FormRequest
             
             'user_id' => 'required',
             'gestion_id' => 'required',
-            'year_id' => 'required',
+            
             'institution_id'=> 'required',
             'level_id' => 'required',
             'position_id' => 'required',
@@ -49,7 +49,7 @@ class OrderStoreRequest extends FormRequest
     return [
     
         'gestion_id.required' =>'EL CAMPO GESTION ES OBLIGATORIO',
-        'year_id.unique' =>'EL CAMPO AÑO ES OBLIGATORIO',
+        
         'gestion_id.required' =>'EL CAMPO INSTITUCION ES OBLIGATORIO',
         'level_id.required' =>'EL CAMPO NIVEL ES OBLIGATORIO',
         'position_id.required' =>'EL CAMPO CARGO ES OBLIGATORIO',

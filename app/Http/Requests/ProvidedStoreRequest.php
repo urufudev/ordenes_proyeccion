@@ -27,8 +27,7 @@ class ProvidedStoreRequest extends FormRequest
             
             'user_id' => 'required',
             'gestion_id' => 'required',
-            'year_id' => 'required',
-
+           
             'regime_id' => 'required',
             'workday_id' => 'required',
             'institution_id'=> 'required',
@@ -56,7 +55,7 @@ class ProvidedStoreRequest extends FormRequest
     return [
     
         'gestion_id.required' =>'EL CAMPO GESTION ES OBLIGATORIO',
-        'year_id.unique' =>'EL CAMPO AÑO ES OBLIGATORIO',
+        
         
         'regime_id.required' =>'EL CAMPO REGIMEN ES OBLIGATORIO',
         'workday_id.required' =>'EL CAMPO JORNADA DE TRABAJO ES OBLIGATORIO',

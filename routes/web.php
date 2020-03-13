@@ -356,8 +356,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('orders/store', 'OrderController@store')->name('orders.store')
         ->middleware('can:orders.create');
 
-    Route::get('orders', 'OrderController@index')->name('orders.index')
-        ->middleware('can:orders.index');
+    /* Route::get('orders', 'OrderController@index')->name('orders.index')
+        ->middleware('can:orders.index'); */
 
     Route::get('orders/create', 'OrderController@create')->name('orders.create')
         ->middleware('can:orders.create');
@@ -376,6 +376,93 @@ Route::middleware(['auth'])->group(function () {
     
         Route::get('orders/{order}/pdf', 'OrderController@pdf')->name('orders.pdf')
         ->middleware('can:orders.pdf');
+
+
+        //Orden de Proyeccion
+        Route::get('orders', 'OrderController@index')->name('orders.index')
+        ->middleware('can:orders.index');
+
+        
+
+
+
+        Route::get('api/orders',function(){
+            
+            foreach (auth()->user()->roles as $rol) {
+                if ($rol->name == 'ADMINISTRADOR') {
+                
+                return datatables()
+
+            
+                ->eloquent(App\Order::orderBy('id','DESC')
+                ->with(['user','position','user.office','institution'])
+                
+                ->where('status','=','ACTIVO'))
+                
+                ->addColumn('btn','orders.partials.actions')
+
+                ->rawColumns(['btn','status_c'])
+                ->toJson();
+                }
+    //-------------------------------------------------------------
+                elseif ($rol->name == 'ADMINISTRADOR OP') {
+                    
+                
+
+            
+                $oficina_id = auth()->user()->office->id;
+
+                $usuarios = App\User::         
+                where('status','=','ACTIVO')
+                ->where('office_id',auth()->user()->office->id)
+                
+                ->get();
+                
+                $ordersFromUser = array();
+
+
+
+                foreach($usuarios as $user){
+
+                    
+
+                    if($user->orders->count() > 0 ){
+                        foreach($user->orders->where('status','=','ACTIVO') as $order){
+                         
+                            array_push($ordersFromUser, $order);
+                        }
+                    }  
+                }
+                $orders = collect($ordersFromUser)->sortByDesc('id');
+                
+                return datatables($orders)
+               
+                ->with(['user','position','user.office','institution'])
+                ->addColumn('btn','orders.partials.actions')
+                
+                ->rawColumns(['btn','status_c'])
+                ->toJson();
+                }
+    //-------------------------------------
+                elseif ($rol->name == 'RESPONSABLE OP') {
+                    
+                    return datatables()
+
+            
+                    ->eloquent(App\Order::orderBy('id','DESC')
+                    ->with(['user','position','user.office','institution'])
+                    ->where('user_id',auth()->user()->id)
+                    ->where('status','=','ACTIVO'))
+                    ->addColumn('btn','orders.partials.actions')
+    
+                    ->rawColumns(['btn','status_c'])
+                    ->toJson();
+                }
+            }
+
+
+            
+        });
 
         //Proveido Presupuestal
     Route::post('provideds/store', 'ProvidedController@store')->name('provideds.store')
